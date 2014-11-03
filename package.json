@@ -1,0 +1,29 @@
+{
+  "name": "Siteify",
+  "description": "Node based content management system",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express" : "~4.1.1",
+    "express-session" : "~1.2.1",
+    "ejs" : "~1.0.0",
+    "cookie-parser" : "~1.1.0",
+    "debug" : "~0.7.4",
+    "body-parser" : "~1.2.0",
+    "morgan" : "~1.0.1",
+    "mongoose"  : "~3.8.9",
+    "connect-flash" : "~0.1.1",
+    "connect-mongo" : "~0.4.1",
+    "node-oauth2-server" : "latest",
+    "bcrypt-nodejs" : "latest"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "keywords": [
+    "Siteify",
+    "CMS",
+    "Content management"
+  ],
+  "author": "Will-Falkowski"
+}

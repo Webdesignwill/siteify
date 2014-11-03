@@ -1,0 +1,2 @@
+<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#interval-management-form">Interval Management <span class="glyphicon glyphicon-plus"></span></button>
+<form role="form" id="interval-management-form" class="collapse interval-management-form"></form>

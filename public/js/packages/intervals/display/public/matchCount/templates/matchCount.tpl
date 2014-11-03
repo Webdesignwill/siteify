@@ -1,0 +1,1 @@
+Showing <span class="match-count badge"></span> matches out of <span class="total-count badge"></span> intervals.

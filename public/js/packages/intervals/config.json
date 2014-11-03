@@ -1,0 +1,13 @@
+{
+  "sidebar" : true,
+  "sitemap" : [{
+    "name" : "signin",
+    "page" : "SigninPage"
+  },{
+    "name" : "repositories",
+    "page" : "RepositoriesPage"
+  },{
+    "name" : "repository",
+    "page" : "RepositoryPage"
+  }]
+}

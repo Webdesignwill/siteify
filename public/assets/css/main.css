@@ -1,0 +1,21 @@
+html, body {
+  height: 100%;
+  min-height: 100%;
+}
+
+body {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
+  color : #555555;
+}
+.clear:after {
+  content:"";
+  display:table;
+  clear:both;
+}
+.navbar-inverse .navbar-brand {
+  color:rgb(0,254,255);
+}
+body.loggedin .admin-view {
+  display:block;
+}
