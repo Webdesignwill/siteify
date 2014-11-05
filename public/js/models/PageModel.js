@@ -1,10 +1,9 @@
 
 define([
-  'Backbone',
   'Siteify'
 ],
 
-function (Backbone, Siteify) {
+function (Siteify) {
 
   "use strict";
 
@@ -18,11 +17,24 @@ function (Backbone, Siteify) {
       // session : '/api/user/session'
     },
 
-    initialize : function () {},
+    initialize : function (model, options) {
+      this.listenTo(options.collection, 'sync', function (collection, ary, response) {
+        this.setModelProperties(collection);
+      }, this);
+    },
 
-    /* Attribute page settings should be set on the model */
-    parse : function (model, options) {
+    parse : function (model) {
       return model;
+    },
+
+    setModelProperties : function (collection) {
+      var subpages = this.get('subpages'),
+            self = this;
+
+      if(subpages) {
+        for(var i = 0; i<subpages.length;i++) {}
+      }
+
     },
 
     getPage : function (prop, direction) {

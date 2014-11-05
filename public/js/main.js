@@ -27,6 +27,7 @@ var siteify_require = require.config({
 
     Siteify                                                   : 'Siteify',
     PageFactory                                          : 'pages/PageFactory',
+    Sitemap                                                : 'Sitemap',
 
     /* Extensions */
     pageExt                                                 : 'pages/pageExt',
@@ -48,8 +49,7 @@ var siteify_require = require.config({
     /* Site models */
     UserModel                                              : 'models/UserModel',
     Oauth2Model                                          : 'models/Oauth2Model',
-    PageModel                                              : 'models/PageModel',
-    Sitemap                                                  : 'models/Sitemap'
+    PageModel                                              : 'models/PageModel'
 
   },
   shim : {

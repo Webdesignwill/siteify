@@ -1,7 +1,17 @@
 
 var mongoose = require('mongoose');
 
-var Pages = new mongoose.Schema({
+/* If there are no pages yet, this gets created */
+// var startPage = {
+//   name : 'siteify-start',
+//   route : 'siteify/start(/)',
+//   path : 'siteify/start/',
+//   nav : true,
+//   packages : [],
+//   page : { view : 'DefaultPage', template : 'siteify-start' }
+// };
+
+var PagesSchema = new mongoose.Schema({
   name : {
     type: String,
     set : function toLower (str) {
@@ -10,6 +20,8 @@ var Pages = new mongoose.Schema({
     unique : true,
     required : true
   },
+  route : String,
+  path : String,
   order : Number,
   page : {
     view : String,
@@ -23,6 +35,6 @@ var Pages = new mongoose.Schema({
   }
 });
 
-mongoose.model('pages', Pages);
-var Pages = mongoose.model('pages');
-module.exports = Pages;
+mongoose.model('pages', PagesSchema);
+var PagesModel = mongoose.model('pages');
+module.exports = PagesModel;

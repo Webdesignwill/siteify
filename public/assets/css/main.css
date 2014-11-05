@@ -13,7 +13,8 @@ body {
   display:table;
   clear:both;
 }
-.navbar-inverse .navbar-brand {
+.navbar-inverse .navbar-brand,
+.navbar-nav .glyphicon-user {
   color:rgb(0,254,255);
 }
 body.loggedin .admin-view {

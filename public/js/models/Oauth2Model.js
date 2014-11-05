@@ -8,7 +8,7 @@ define([
   var Oauth2Model = Backbone.Model.extend({
 
     app : {
-      secret : 'aW50ZXJ2YWxmaWx0ZXI6aW50ZXJ2YWxmaWx0ZXJpc3RoZWJlc3RmaWx0ZXJpbnRoZXdvcmxk'
+      secret : 'c2l0ZWlmeWF3ZXNvbWVjbXM6c2l0ZWlmeWlzdGhlb25seWF3ZXNvbWVjb250ZW50bWFuYWdlbWVudHN5c3RlbXRoYXR3ZWxvdmVmb3JldmVy'
     },
 
     urls : {

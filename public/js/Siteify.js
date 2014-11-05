@@ -8,35 +8,39 @@ define([
 
   var Siteify = Backbone.Model.extend({
 
+    url : '/api/siteify/hello',
     page : new Backbone.Model(),
     $broker : $({}),
 
-    init : function () {
+    initialize : function () {
+      this.listenTo(this, 'change:status', function (model, event) {
+        console.log('%c Siteify has ' + event + ' ', 'background: #444f64; color: #FFFFFF');
+      });
+    },
+
+    setup : function (data, status) {
+
       var self = this;
 
-      function loadSitemap () {
+      function getSitemap () {
         siteify_require(['Sitemap'], function (Sitemap) {
           self.Sitemap = new Sitemap();
-          self.Sitemap.fetch({
-            success : function () {
-              loadBody();
-            }
-          });
+          getBodyView();
         });
       }
 
-      function loadBody () {
+      function getBodyView () {
         siteify_require(['BodyView'], function (BodyView) {
-          loadForms();
+          getForms();
         });
       }
 
-      function loadForms () {
+      function getForms () {
         siteify_require(['forms'], function (config) {
           function load () {
             req(['Forms'], function (Forms) {
               self.Forms = Forms;
-              loadRouter();
+              getRouter();
             });
           }
           var req = window.require(config(), function () {
@@ -45,21 +49,65 @@ define([
         });
       }
 
-      function loadRouter () {
+      function getRouter () {
         siteify_require(['Router'], function (Router) {
           self.Router = new Router();
-
-          /* TODO Investigate the passing in of self here */
-          self.Router.init(self);
-          console.log('%c Siteify has started ', 'background: #444f64; color: #FFFFFF');
+          start();
         });
+      }
+
+      function start () {
+        if(data.showSetup) {
+          return self.setupSiteify();
+        }
+        self.startSiteify();
       }
 
       siteify_require(['UserModel'], function (UserModel) {
         self.User = new UserModel();
-        loadSitemap();
+        getSitemap();
       });
 
+    },
+
+    setupSiteify : function () {
+      // Navigate to start page
+      this.set('status', 'started');
+
+      /* TODO Investigate the passing in of self here */
+      this.Router.init(this).navigate('siteify/setup', {trigger:true});
+    },
+
+    startSiteify : function () {
+
+      var self = this;
+
+      function initRouter () {
+        self.Router.init(self); /* TODO Investigate the passing in of self here */
+        self.set('status', 'started');
+      }
+
+      // TODO this.User.fetch({});
+
+      this.Sitemap.fetch({
+        success : function () {
+          initRouter();
+        },
+        error : function () { alert('Something went wrong loading the pages'); }
+      });
+    },
+
+    init : function () {
+      $.ajax({
+        type : 'GET',
+        context : this,
+        url : this.url,
+        contentType : 'application/x-www-form-urlencoded',
+        success : this.setup,
+        error : function (data, status) {
+          alert("Siteify isn't available");
+        }
+      });
     }
 
   });

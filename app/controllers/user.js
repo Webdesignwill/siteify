@@ -76,6 +76,7 @@ module.exports.deleteMe = function (req, res, next) {
 /* Update me a user
 ============================= */
 module.exports.putMe = function (req, res, next) {
+  // findByIdAndUpdate
   User.findOne({ email : req.user.id }, function (err, user) {
     if (err) res.send(err);
     for(var key in req.body) {

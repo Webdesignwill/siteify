@@ -1,7 +1,12 @@
 
-var Controllers = require('./../app/controllers');
+var Controllers = require('./../app/controllers'),
+      middleware = require('./../app/middleware');
 
 module.exports = function (app) {
+
+  /* Siteify
+  ==================================== */
+  app.get('/api/siteify/hello', Controllers.Siteify.hello);
 
   /* Oauth
   ==================================== */
@@ -12,9 +17,9 @@ module.exports = function (app) {
   app.post('/api/user/unique', Controllers.User.unique);
   app.post('/api/user/session', Controllers.User.session);
   app.post('/api/user/register', Controllers.User.register);
-  app.get('/api/user/me', app.oauth.authorise(), Controllers.User.getMe);
-  app.delete('/api/user/me', app.oauth.authorise(), Controllers.User.deleteMe);
-  app.put('/api/user/me', app.oauth.authorise(), Controllers.User.putMe);
+  app.get('/api/user/me', middleware.requiresUser, Controllers.User.getMe);
+  app.delete('/api/user/me', middleware.requiresUser, Controllers.User.deleteMe);
+  app.put('/api/user/me', middleware.requiresUser, Controllers.User.putMe);
   app.post('/api/user/logout', Controllers.User.logout);
 
    /* Pages

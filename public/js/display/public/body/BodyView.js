@@ -21,7 +21,7 @@ define([
       this.render();
       this.setElements();
       this.renderPageComponents();
-      // this.delegateAnchorClickEvent();
+      this.delegateAnchorClickEvent();
     },
 
     toggleClass : function (att, cls) {

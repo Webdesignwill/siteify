@@ -10,32 +10,45 @@ function (Siteify, PageFactory) {
 
   var Router = Backbone.Router.extend({
 
+    templatePath : '/js/templates',
+
+    routes : {
+      'siteify/setup(/)' : 'setup'
+    },
+
     init : function (module) {
 
-      var self = this,
-            pageFactory = new PageFactory(module);
+      var self = this;
+      this.pageFactory = new PageFactory(module);
 
       function setRoutes (pageModel) {
-        /* TODO remove this and have the templates as blobs in the page mode */
-        var templatePath = '/js/templates/';
-
         self.route(pageModel.get('route'), pageModel.get('name'), function (option) {
-          siteify_require([pageModel.get('view')], function (View) {
-            pageFactory.make(templatePath, $('#sf-content'), pageModel, View, option);
+          siteify_require([pageModel.get('page').view], function (Page) {
+            self.pageFactory.make(self.templatePath, $('#sf-content'), pageModel, Page, option);
           });
         });
       }
 
-      var sitemap = Siteify.Sitemap.attributes;
-      for(var key in sitemap){
-        console.log(sitemap[key]);
-        setRoutes(sitemap[key]);
-      }
+      Siteify.Sitemap.each(function (model, index, list) {
+        setRoutes(model);
+      });
+
       Backbone.history.start();
+
+      return this;
     },
 
     execute: function(callback, args) {
       if (callback) callback.apply(this, args);
+    },
+
+    setup : function (option) {
+      var pageModel = new Backbone.Model({name : 'setup'}),
+            self = this;
+
+      siteify_require(['DefaultPage'], function (Page) {
+        self.pageFactory.make(self.templatePath, $('#sf-content'), pageModel, Page, option);
+      });
     }
 
   });

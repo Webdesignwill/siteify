@@ -1,6 +1,6 @@
 
 var mongoose = require('mongoose'),
-      authorizedClientIds = ['intervalfilter'];
+      authorizedClientIds = ['siteifyawesomecms'];
 
 var OAuthClientsSchema = new mongoose.Schema({
   clientId: String,
@@ -32,8 +32,8 @@ If you drop the database, you need to run this once.
 ==================================================== */
 
 // OAuthClientsModel.create({
-//   clientId: 'intervalfilter',
-//   clientSecret: 'intervalfilteristhebestfilterintheworld',
+//   clientId: 'siteifyawesomecms',
+//   clientSecret: 'siteifyistheonlyawesomecontentmanagementsystemthatweloveforever',
 //   redirectUri: '/oauth/redirect'
 // }, function() {
 //   process.exit();
