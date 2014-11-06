@@ -15,6 +15,7 @@ define([
     before : function (done) {},
 
     close : function (done) {
+      if(this.form) this.form.destroy();
       this.$el.off().remove();
       done();
     }

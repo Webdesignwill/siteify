@@ -1,9 +1,9 @@
 
 define([
-  'Siteify',
+  'App',
   'require',
   'text!display/public/modal/templates/modal.tpl'
-], function (Siteify, require, template) {
+], function (App, require, template) {
 
   "use strict";
 
@@ -13,10 +13,10 @@ define([
 
     initialize : function () {
       var self = this;
-      Siteify.$broker.on('modal:open', function (event, options) {
+      App.$broker.on('modal:open', function (event, options) {
         self.load(options);
       });
-      Siteify.$broker.on('modal:close', function (event) {
+      App.$broker.on('modal:close', function (event) {
         self.$el.modal('hide');
       });
       this.$el.on('hidden.bs.modal', function (e) {

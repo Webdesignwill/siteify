@@ -1,8 +1,8 @@
 
-var siteify_require = require.config({
+var app_require = require.config({
 
   baseUrl : './js/',
-  context : 'siteify_require',
+  context : 'app_require',
 
   packages: [{
     name : 'forms',
@@ -25,15 +25,17 @@ var siteify_require = require.config({
 
     Router                                                  : 'Router',
 
-    Siteify                                                   : 'Siteify',
+    App                                                      : 'App',
     PageFactory                                          : 'pages/PageFactory',
     Sitemap                                                : 'Sitemap',
 
     /* Extensions */
     pageExt                                                 : 'pages/pageExt',
 
-    /* Pages */
-    DefaultPage                                          : 'pages/default/DefaultPage',
+    /* Pages, Public */
+    DefaultPage                                          : 'pages/public/DefaultPage',
+    /* Admin */
+    SetupPage                                             : 'pages/admin/SetupPage',
 
     /* Public */
     BodyView                                               : 'display/public/body/BodyView',
@@ -42,14 +44,15 @@ var siteify_require = require.config({
     ModalView                                             : 'display/public/modal/modalView',
 
     /* Admin */
-    LoginView                                              : 'display/admin/user/LoginView',
-    RegisterView                                          : 'display/admin/user/RegisterView',
-    ProfileView                                             : 'display/admin/user/ProfileView',
+    LoginView                                              : 'display/forms/LoginView',
+    RegisterView                                          : 'display/forms/RegisterView',
+    ProfileView                                             : 'display/forms/ProfileView',
 
     /* Site models */
     UserModel                                              : 'models/UserModel',
     Oauth2Model                                          : 'models/Oauth2Model',
-    PageModel                                              : 'models/PageModel'
+    PageModel                                              : 'models/PageModel',
+    SiteifyModel                                           : 'models/SiteifyModel'
 
   },
   shim : {
@@ -65,8 +68,8 @@ var siteify_require = require.config({
       exports : 'bootstrap'
     }
   },
-  deps : ['jquery', 'underscore', 'Siteify', 'domReady', 'bootstrap', 'pageExt', 'Validation'],
-  callback : function ($, _, Siteify, domReady) {
+  deps : ['jquery', 'underscore', 'App', 'domReady', 'bootstrap', 'pageExt', 'Validation'],
+  callback : function ($, _, App, domReady) {
 
     // Mix in the validation for all models. Do something with this
     // cause it can't very well go here
@@ -92,7 +95,7 @@ var siteify_require = require.config({
     });
 
     domReady(function() {
-      Siteify.init();
+      App.init();
     });
   }
 });

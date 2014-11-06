@@ -1,10 +1,10 @@
 
 define([
-  'Siteify',
+  'App',
   'NavBarView',
   'ModalView',
   'text!display/public/body/templates/body.tpl'
-], function (Siteify, NavBarView, ModalView, template) {
+], function (App, NavBarView, ModalView, template) {
 
   "use strict";
 
@@ -14,7 +14,7 @@ define([
 
     initialize : function () {
 
-      this.listenTo(Siteify.User, 'change:loggedin', function (model, att, something) {
+      this.listenTo(App.User, 'change:loggedin', function (model, att, something) {
         this.toggleClass(att, 'loggedin');
       }, this);
 
@@ -66,7 +66,7 @@ define([
             argument = argsArray[2] || null;
 
       if(module && event) {
-        Siteify.$broker.trigger(module + ':' + event, argument);
+        App.$broker.trigger(module + ':' + event, argument);
       }
     },
 

@@ -1,10 +1,10 @@
 
 define([
   'handlebars',
-  'Siteify'
+  'App'
 ],
 
-function (handlebars, Siteify) {
+function (handlebars, App) {
 
   "use strict";
 
@@ -21,7 +21,7 @@ function (handlebars, Siteify) {
     },
 
     setEvents : function () {
-      this.listenTo(Siteify.page, 'change:page', function (model) {
+      this.listenTo(App.page, 'change:page', function (model) {
         this.highlightActive(model.get('page'));
       });
     },
@@ -31,7 +31,7 @@ function (handlebars, Siteify) {
     },
 
     navigate : function () {
-      Siteify.Router.navigate(this.model.get('path'), {trigger: true});
+      App.Router.navigate(this.model.get('path'), {trigger: true});
     },
 
     render : function () {

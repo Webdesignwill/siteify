@@ -8,10 +8,10 @@
   ========================================================== */
 
 define([
-  'Siteify',
+  'App',
   'PageFactory',
   'launchControl'
-], function (Siteify, PageFactory, launchControl) {
+], function (App, PageFactory, launchControl) {
 
   "use strict";
 
@@ -30,7 +30,7 @@ define([
         /* Either grab the element where the package should be loaded in to
             or pass the whole page container
         ========================================== */
-        var $page = Siteify.page.get('page'),
+        var $page = App.page.get('page'),
               $packageElement = $page.$el.find("[data-package='" + packageName + "']");
 
         return $packageElement.length > 0 ? $packageElement : $page.$el;
@@ -83,7 +83,7 @@ define([
 
       // Get the commonjs module
       function requireConfig () {
-        siteify_require([packageName], function (config) {
+        app_require([packageName], function (config) {
           loadPackage(config(packageName));
         });
       }
@@ -110,7 +110,7 @@ define([
         pageModel.get('packages') returns an array. Could be empty but always an array. If it's more
         than 0 then start loading them.
     ========================================================== */
-    Siteify.page.on('change:page', function (model) {
+    App.page.on('change:page', function (model) {
       var pageModel = model.get('page').model,
             pgsArray = pageModel.get('packages');
 

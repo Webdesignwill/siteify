@@ -17,6 +17,7 @@ define([
 
     loadForm : function (options) {
       var self = this;
+
       require(['FormView'], function (FormView) {
         self.formView = new FormView({
           name : options.name,

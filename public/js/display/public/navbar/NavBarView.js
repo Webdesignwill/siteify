@@ -1,17 +1,17 @@
 
 define([
-  'Siteify',
+  'App',
   'handlebars',
   'NavSubView',
   'text!display/public/navbar/templates/navbar.tpl'
-], function (Siteify, handlebars, NavSubView, template) {
+], function (App, handlebars, NavSubView, template) {
 
   "use strict";
 
   var NavBar = Backbone.View.extend({
 
     initialize : function () {
-      this.listenTo(Siteify.User, 'change', function () {
+      this.listenTo(App.User, 'change', function () {
         this.render();
       }, this);
 
@@ -24,7 +24,7 @@ define([
 
     render : function () {
       var tpl = handlebars.compile(template);
-      var compiled = tpl(Siteify.User.attributes);
+      var compiled = tpl(App.User.attributes);
 
       this.$el.html(compiled);
       this.setElements();
@@ -36,7 +36,7 @@ define([
 
     renderNav : function () {
       var fragment = document.createDocumentFragment(),
-            sitemap = Siteify.Sitemap.attributes;
+            sitemap = App.Sitemap.attributes;
 
       for(var key in sitemap){
         if(sitemap[key].get('nav')) {

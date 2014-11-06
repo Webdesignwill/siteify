@@ -1,12 +1,13 @@
 
 define([
   'Backbone',
+  'SiteifyModel',
   'require'
-], function (Backbone, siteify_require) {
+], function (Backbone, SiteifyModel, app_require) {
 
   "use strict";
 
-  var Siteify = Backbone.Model.extend({
+  var App = Backbone.Model.extend({
 
     url : '/api/siteify/hello',
     page : new Backbone.Model(),
@@ -14,7 +15,7 @@ define([
 
     initialize : function () {
       this.listenTo(this, 'change:status', function (model, event) {
-        console.log('%c Siteify has ' + event + ' ', 'background: #444f64; color: #FFFFFF');
+        console.log('%c App has ' + event + ' ', 'background: #444f64; color: #FFFFFF');
       });
     },
 
@@ -23,20 +24,20 @@ define([
       var self = this;
 
       function getSitemap () {
-        siteify_require(['Sitemap'], function (Sitemap) {
+        app_require(['Sitemap'], function (Sitemap) {
           self.Sitemap = new Sitemap();
           getBodyView();
         });
       }
 
       function getBodyView () {
-        siteify_require(['BodyView'], function (BodyView) {
+        app_require(['BodyView'], function (BodyView) {
           getForms();
         });
       }
 
       function getForms () {
-        siteify_require(['forms'], function (config) {
+        app_require(['forms'], function (config) {
           function load () {
             req(['Forms'], function (Forms) {
               self.Forms = Forms;
@@ -50,41 +51,34 @@ define([
       }
 
       function getRouter () {
-        siteify_require(['Router'], function (Router) {
+        app_require(['Router'], function (Router) {
           self.Router = new Router();
           start();
         });
       }
 
       function start () {
-        if(data.showSetup) {
-          return self.setupSiteify();
-        }
-        self.startSiteify();
+        self[SiteifyModel.get('showSetup') ? 'setupApp' : 'startApp']();
       }
 
-      siteify_require(['UserModel'], function (UserModel) {
+      app_require(['UserModel'], function (UserModel) {
         self.User = new UserModel();
         getSitemap();
       });
 
     },
 
-    setupSiteify : function () {
-      // Navigate to start page
-      this.set('status', 'started');
-
+    setupApp : function () {
       /* TODO Investigate the passing in of self here */
       this.Router.init(this).navigate('siteify/setup', {trigger:true});
     },
 
-    startSiteify : function () {
+    startApp : function () {
 
       var self = this;
 
       function initRouter () {
         self.Router.init(self); /* TODO Investigate the passing in of self here */
-        self.set('status', 'started');
       }
 
       // TODO this.User.fetch({});
@@ -98,20 +92,18 @@ define([
     },
 
     init : function () {
-      $.ajax({
-        type : 'GET',
-        context : this,
-        url : this.url,
-        contentType : 'application/x-www-form-urlencoded',
-        success : this.setup,
-        error : function (data, status) {
-          alert("Siteify isn't available");
-        }
+      var self = this;
+      SiteifyModel.hello(function () {
+        self.setup();
       });
+    },
+
+    makeSite : function (siteify, done) {
+      done(true, null, null);
     }
 
   });
 
-  return new Siteify();
+  return new App();
 
 });

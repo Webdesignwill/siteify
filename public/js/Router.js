@@ -1,10 +1,10 @@
 
 define([
-  'Siteify',
+  'App',
   'PageFactory'
 ],
 
-function (Siteify, PageFactory) {
+function (App, PageFactory) {
 
   "use strict";
 
@@ -23,13 +23,13 @@ function (Siteify, PageFactory) {
 
       function setRoutes (pageModel) {
         self.route(pageModel.get('route'), pageModel.get('name'), function (option) {
-          siteify_require([pageModel.get('page').view], function (Page) {
+          app_require([pageModel.get('page').view], function (Page) {
             self.pageFactory.make(self.templatePath, $('#sf-content'), pageModel, Page, option);
           });
         });
       }
 
-      Siteify.Sitemap.each(function (model, index, list) {
+      App.Sitemap.each(function (model, index, list) {
         setRoutes(model);
       });
 
@@ -46,7 +46,7 @@ function (Siteify, PageFactory) {
       var pageModel = new Backbone.Model({name : 'setup'}),
             self = this;
 
-      siteify_require(['DefaultPage'], function (Page) {
+      app_require(['SetupPage'], function (Page) {
         self.pageFactory.make(self.templatePath, $('#sf-content'), pageModel, Page, option);
       });
     }

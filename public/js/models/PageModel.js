@@ -1,9 +1,9 @@
 
 define([
-  'Siteify'
+  'App'
 ],
 
-function (Siteify) {
+function (App) {
 
   "use strict";
 
@@ -38,7 +38,7 @@ function (Siteify) {
     },
 
     getPage : function (prop, direction) {
-      return prop ? Siteify.Sitemap.get(this.get(direction + 'Page') + '-page').get(prop) : Siteify.Sitemap.get(this.get(direction + 'Page') + '-page');
+      return prop ? App.Sitemap.get(this.get(direction + 'Page') + '-page').get(prop) : App.Sitemap.get(this.get(direction + 'Page') + '-page');
     }
 
   });

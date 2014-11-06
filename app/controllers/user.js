@@ -48,7 +48,7 @@ module.exports.register = function (req, res, next) {
 module.exports.unique = function (req, res, next) {
   User.findOne({ email : req.body.email }, function (err, user) {
     if (err) res.send(err);
-    var statusCode = user ? 500 : 200;
+    var statusCode = user ? 400 : 200;
     res.send(statusCode);
   });
 };

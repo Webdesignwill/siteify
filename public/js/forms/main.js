@@ -15,7 +15,7 @@ define(function (require, exports, module) {
         LoginModel                                                 : 'login/LoginModel',
         ProfileModel                                                : 'profile/ProfileModel',
         RegisterModel                                              : 'register/RegisterModel',
-        IntervalModel                                               : 'interval/IntervalModel'
+        SetupModel                                                 : 'setup/SetupModel'
       },
       deps : ['Forms']
     };
