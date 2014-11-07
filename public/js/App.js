@@ -10,14 +10,8 @@ define([
   var App = Backbone.Model.extend({
 
     url : '/api/siteify/hello',
-    page : new Backbone.Model(),
+    Page : new Backbone.Model(),
     $broker : $({}),
-
-    initialize : function () {
-      this.listenTo(this, 'change:status', function (model, event) {
-        console.log('%c App has ' + event + ' ', 'background: #444f64; color: #FFFFFF');
-      });
-    },
 
     setup : function (data, status) {
 
@@ -58,7 +52,7 @@ define([
       }
 
       function start () {
-        self[SiteifyModel.get('showSetup') ? 'setupApp' : 'startApp']();
+        self[SiteifyModel.get('status') === 'setup' ? 'setupApp' : 'startApp']();
       }
 
       app_require(['UserModel'], function (UserModel) {
@@ -93,8 +87,8 @@ define([
 
     init : function () {
       var self = this;
-      SiteifyModel.hello(function () {
-        self.setup();
+      SiteifyModel.hello(function (result, data, status) {
+        if(result) self.setup();
       });
     },
 

@@ -6,7 +6,7 @@ define([], function () {
     var PageFactory = function (module) {
 
       function closeCurrentPage (done) {
-        var page = module.page.get('page');
+        var page = module.Page.get('page');
         if(page && typeof page.close === 'function') {
           return page.close(function () {
             done();

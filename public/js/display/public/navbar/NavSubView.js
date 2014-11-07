@@ -1,10 +1,11 @@
 
 define([
-  'handlebars',
-  'App'
+  'App',
+  'SiteifyModel',
+  'handlebars'
 ],
 
-function (handlebars, App) {
+function (App, SiteifyModel, handlebars) {
 
   "use strict";
 
@@ -21,7 +22,7 @@ function (handlebars, App) {
     },
 
     setEvents : function () {
-      this.listenTo(App.page, 'change:page', function (model) {
+      this.listenTo(App.Page, 'change:page', function (model) {
         this.highlightActive(model.get('page'));
       });
     },

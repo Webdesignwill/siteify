@@ -9,13 +9,23 @@ function (App) {
 
   var SiteifyModel = Backbone.Model.extend({
 
-    defaults : { showSetup : false },
+    defaults : {
+      status : null,
+      page : null
+    },
 
     urls : {
       hello : '/api/siteify/hello'
     },
 
-    initialize : function () {},
+    initialize : function () {
+      this.listenTo(this, 'change:status', function (model, event) {
+        console.log('%c App status is ' + event + ' ', 'background: #444f64; color: #FFFFFF');
+      });
+      this.listenTo(this, 'change:page', function (model, event) {
+        console.log('%c Page changed to ' + event + ' ', 'background: #444f64; color: #FFFFFF');
+      });
+    },
 
     hello : function (done) {
       $.ajax({
@@ -24,33 +34,14 @@ function (App) {
         url : this.urls.hello,
         contentType : 'application/x-www-form-urlencoded',
         success : function (data, status) {
+          this.set(data);
           done(true, data, status);
         },
         error : function (data, status) {
           alert("Siteify isn't available");
         }
       });
-    },
-
-    register : function (user, done) {
-      $.ajax({
-        type : 'POST',
-        context : this,
-        url : this.urls.register,
-        contentType : 'application/x-www-form-urlencoded',
-        data : user,
-        success : function (data, status) {
-          this.set(data);
-          done(true, data, status);
-        },
-        error : function (data, status) {
-          done(false, data, status);
-        }
-      });
-    },
-
-    getProfile : function (done) {},
-    put : function (user, done) {},
+    }
 
   });
 

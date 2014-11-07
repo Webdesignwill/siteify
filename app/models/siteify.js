@@ -2,16 +2,16 @@
 var mongoose = require('mongoose');
 
 var SiteifySchema = new mongoose.Schema({
-  firstTimeInstallation : {
-    type : Boolean,
-    default : true
+  status : {
+    type : String,
+    default : 'setup'
   }
 });
 
 SiteifySchema.statics.hello = function (callback) {
-  SiteifyModel.find({firstTimeInstallation : true}, function (err, firstTimeInstallation) {
+  SiteifyModel.findOne({status : 'setup'}, function (err, siteify) {
     if(err) callback(err);
-    callback(err, firstTimeInstallation);
+    callback(err, siteify);
   });
 };
 
@@ -23,7 +23,7 @@ module.exports = SiteifyModel;
 ==================================================== */
 
 // SiteifyModel.create({
-//   firstTimeInstallation: true
+//   setup: 'setup'
 // }, function() {
 //   process.exit();
 // });

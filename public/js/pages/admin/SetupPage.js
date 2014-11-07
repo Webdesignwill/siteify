@@ -15,9 +15,9 @@ define([
     render : function () {
       this.$el.html(this.options.template);
       var self = this;
-      this.form.init(App, {
+      this.form.init(App.Page, {
         name : 'Setup',
-        action : 'makeSite',
+        action : 'create',
         el : this.$el.find('form')
       }, function () { self.done(); });
       return this;

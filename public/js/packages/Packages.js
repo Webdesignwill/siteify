@@ -9,9 +9,10 @@
 
 define([
   'App',
+  'SiteifyModel',
   'PageFactory',
   'launchControl'
-], function (App, PageFactory, launchControl) {
+], function (App, SiteifyModel, PageFactory, launchControl) {
 
   "use strict";
 
@@ -30,7 +31,7 @@ define([
         /* Either grab the element where the package should be loaded in to
             or pass the whole page container
         ========================================== */
-        var $page = App.page.get('page'),
+        var $page = App.Page.get('page'),
               $packageElement = $page.$el.find("[data-package='" + packageName + "']");
 
         return $packageElement.length > 0 ? $packageElement : $page.$el;
@@ -110,7 +111,7 @@ define([
         pageModel.get('packages') returns an array. Could be empty but always an array. If it's more
         than 0 then start loading them.
     ========================================================== */
-    App.page.on('change:page', function (model) {
+    App.Page.on('change:page', function (model) {
       var pageModel = model.get('page').model,
             pgsArray = pageModel.get('packages');
 

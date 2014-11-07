@@ -1,7 +1,5 @@
 
-define([
-  'App'
-],
+define(['App'],
 
 function (App) {
 
@@ -10,11 +8,7 @@ function (App) {
   var PageModel = Backbone.Model.extend({
 
     urls : {
-      // register : '/api/user/register',
-      // login : '/api/user/login',
-      // logout : '/api/user/logout',
-      // me : '/api/user/me',
-      // session : '/api/user/session'
+      create : '/api/pages/create'
     },
 
     initialize : function (model, options) {
