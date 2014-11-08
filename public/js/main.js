@@ -41,7 +41,7 @@ var app_require = require.config({
     BodyView                                               : 'display/public/body/BodyView',
     NavBarView                                            : 'display/public/navbar/NavBarView',
     NavSubView                                           : 'display/public/navbar/NavSubView',
-    ModalView                                             : 'display/public/modal/modalView',
+    ModalView                                             : 'display/public/modal/ModalView',
 
     /* Admin */
     LoginView                                              : 'display/forms/LoginView',
