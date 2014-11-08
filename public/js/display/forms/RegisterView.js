@@ -21,7 +21,7 @@ define([
         name : 'Register',
         action : 'register',
         el : this.$el.find('form')
-      }, function () { self.done(); });
+      }, self.done);
       return this;
     },
 

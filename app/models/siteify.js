@@ -1,14 +1,6 @@
 
 var mongoose = require('mongoose');
 
-/* App States
-=============
-
-setup
-installed
-
-*/
-
 var SiteifySchema = new mongoose.Schema({
   setup : {
     type : Boolean,
@@ -31,9 +23,12 @@ SiteifySchema.statics.hello = function (siteid, callback) {
   });
 };
 
-SiteifySchema.statics.setup = function (siteid, callback) {
-
-  callback();
+SiteifySchema.statics.setup = function (options, callback) {
+  SiteifyModel.findOneAndUpdate({_id:options.siteid}, {
+    setup : true,
+    status : 'installed',
+    sitename : options.sitename
+  }, null, callback);
 };
 
 mongoose.model('siteify', SiteifySchema);

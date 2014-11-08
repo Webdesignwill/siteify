@@ -21,7 +21,7 @@ define([
         name : 'Login',
         action : 'login',
         el : this.$el.find('form')
-      }, function () { self.done(); });
+      }, self.done);
       return this;
     },
 

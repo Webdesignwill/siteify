@@ -7,7 +7,7 @@ module.exports = function (app) {
   /* Siteify
   ==================================== */
   app.get('/api/siteify/hello', middleware.sessionSiteId, Controllers.Siteify.hello);
-  app.get('/api/siteify/setup', Controllers.Siteify.setup);
+  app.post('/api/siteify/setup', Controllers.Siteify.setup);
 
   /* Oauth
   ==================================== */

@@ -37,9 +37,7 @@ define([
               getRouter();
             });
           }
-          var req = window.require(config(), function () {
-            load();
-          });
+          var req = window.require(config(), load);
         });
       }
 
@@ -51,7 +49,7 @@ define([
       }
 
       function start () {
-        self[!SiteifyModel.get('setup') ? 'setupApp' : 'startApp']();
+        self[SiteifyModel.get('setup') ? 'startApp' : 'setupApp']();
       }
 
       app_require(['UserModel'], function (UserModel) {
@@ -67,6 +65,7 @@ define([
     },
 
     startApp : function () {
+
       var self = this;
       this.Sitemap.fetch({
         success : function () {
@@ -81,10 +80,6 @@ define([
       SiteifyModel.hello(function (result, data, status) {
         if(result) self.setup();
       });
-    },
-
-    makeSite : function (siteify, done) {
-      done(true, null, null);
     }
 
   });

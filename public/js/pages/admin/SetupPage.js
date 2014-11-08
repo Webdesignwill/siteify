@@ -21,11 +21,11 @@ define([
         name : 'Setup',
         action : 'setup',
         el : this.$el.find('form')
-      }, function () { self.done(); });
+      }, self.done);
       return this;
     },
 
-    done : function () {
+    done : function (result, data, status) {
       alert('Navigate to home page I guess');
     }
 

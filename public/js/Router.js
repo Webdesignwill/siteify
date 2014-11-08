@@ -1,10 +1,11 @@
 
 define([
   'App',
+  'SiteifyModel',
   'PageFactory'
 ],
 
-function (App, PageFactory) {
+function (App, SiteifyModel, PageFactory) {
 
   "use strict";
 
