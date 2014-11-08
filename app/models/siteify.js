@@ -31,8 +31,8 @@ module.exports = SiteifyModel;
 /* When you first create the server, the default properties will be set
 ==================================================== */
 
-SiteifyModel.create({
-  setup: 'setup'
-}, function() {
-  process.exit();
-});
+// SiteifyModel.create({
+//   setup: 'setup'
+// }, function() {
+//   process.exit();
+// });

@@ -31,10 +31,10 @@ module.exports = OAuthClientsModel;
 If you drop the database, you need to run this once.
 ==================================================== */
 
-// OAuthClientsModel.create({
-//   clientId: 'siteifyawesomecms',
-//   clientSecret: 'siteifyistheonlyawesomecontentmanagementsystemthatweloveforever',
-//   redirectUri: '/oauth/redirect'
-// }, function() {
-//   process.exit();
-// });
+OAuthClientsModel.create({
+  clientId: 'siteifyawesomecms',
+  clientSecret: 'siteifyistheonlyawesomecontentmanagementsystemthatweloveforever',
+  redirectUri: '/oauth/redirect'
+}, function() {
+  process.exit();
+});
