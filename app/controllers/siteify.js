@@ -4,7 +4,8 @@ var Siteify = require('./../models').Siteify;
 function parseResponse (siteify) {
   return {
     id : siteify._id,
-    sitename : siteify.sitename
+    sitename : siteify.sitename,
+    status : siteify.status
   };
 }
 

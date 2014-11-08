@@ -1,10 +1,11 @@
 
 define([
   'App',
+  'SiteifyModel',
   'NavBarView',
   'ModalView',
   'text!display/public/body/templates/body.tpl'
-], function (App, NavBarView, ModalView, template) {
+], function (App, SiteifyModel, NavBarView, ModalView, template) {
 
   "use strict";
 
@@ -14,8 +15,12 @@ define([
 
     initialize : function () {
 
-      this.listenTo(App.User, 'change:loggedin', function (model, att, something) {
-        this.toggleClass(att, 'loggedin');
+      this.listenTo(App.User, 'change:loggedin', function (model, loggedin) {
+        this.toggleClass(loggedin, 'loggedin');
+      }, this);
+
+      this.listenTo(SiteifyModel, 'change:status', function (model, status) {
+        console.log(status);
       }, this);
 
       this.render();

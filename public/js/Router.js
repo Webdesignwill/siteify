@@ -13,7 +13,7 @@ function (App, PageFactory) {
     templatePath : '/js/templates',
 
     routes : {
-      'siteify/setup(/)' : 'setup'
+      '/siteify/setup(/)' : 'setup'
     },
 
     init : function (module) {

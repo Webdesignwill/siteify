@@ -63,22 +63,14 @@ define([
 
     setupApp : function () {
       /* TODO Investigate the passing in of this here */
-      this.Router.init(this).navigate('siteify/setup', {trigger:true});
+      this.Router.init(this).navigate('/siteify/setup', {trigger:true});
     },
 
     startApp : function () {
-
       var self = this;
-
-      function initRouter () {
-        self.Router.init(self); /* TODO Investigate the passing in of self here */
-      }
-
-      // TODO this.User.fetch({});
-
       this.Sitemap.fetch({
         success : function () {
-          initRouter();
+          self.Router.init(self); /* TODO Investigate the passing in of self here */
         },
         error : function () { alert('Something went wrong loading the pages'); }
       });
