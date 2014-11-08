@@ -5,14 +5,23 @@ var SiteifySchema = new mongoose.Schema({
   status : {
     type : String,
     default : 'setup'
+  },
+  sitename : {
+    type : String,
+    default : null
   }
 });
 
-SiteifySchema.statics.hello = function (callback) {
-  SiteifyModel.findOne({status : 'setup'}, function (err, siteify) {
+SiteifySchema.statics.hello = function (siteid, callback) {
+  SiteifyModel.findOne({_id:siteid}, function (err, siteify) {
     if(err) callback(err);
     callback(err, siteify);
   });
+};
+
+SiteifySchema.statics.setup = function (siteid, callback) {
+
+  callback();
 };
 
 mongoose.model('siteify', SiteifySchema);

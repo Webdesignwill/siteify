@@ -1,11 +1,10 @@
 
 define([
   'App',
-  'SiteifyModel',
-  'handlebars'
+  'SiteifyModel'
 ],
 
-function (App, SiteifyModel, handlebars) {
+function (App, SiteifyModel) {
 
   "use strict";
 
@@ -22,13 +21,16 @@ function (App, SiteifyModel, handlebars) {
     },
 
     setEvents : function () {
+      this.listenTo(SiteifyModel, 'change:page', function (model, event) {
+        console.log('NAV : ', model);
+      });
       this.listenTo(App.Page, 'change:page', function (model) {
         this.highlightActive(model.get('page'));
       });
     },
 
     highlightActive : function (page) {
-      this.$el[page.model === this.model ? 'addClass' : 'removeClas']('active');
+      this.$el[page.model === this.model ? 'addClass' : 'removeClass']('active');
     },
 
     navigate : function () {

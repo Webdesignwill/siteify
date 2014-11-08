@@ -11,8 +11,12 @@ define([
       Backbone.View.prototype.constructor.apply(this, arguments);
     },
 
-    opacity : function (done) {},
-    before : function (done) {},
+    opacity : function (done) {
+      done();
+    },
+    before : function (done) {
+      done();
+    },
 
     close : function (done) {
       if(this.form) this.form.destroy();

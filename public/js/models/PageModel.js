@@ -7,10 +7,6 @@ function (App) {
 
   var PageModel = Backbone.Model.extend({
 
-    urls : {
-      create : '/api/pages/create'
-    },
-
     initialize : function (model, options) {
       this.listenTo(options.collection, 'sync', function (collection, ary, response) {
         this.setModelProperties(collection);

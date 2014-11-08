@@ -1,7 +1,5 @@
 
-define([
-  'PageModel'
-],
+define(['PageModel'],
 
 function (PageModel) {
 
@@ -12,11 +10,7 @@ function (PageModel) {
     // url : 'js/sitemap-stub.json',
     url : '/api/pages/all',
     urls : {
-      // register : '/api/user/register',
-      // login : '/api/user/login',
-      // logout : '/api/user/logout',
-      // me : '/api/user/me',
-      // session : '/api/user/session'
+      create : '/api/pages/create'
     },
 
     model : PageModel,
@@ -29,6 +23,22 @@ function (PageModel) {
         response[i].id = response[i]._id;
       }
       return response;
+    },
+
+    create : function (page, done) {
+      $.ajax({
+        type : 'POST',
+        context : this,
+        url : this.urls.create,
+        contentType : 'application/x-www-form-urlencoded',
+        data : page,
+        success : function (data, status) {
+          done(true, data, status);
+        },
+        error : function (data, status) {
+          done(false, data, status);
+        }
+      });
     }
 
   });

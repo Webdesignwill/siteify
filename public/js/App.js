@@ -9,7 +9,6 @@ define([
 
   var App = Backbone.Model.extend({
 
-    url : '/api/siteify/hello',
     Page : new Backbone.Model(),
     $broker : $({}),
 
@@ -63,7 +62,7 @@ define([
     },
 
     setupApp : function () {
-      /* TODO Investigate the passing in of self here */
+      /* TODO Investigate the passing in of this here */
       this.Router.init(this).navigate('siteify/setup', {trigger:true});
     },
 

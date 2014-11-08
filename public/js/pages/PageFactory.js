@@ -1,5 +1,5 @@
 
-define([], function () {
+define(['SiteifyModel'], function (SiteifyModel) {
 
     "use strict";
 
@@ -41,7 +41,12 @@ define([], function () {
           $container.html(page.render().el);
 
           openNextPage($container, page, function () {
-            module.page.set({
+            SiteifyModel.set('page', {
+              id : pageModel.get('id'),
+              view : page,
+              model : pageModel
+            });
+            module.Page.set({
               page : page,
               model : pageModel
             });

@@ -43,7 +43,7 @@ function (App, PageFactory) {
     },
 
     setup : function (option) {
-      var pageModel = new Backbone.Model({name : 'setup'}),
+      var pageModel = new Backbone.Model({id : 'admin', name : 'setup'}),
             self = this;
 
       app_require(['SetupPage'], function (Page) {
