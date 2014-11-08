@@ -8,6 +8,7 @@ function (App) {
   var SiteifyModel = Backbone.Model.extend({
 
     defaults : {
+      setup : null,
       sitename : null,
       status : null,
       page : null /* Not meant to be here */
@@ -21,9 +22,6 @@ function (App) {
     initialize : function () {
       this.listenTo(this, 'change:status', function (model, status) {
         console.log('%c App status is ' + status + ' ', 'background: #444f64; color: #FFFFFF');
-      }, this);
-      this.listenTo(this, 'change:page', function (model, page) {
-        console.log('Page change : ', page);
       }, this);
     },
 

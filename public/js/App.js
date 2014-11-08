@@ -51,7 +51,7 @@ define([
       }
 
       function start () {
-        self[SiteifyModel.get('status') === 'setup' ? 'setupApp' : 'startApp']();
+        self[!SiteifyModel.get('setup') ? 'setupApp' : 'startApp']();
       }
 
       app_require(['UserModel'], function (UserModel) {
