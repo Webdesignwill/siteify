@@ -3,9 +3,18 @@ var mongoose = require('mongoose'),
       authorizedClientIds = ['siteifyawesomecms'];
 
 var OAuthClientsSchema = new mongoose.Schema({
-  clientId: String,
-  clientSecret: String,
-  redirectUri: String
+  clientId: {
+    type : String,
+    default : 'siteifyawesomecms'
+  },
+  clientSecret: {
+    type : String,
+    default : 'siteifyistheonlyawesomecontentmanagementsystemthatweloveforever'
+  },
+  redirectUri: {
+    type : String,
+    default : '/oauth/redirect'
+  }
 });
 
 OAuthClientsSchema.statics.getClient = function (clientId, clientSecret, callback) {
@@ -27,14 +36,7 @@ mongoose.model('oauth_clients', OAuthClientsSchema);
 var OAuthClientsModel = mongoose.model('oauth_clients');
 module.exports = OAuthClientsModel;
 
-/* Client Secret and Client ID for authorized clients like for instance 'webdesignwill'
-If you drop the database, you need to run this once.
-==================================================== */
-
-// OAuthClientsModel.create({
-//   clientId: 'siteifyawesomecms',
-//   clientSecret: 'siteifyistheonlyawesomecontentmanagementsystemthatweloveforever',
-//   redirectUri: '/oauth/redirect'
-// }, function() {
-//   process.exit();
-// });
+/* FIRST TIME ONLY */
+OAuthClientsModel.findOne(function (err, oauthClient) {
+  if(!oauthClient) OAuthClientsModel.create({});
+});

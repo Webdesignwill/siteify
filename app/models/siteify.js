@@ -1,7 +1,19 @@
 
 var mongoose = require('mongoose');
 
+/* App States
+=============
+
+setup
+installed
+
+*/
+
 var SiteifySchema = new mongoose.Schema({
+  setup : {
+    type : Boolean,
+    default : false
+  },
   status : {
     type : String,
     default : 'setup'
@@ -28,11 +40,7 @@ mongoose.model('siteify', SiteifySchema);
 var SiteifyModel = mongoose.model('siteify');
 module.exports = SiteifyModel;
 
-/* When you first create the server, the default properties will be set
-==================================================== */
-
-// SiteifyModel.create({
-//   setup: 'setup'
-// }, function() {
-//   process.exit();
-// });
+/* FIRST TIME ONLY */
+SiteifyModel.findOne(function (err, siteify) {
+  if(!siteify) SiteifyModel.create({});
+});
