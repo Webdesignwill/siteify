@@ -1,7 +1,7 @@
 
 var express = require('express'),
       session = require('express-session'),
-      mongoStore = require('connect-mongo')(session),
+      MongoStore = require('connect-mongo')(session),
       bodyParser = require('body-parser'),
       cookieParser = require('cookie-parser'),
       morgan = require('morgan'),
@@ -25,7 +25,7 @@ module.exports = function (app, config) {
 
   app.use(session({
     secret: 'intervalfilteristhebestfilterintheworld',
-      store: new mongoStore({ url: config.db, collection: 'sessions'})
+      store: new MongoStore({ url: config.db, collection: 'sessions'})
     })
   );
 
