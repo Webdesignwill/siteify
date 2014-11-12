@@ -36,7 +36,7 @@ define([
     formValid : function (validationModel) {
       var self = this;
       this.model[this.action](validationModel.attributes, function (result, data, status) {
-        if(result) { return self.done(); }
+        if(result) { return self.done(result, data, status); }
         alert('TODO : Server Errors');
       });
     },

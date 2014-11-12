@@ -25,7 +25,7 @@ define([
       return this;
     },
 
-    done : function () {
+    done : function (result, data, status) {
       App.$broker.trigger('modal:close');
     },
 
