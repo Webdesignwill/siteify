@@ -7,14 +7,17 @@ var env = process.env.NODE_ENV || 'development',
       mongoose = require('mongoose');
 
 // Database
-mongoose.connect(config.db);
+var db = mongoose.connect(config.db);
+
+// access control settings
+require('./config/acl').initialize(app, db, config);
 
 var app = express();
 
 // express settings
 require('./config/express')(app, config);
 
-// express settings
+// route settings
 require('./config/routes')(app);
 
 // Start

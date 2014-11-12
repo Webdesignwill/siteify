@@ -4,6 +4,11 @@ var Controllers = require('./../app/controllers'),
 
 module.exports = function (app) {
 
+  app.post('/getPermissions', Controllers.User.getPermissions);
+  app.get('/private', function (req, res, next) {
+    // for the hell of it
+  });
+
   /* Siteify
   ==================================== */
   app.get('/api/siteify/hello', middleware.sessionSiteId, Controllers.Siteify.hello);

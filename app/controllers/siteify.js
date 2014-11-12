@@ -27,8 +27,7 @@ module.exports.setup = function (req, res, next) {
     User.register({
       displayname : req.body.displayname,
       email : req.body.email,
-      password : req.body.password,
-      confirmpassword : req.body.confirmpassword
+      password : req.body.password
     }, function (err, user) {
       if (err) return next(err);
       res.json(parseResponse(siteify));

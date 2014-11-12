@@ -4,7 +4,6 @@ var express = require('express'),
       MongoStore = require('connect-mongo')(session),
       bodyParser = require('body-parser'),
       cookieParser = require('cookie-parser'),
-      morgan = require('morgan'),
       flash = require('connect-flash'),
       oauth = require('./../app/models/oauth'),
       oauth2server = require('node-oauth2-server');
@@ -13,10 +12,6 @@ module.exports = function (app, config) {
   app.set('showStackError', true);
 
   app.use(express.static(config.root + '/public'));
-
-  if(process.env.NODE_ENV !== 'test') {
-    app.use(morgan('dev'));
-  }
 
   app.enable("jsonp callback");
 

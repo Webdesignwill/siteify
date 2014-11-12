@@ -1,6 +1,9 @@
 
 var User = require('./../models').User,
-      Oauth = require('./../models/oauth');
+      Oauth = require('./../models/oauth'),
+
+      // access control settings
+      node_acl = require('./../../config/acl').node_acl();
 
 function parseUserObject (user) {
   return {
@@ -10,6 +13,7 @@ function parseUserObject (user) {
     firstname : user.firstname,
     lastname : user.lastname,
     company : user.company,
+    roles : user.roles,
     loggedin : true
   };
 }
@@ -37,8 +41,15 @@ module.exports.session = function (req, res, next) {
 /* Register user
 ============================= */
 module.exports.register = function (req, res, next) {
-  User.register(req.body, function (err, user) {
+  User.register({
+      displayname : req.body.displayname,
+      email : req.body.email,
+      password : req.body.password
+    }, function (err, user) {
     if (err) return next(err);
+
+    node_acl.addUserRoles(user._id.toString(), 'admin');
+
     res.json(parseUserObject(user));
   });
 };
@@ -79,6 +90,7 @@ module.exports.putMe = function (req, res, next) {
   // findByIdAndUpdate
   User.findOne({ email : req.user.id }, function (err, user) {
     if (err) res.send(err);
+
     for(var key in req.body) {
       user[key] = req.body[key];
     }
@@ -93,4 +105,17 @@ module.exports.putMe = function (req, res, next) {
 ============================= */
 module.exports.logout = function (req, res, next) {
   logMeOut(req, res, next);
+};
+
+module.exports.getPermissions = function (req, res, next) {
+  User.findOne({ _id : req.body.id }, function (err, user) {
+    if(err) return next(err);
+    // node_acl.allowedPermissions(user._id.toString(), '/private', function (err, permissions) {
+    //   res.json(permissions);
+    // });
+
+    node_acl.isAllowed(user._id.toString(), '/private', req.body.permission, function (err, response) {
+      res.json({result : response});
+    });
+  });
 };
