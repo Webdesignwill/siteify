@@ -110,11 +110,16 @@ module.exports.logout = function (req, res, next) {
 module.exports.getPermissions = function (req, res, next) {
   User.findOne({ _id : req.body.id }, function (err, user) {
     if(err) return next(err);
-    // node_acl.allowedPermissions(user._id.toString(), '/private', function (err, permissions) {
+
+    if(!user) {
+      return res.send(404, 'Fuck all');
+    }
+
+    // node_acl.allowedPermissions(user._id.toString(), req.body.resource, function (err, permissions) {
     //   res.json(permissions);
     // });
 
-    node_acl.isAllowed(user._id.toString(), '/private', req.body.permission, function (err, response) {
+    node_acl.isAllowed(user._id.toString(), req.body.resource, req.body.permission, function (err, response) {
       res.json({result : response});
     });
   });

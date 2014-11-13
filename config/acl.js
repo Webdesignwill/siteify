@@ -10,7 +10,7 @@ module.exports.initialize = function (app, db, config) {
   node_acl.allow([{
     roles : 'admin',
     allows : [{
-      resources: '/private',
+      resources: '/api/user/me',
       permissions: ['create', 'remove', 'update', 'delete']
     }]
   }]);
