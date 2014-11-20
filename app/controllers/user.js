@@ -112,7 +112,7 @@ module.exports.getPermissions = function (req, res, next) {
     if(err) return next(err);
 
     if(!user) {
-      return res.send(404, 'Fuck all');
+      return res.send(404, 'No user');
     }
 
     // node_acl.allowedPermissions(user._id.toString(), req.body.resource, function (err, permissions) {
