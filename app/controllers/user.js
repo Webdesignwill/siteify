@@ -1,9 +1,6 @@
 
 var User = require('./../models').User,
-      Oauth = require('./../models/oauth'),
-
-      // access control settings
-      node_acl = require('./../../config/acl').node_acl();
+      Oauth = require('./../models/oauth');
 
 function parseUserObject (user) {
   return {
@@ -47,9 +44,6 @@ module.exports.register = function (req, res, next) {
       password : req.body.password
     }, function (err, user) {
     if (err) return next(err);
-
-    node_acl.addUserRoles(user._id.toString(), 'admin');
-
     res.json(parseUserObject(user));
   });
 };
@@ -115,12 +109,8 @@ module.exports.getPermissions = function (req, res, next) {
       return res.send(404, 'No user');
     }
 
-    // node_acl.allowedPermissions(user._id.toString(), req.body.resource, function (err, permissions) {
-    //   res.json(permissions);
-    // });
+    /* DO ACL testing here */
+    // console.log('******* : ', relations.pages());
 
-    node_acl.isAllowed(user._id.toString(), req.body.resource, req.body.permission, function (err, response) {
-      res.json({result : response});
-    });
   });
 };

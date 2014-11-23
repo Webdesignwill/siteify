@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "acl" : "latest",
+    "relations" : "https://github.com/Webdesignwill/node-relations/tarball/master",
     "express" : "~4.1.1",
     "express-session" : "~1.2.1",
     "ejs" : "~1.0.0",

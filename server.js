@@ -9,10 +9,10 @@ var env = process.env.NODE_ENV || 'development',
 // Database
 var db = mongoose.connect(config.db);
 
-// access control settings
-require('./config/acl').initialize(app, db, config);
-
 var app = express();
+
+// access control settings
+require('./config/relations')(app, config);
 
 // express settings
 require('./config/express')(app, config);
