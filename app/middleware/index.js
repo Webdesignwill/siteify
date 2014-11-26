@@ -11,9 +11,12 @@ module.exports.requiresUser = function (req, res, next) {
 };
 
 module.exports.sessionSiteId = function (req, res, next) {
-  var query = req.session.siteid || {};
-  Siteify.findOne(query, function (err, siteify) {
-    req.session.siteid = siteify._id;
-    next();
-  });
+  if(!req.session.siteid) {
+    var query = req.session.siteid || {};
+    return Siteify.findOne(query, function (err, siteify) {
+      req.session.siteid = siteify._id;
+      next();
+    });
+  }
+  next();
 };

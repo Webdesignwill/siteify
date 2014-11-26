@@ -61,7 +61,7 @@ define([
 
     setupApp : function () {
       /* TODO Investigate the passing in of this here */
-      this.Router.init(this).navigate('/siteify/setup', {trigger:true});
+      this.Router.init(this).navigate('/siteify/setup/admin', {trigger:true});
     },
 
     startApp : function () {

@@ -35,7 +35,8 @@ var app_require = require.config({
     /* Pages, Public */
     DefaultPage                                          : 'pages/public/DefaultPage',
     /* Admin */
-    SetupPage                                             : 'pages/admin/SetupPage',
+    AdminSetup                                           : 'pages/admin/setup/AdminSetup',
+    SiteifySetup                                           : 'pages/admin/setup/SiteifySetup',
 
     /* Public */
     BodyView                                               : 'display/public/body/BodyView',

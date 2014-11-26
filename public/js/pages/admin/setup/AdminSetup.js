@@ -1,13 +1,12 @@
 
 define([
   'App',
-  'SiteifyModel',
   'UserModel'
-], function (App, SiteifyModel, UserModel) {
+], function (App, UserModel) {
 
   "use strict";
 
-  var SetupPage = Backbone.Page.extend({
+  var AdminSetup = Backbone.Page.extend({
 
     initialize : function (options) {
       this.options = options;
@@ -17,20 +16,20 @@ define([
     render : function () {
       this.$el.html(this.options.template);
       var self = this;
-      this.form.init(SiteifyModel, {
-        name : 'Setup',
-        action : 'setup',
+      this.form.init(App.User, {
+        name : 'Register',
+        action : 'register',
         el : this.$el.find('form')
       }, self.done);
       return this;
     },
 
     done : function (result, data, status) {
-      alert('Navigate to home page I guess');
+      App.Router.navigate('/siteify/setup/site', {trigger:true});
     }
 
   });
 
-  return SetupPage;
+  return AdminSetup;
 
 });

@@ -14,7 +14,8 @@ function (App, SiteifyModel, PageFactory) {
     templatePath : '/js/templates',
 
     routes : {
-      'siteify/setup(/)' : 'setup'
+      'siteify/setup/admin(/)' : 'setupAdmin',
+      'siteify/setup/site(/)' : 'setupSite'
     },
 
     init : function (module) {
@@ -43,11 +44,23 @@ function (App, SiteifyModel, PageFactory) {
       if (callback) callback.apply(this, args);
     },
 
-    setup : function (option) {
-      var pageModel = new Backbone.Model({id : 'admin', name : 'setup'}),
+    /* Admin routes
+    ========================================== */
+
+    setupSite : function (option) {
+      var pageModel = new Backbone.Model({id : 'admin', name : 'setupSite'}),
             self = this;
 
-      app_require(['SetupPage'], function (Page) {
+      app_require(['SiteifySetup'], function (Page) {
+        self.pageFactory.make(self.templatePath, $('#sf-content'), pageModel, Page, option);
+      });
+    },
+
+    setupAdmin : function (option) {
+      var pageModel = new Backbone.Model({id : 'admin', name : 'setupAdmin'}),
+            self = this;
+
+      app_require(['AdminSetup'], function (Page) {
         self.pageFactory.make(self.templatePath, $('#sf-content'), pageModel, Page, option);
       });
     }

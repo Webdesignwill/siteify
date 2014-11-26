@@ -38,12 +38,16 @@ module.exports.session = function (req, res, next) {
 /* Register user
 ============================= */
 module.exports.register = function (req, res, next) {
+
+  // Trigger event saying a user is registered
+
   User.register({
       displayname : req.body.displayname,
       email : req.body.email,
       password : req.body.password
     }, function (err, user) {
     if (err) return next(err);
+    var userId = user._id.toString();
     res.json(parseUserObject(user));
   });
 };

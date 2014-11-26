@@ -1,4 +1,4 @@
-<h3>Register</h3>
+<h3>Create new user</h3>
 <div class="form-group">
   <label class="control-label" for="displayname-field">Enter your display name</label>
   <input type="text" class="form-control" id="displayname-field" name="displayname" placeholder="Display name" />
