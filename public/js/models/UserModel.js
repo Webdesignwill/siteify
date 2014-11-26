@@ -17,7 +17,8 @@ function (App, Oauth2Model) {
       login : '/api/user/login',
       logout : '/api/user/logout',
       me : '/api/user/me',
-      session : '/api/user/session'
+      session : '/api/user/session',
+      admin : '/api/siteify/admin'
     },
 
     initialize : function () {
@@ -37,6 +38,22 @@ function (App, Oauth2Model) {
         type : 'POST',
         context : this,
         url : this.urls.register,
+        contentType : 'application/x-www-form-urlencoded',
+        data : user,
+        success : function (data, status) {
+          done(true, data, status);
+        },
+        error : function (data, status) {
+          done(false, data, status);
+        }
+      });
+    },
+
+    registerAdmin : function (user, done) {
+      $.ajax({
+        type : 'POST',
+        context : this,
+        url : this.urls.admin,
         contentType : 'application/x-www-form-urlencoded',
         data : user,
         success : function (data, status) {

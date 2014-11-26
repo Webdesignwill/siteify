@@ -12,8 +12,7 @@ module.exports.requiresUser = function (req, res, next) {
 
 module.exports.sessionSiteId = function (req, res, next) {
   if(!req.session.siteid) {
-    var query = req.session.siteid || {};
-    return Siteify.findOne(query, function (err, siteify) {
+    return Siteify.findOne(req.session.siteid, function (err, siteify) {
       req.session.siteid = siteify._id;
       next();
     });

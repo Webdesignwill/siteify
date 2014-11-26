@@ -1,6 +1,8 @@
 
 var User = require('./../models').User,
-      Oauth = require('./../models/oauth');
+      Oauth = require('./../models/oauth'),
+      Siteify = require('./../models').Siteify,
+      relations = require('relations');
 
 function parseUserObject (user) {
   return {
@@ -38,9 +40,6 @@ module.exports.session = function (req, res, next) {
 /* Register user
 ============================= */
 module.exports.register = function (req, res, next) {
-
-  // Trigger event saying a user is registered
-
   User.register({
       displayname : req.body.displayname,
       email : req.body.email,

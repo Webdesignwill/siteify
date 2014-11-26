@@ -49,7 +49,10 @@ define([
       }
 
       function start () {
-        self[SiteifyModel.get('setup') ? 'startApp' : 'setupApp']();
+        if(SiteifyModel.get('owner')) {
+          return self[SiteifyModel.get('setup') ? 'startSite' : 'setupSite']();
+        }
+        self.Router.init(self).navigate('/siteify/setup/admin', {trigger:true});
       }
 
       app_require(['UserModel'], function (UserModel) {
@@ -59,20 +62,21 @@ define([
 
     },
 
-    setupApp : function () {
+    setupSite : function () {
       /* TODO Investigate the passing in of this here */
-      this.Router.init(this).navigate('/siteify/setup/admin', {trigger:true});
+      this.Router.init(this).navigate('/siteify/setup/site', {trigger:true});
     },
 
-    startApp : function () {
-
-      var self = this;
-      this.Sitemap.fetch({
-        success : function () {
-          self.Router.init(self); /* TODO Investigate the passing in of self here */
-        },
-        error : function () { alert('Something went wrong loading the pages'); }
-      });
+    startSite : function () {
+      alert('Start App as normal');
+      // var self = this;
+      // this.Sitemap.fetch({
+      //   success : function () {
+      //     /* TODO Investigate the passing in of self here */
+      //     self.Router.init(self);
+      //   },
+      //   error : function () { alert('Something went wrong loading the pages'); }
+      // });
     },
 
     init : function () {

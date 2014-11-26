@@ -18,7 +18,7 @@ define([
       var self = this;
       this.form.init(App.User, {
         name : 'Register',
-        action : 'register',
+        action : 'registerAdmin',
         el : this.$el.find('form')
       }, self.done);
       return this;

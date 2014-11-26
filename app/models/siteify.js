@@ -2,6 +2,10 @@
 var mongoose = require('mongoose');
 
 var SiteifySchema = new mongoose.Schema({
+  owner : {
+    type : Boolean,
+    default : false
+  },
   setup : {
     type : Boolean,
     default : false
