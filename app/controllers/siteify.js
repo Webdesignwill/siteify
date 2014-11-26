@@ -22,7 +22,7 @@ module.exports.hello = function (req, res, next) {
 module.exports.setup = function (req, res, next) {
   Siteify.findOne({_id:req.session.siteid}, function (err, siteify) {
     if(err) return next(err);
-    if(!siteify.setup) {
+    if(!siteify && !siteify.setup) {
       return firstTimeInstall();
     }
     res.json(parseResponse(siteify));
