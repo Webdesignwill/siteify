@@ -6,7 +6,10 @@ module.exports = function (app, config) {
   // Use Mongoose store
   relations.use(relations.stores.mongoose);
 
-  // Define pre set relations
+  relations.define('siteify', {
+    owner : ['all']
+  });
+
   relations.define('pages', {
     admin : ['create', 'remove', 'update', 'delete'],
     owner : ['create', 'remove', 'update', 'delete']

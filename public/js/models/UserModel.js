@@ -18,7 +18,7 @@ function (App, Oauth2Model) {
       logout : '/api/user/logout',
       me : '/api/user/me',
       session : '/api/user/session',
-      admin : '/api/siteify/admin'
+      owner : '/api/siteify/owner'
     },
 
     initialize : function () {
@@ -49,11 +49,11 @@ function (App, Oauth2Model) {
       });
     },
 
-    registerAdmin : function (user, done) {
+    registerOwner : function (user, done) {
       $.ajax({
         type : 'POST',
         context : this,
-        url : this.urls.admin,
+        url : this.urls.owner,
         contentType : 'application/x-www-form-urlencoded',
         data : user,
         success : function (data, status) {

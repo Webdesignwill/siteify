@@ -13,7 +13,7 @@ module.exports = function (app) {
   ==================================== */
   app.get('/api/siteify/hello', middleware.sessionSiteId, Controllers.Siteify.hello);
   app.post('/api/siteify/setup', Controllers.Siteify.setup);
-  app.post('/api/siteify/admin', Controllers.Siteify.admin);
+  app.post('/api/siteify/owner', Controllers.Siteify.owner);
 
   /* Oauth
   ==================================== */

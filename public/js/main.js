@@ -7,9 +7,6 @@ var app_require = require.config({
   packages: [{
     name : 'forms',
     location : 'forms'
-  },{
-    name : 'packages',
-    location : 'packages'
   }],
 
   paths : {
@@ -29,14 +26,15 @@ var app_require = require.config({
     PageFactory                                          : 'pages/PageFactory',
     Sitemap                                                : 'Sitemap',
 
+    /* Owner/Site Setup */
+    OwnerSetup                                           : 'pages/admin/setup/OwnerSetup',
+    SiteSetup                                               : 'pages/admin/setup/SiteSetup',
+
     /* Extensions */
     pageExt                                                 : 'pages/pageExt',
 
     /* Pages, Public */
     DefaultPage                                          : 'pages/public/DefaultPage',
-    /* Admin */
-    AdminSetup                                           : 'pages/admin/setup/AdminSetup',
-    SiteifySetup                                           : 'pages/admin/setup/SiteifySetup',
 
     /* Public */
     BodyView                                               : 'display/public/body/BodyView',

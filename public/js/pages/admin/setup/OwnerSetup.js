@@ -6,7 +6,7 @@ define([
 
   "use strict";
 
-  var AdminSetup = Backbone.Page.extend({
+  var OwnerSetupPage = Backbone.Page.extend({
 
     initialize : function (options) {
       this.options = options;
@@ -18,7 +18,7 @@ define([
       var self = this;
       this.form.init(App.User, {
         name : 'Register',
-        action : 'registerAdmin',
+        action : 'registerOwner',
         el : this.$el.find('form')
       }, self.done);
       return this;
@@ -30,6 +30,6 @@ define([
 
   });
 
-  return AdminSetup;
+  return OwnerSetupPage;
 
 });

@@ -52,7 +52,7 @@ define([
         if(SiteifyModel.get('owner')) {
           return self[SiteifyModel.get('setup') ? 'startSite' : 'setupSite']();
         }
-        self.Router.init(self).navigate('/siteify/setup/admin', {trigger:true});
+        self.Router.init(self).navigate('/siteify/setup/owner', {trigger:true});
       }
 
       app_require(['UserModel'], function (UserModel) {

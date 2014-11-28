@@ -20,9 +20,9 @@ module.exports.hello = function (req, res, next) {
   });
 };
 
-module.exports.admin = function (req, res, next) {
+module.exports.owner = function (req, res, next) {
 
-  function registerAdmin () {
+  function registerOwner () {
     User.register({
         displayname : req.body.displayname,
         email : req.body.email,
@@ -30,13 +30,13 @@ module.exports.admin = function (req, res, next) {
       }, function (err, user) {
       if (err) return next(err);
 
-      // Make this user the owner of siteify in relations
+      relations.siteify('%s is the owner of %s', user._id.toString(), 'siteify');
 
       Siteify.findOneAndUpdate({_id:req.session.siteid}, {
         owner : true
       }, null, function (err, siteify) {
         if(err) return next(err);
-        res.send(200);
+        res.json(parseResponse(siteify));
       });
     });
   }
@@ -44,9 +44,9 @@ module.exports.admin = function (req, res, next) {
   Siteify.findOne({_id:req.session.siteid}, function (err, siteify) {
     if(err) return next(err);
     if(siteify.owner) {
-      res.send(401);
+      res.send(401, "there is already an owner");
     }
-    registerAdmin();
+    registerOwner();
   });
 };
 

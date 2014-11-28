@@ -6,7 +6,7 @@ define([
 
   "use strict";
 
-  var SetupPage = Backbone.Page.extend({
+  var SiteSetupPage = Backbone.Page.extend({
 
     initialize : function (options) {
       this.options = options;
@@ -30,6 +30,6 @@ define([
 
   });
 
-  return SetupPage;
+  return SiteSetupPage;
 
 });
