@@ -1,7 +1,6 @@
 
 var mongoose = require('mongoose'),
-      bcrypt = require('bcrypt-nodejs'),
-      relations = require('relations');
+      bcrypt = require('bcrypt-nodejs');
 
 var OAuthUsersSchema = new mongoose.Schema({
   email: {
@@ -42,21 +41,10 @@ function hashPassword(password) {
 }
 
 OAuthUsersSchema.statics.register = function (fields, callback) {
-
-  var userid;
-
   fields.hashed_password = hashPassword(fields.password);
   delete fields.password;
   var user = new OAuthUsersModel(fields);
-
-  user.save(function (err, user) {
-    if(err) return callback(err);
-
-    userid = user._id.toString();
-    relations.users('%s is the owner of %s', userid, userid);
-
-    callback(err, user);
-  });
+  user.save(callback);
 };
 
 OAuthUsersSchema.statics.authenticate = function (email, password, callback) {

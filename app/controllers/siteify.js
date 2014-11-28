@@ -48,7 +48,7 @@ module.exports.owner = function (req, res, next) {
 };
 
 module.exports.setup = function (req, res, next) {
-  function firstTimeInstall () {
+  function setup () {
     Siteify.setup({
       sitename : req.body.sitename,
       siteid : req.session.siteid
@@ -59,7 +59,10 @@ module.exports.setup = function (req, res, next) {
 
   Siteify.findOne({_id:req.session.siteid}, function (err, siteify) {
     if(err) return next(err);
-    firstTimeInstall();
+    if(siteify.setup) {
+      res.send(401, "The site has already been setup");
+    }
+    setup();
   });
 
 };
