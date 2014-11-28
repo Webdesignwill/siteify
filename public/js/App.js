@@ -44,6 +44,7 @@ define([
       function getRouter () {
         app_require(['Router'], function (Router) {
           self.Router = new Router();
+          self.Router.init(self);
           start();
         });
       }
@@ -52,7 +53,7 @@ define([
         if(SiteifyModel.get('owner')) {
           return self[SiteifyModel.get('setup') ? 'startSite' : 'setupSite']();
         }
-        self.Router.init(self).navigate('/siteify/setup/owner', {trigger:true});
+        self.Router.navigate('/siteify/setup/owner', {trigger:true});
       }
 
       app_require(['UserModel'], function (UserModel) {
@@ -63,26 +64,31 @@ define([
     },
 
     setupSite : function () {
-      /* TODO Investigate the passing in of this here */
-      this.Router.init(this).navigate('/siteify/setup/site', {trigger:true});
+      this.Router.navigate('/siteify/setup/site', {trigger:true});
     },
 
     startSite : function () {
-      alert('Start App as normal');
-      // var self = this;
-      // this.Sitemap.fetch({
-      //   success : function () {
-      //     /* TODO Investigate the passing in of self here */
-      //     self.Router.init(self);
-      //   },
-      //   error : function () { alert('Something went wrong loading the pages'); }
-      // });
+      var self = this;
+      this.Sitemap.getSitemap(function (result, data, status) {
+        if(result) {
+          if(data.length) {
+            return alert('Load first page');
+          }
+          self.Router.navigate('/siteify/pages/new', {trigger:true});
+        } else {
+          alert('Something went wrong loading the sitemap');
+        }
+      });
     },
 
     init : function () {
       var self = this;
       SiteifyModel.hello(function (result, data, status) {
-        if(result) self.setup();
+        if(result) {
+          self.setup();
+        } else {
+          alert('Something went wrong saying hello :( ');
+        }
       });
     }
 

@@ -31,10 +31,10 @@ module.exports = function (app) {
 
    /* Pages
   ==================================== */
-  app.post('/api/pages/create', Controllers.Pages.create);
+  app.post('/api/pages/new', Controllers.Pages.new);
   app.get('/api/pages/all', Controllers.Pages.all);
-  app.get('/api/pages/get/:page_id', Controllers.Pages.get);
-  app.put('/api/pages/put/:page_id', Controllers.Pages.put);
-  app.delete('/api/pages/delete/:page_id', Controllers.Pages.delete);
+  // app.get('/api/pages/get/:page_id', Controllers.Pages.get);
+  // app.put('/api/pages/put/:page_id', Controllers.Pages.put);
+  // app.delete('/api/pages/delete/:page_id', Controllers.Pages.delete);
 
 };

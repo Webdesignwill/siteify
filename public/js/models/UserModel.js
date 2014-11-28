@@ -10,7 +10,9 @@ function (App, Oauth2Model) {
 
   var UserModel = Backbone.Model.extend({
 
-    defaults : { loggedin : false },
+    defaults : {
+      loggedin : false
+    },
 
     urls : {
       register : '/api/user/register',

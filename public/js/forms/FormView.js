@@ -2,7 +2,7 @@
 define([
   'require',
   'handlebars'
-], function (siteify_forms, handlebars, template) {
+], function (siteify_forms, handlebars) {
 
   "use strict";
 

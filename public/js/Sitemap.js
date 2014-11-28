@@ -7,10 +7,9 @@ function (PageModel) {
 
   var Sitemap = Backbone.Collection.extend({
 
-    // url : 'js/sitemap-stub.json',
     url : '/api/pages/all',
     urls : {
-      create : '/api/pages/create'
+      new : '/api/pages/new'
     },
 
     model : PageModel,
@@ -25,11 +24,22 @@ function (PageModel) {
       return response;
     },
 
-    create : function (page, done) {
+    getSitemap : function (done) {
+      this.fetch({
+        success : function (data, status) {
+          done(true, data, status);
+        },
+        error : function (data, status) {
+          done(false, data, status);
+        }
+      });
+    },
+
+    newPage : function (page, done) {
       $.ajax({
         type : 'POST',
         context : this,
-        url : this.urls.create,
+        url : this.urls.new,
         contentType : 'application/x-www-form-urlencoded',
         data : page,
         success : function (data, status) {

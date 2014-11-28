@@ -15,7 +15,8 @@ function (App, SiteifyModel, PageFactory) {
 
     routes : {
       'siteify/setup/owner(/)' : 'setupOwner',
-      'siteify/setup/site(/)' : 'setupSite'
+      'siteify/setup/site(/)' : 'setupSite',
+      'siteify/pages/new(/)' : 'newPage'
     },
 
     init : function (module) {
@@ -61,6 +62,15 @@ function (App, SiteifyModel, PageFactory) {
             self = this;
 
       app_require(['OwnerSetup'], function (Page) {
+        self.pageFactory.make(self.templatePath, $('#sf-content'), pageModel, Page, option);
+      });
+    },
+
+    newPage : function (option) {
+      var pageModel = new Backbone.Model({id : 'newPage', name : 'newPage'}),
+            self = this;
+
+      app_require(['NewPage'], function (Page) {
         self.pageFactory.make(self.templatePath, $('#sf-content'), pageModel, Page, option);
       });
     }

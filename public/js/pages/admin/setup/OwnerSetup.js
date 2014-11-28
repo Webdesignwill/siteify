@@ -25,7 +25,11 @@ define([
     },
 
     done : function (result, data, status) {
-      App.Router.navigate('/siteify/setup/site', {trigger:true});
+      if(result) {
+        App.Router.navigate('/siteify/setup/site', {trigger:true});
+      } else {
+        alert('Something went wrong registering the owner');
+      }
     }
 
   });

@@ -6,7 +6,6 @@ function parseResponse (siteify) {
   return {
     id : siteify._id,
     sitename : siteify.sitename,
-    status : siteify.status,
     setup : siteify.setup,
     owner : siteify.owner
   };

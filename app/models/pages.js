@@ -12,7 +12,7 @@ var mongoose = require('mongoose');
 // };
 
 var PagesSchema = new mongoose.Schema({
-  name : {
+  title : {
     type: String,
     set : function toLower (str) {
       return str.toLowerCase();
@@ -34,6 +34,12 @@ var PagesSchema = new mongoose.Schema({
     path : String
   }
 });
+
+PagesSchema.statics.create = function () {
+  // PagesModel.doSoemthing(function (err, pages){
+
+  // });
+};
 
 mongoose.model('pages', PagesSchema);
 var PagesModel = mongoose.model('pages');

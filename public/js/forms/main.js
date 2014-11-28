@@ -15,7 +15,10 @@ define(function (require, exports, module) {
         LoginModel                                                 : 'login/LoginModel',
         ProfileModel                                                : 'profile/ProfileModel',
         RegisterModel                                              : 'register/RegisterModel',
-        SetupModel                                                 : 'setup/SetupModel'
+        SetupModel                                                 : 'setup/SetupModel',
+
+        // Pages
+        NewPageModel                                            : 'newpage/NewPageModel'
       },
       deps : ['Forms']
     };

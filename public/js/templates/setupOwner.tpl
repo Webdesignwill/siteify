@@ -1,5 +1,5 @@
 <div class="jumbotron">
-  <h1>Welcome to Siteify</h1>
-  <p>Thanks for choosing to use Siteify the Node based CMS. Please create the administrator's account</p>
+  <h1>Hey, How's it going?</h1>
+  <p>There isn't an owner to the site yet.</p>
   <form role="form" class="clearfix"></form>
 </div>

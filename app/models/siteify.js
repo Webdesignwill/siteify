@@ -11,10 +11,6 @@ var SiteifySchema = new mongoose.Schema({
     type : Boolean,
     default : false
   },
-  status : {
-    type : String,
-    default : 'setup'
-  },
   sitename : {
     type : String,
     default : null
@@ -29,7 +25,6 @@ SiteifySchema.statics.hello = function (siteid, callback) {
 };
 
 SiteifySchema.statics.registerOwner = function (options, callback) {
-
   SiteifyModel.findOneAndUpdate({_id:options.siteid}, {
     owner : true
   }, null, function (err, siteify) {
@@ -42,7 +37,6 @@ SiteifySchema.statics.registerOwner = function (options, callback) {
 SiteifySchema.statics.setup = function (options, callback) {
   SiteifyModel.findOneAndUpdate({_id:options.siteid}, {
     setup : true,
-    status : 'installed',
     sitename : options.sitename
   }, null, callback);
 };

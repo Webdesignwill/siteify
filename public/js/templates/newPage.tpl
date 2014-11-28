@@ -1,5 +1,5 @@
 <div class="jumbotron">
-  <h1>Site Details</h1>
-  <p>Whats the site going to be all about?</p>
+  <h1>Your First Page</h1>
+  <p>You don't have any pages yet</p>
   <form role="form" class="clearfix"></form>
 </div>

@@ -30,6 +30,13 @@ var app_require = require.config({
     OwnerSetup                                           : 'pages/admin/setup/OwnerSetup',
     SiteSetup                                               : 'pages/admin/setup/SiteSetup',
 
+    /* Admin */
+    LoginView                                              : 'display/forms/LoginView',
+    RegisterView                                          : 'display/forms/RegisterView',
+    ProfileView                                             : 'display/forms/ProfileView',
+
+    NewPage                                                : 'pages/admin/pages/NewPage',
+
     /* Extensions */
     pageExt                                                 : 'pages/pageExt',
 
@@ -41,11 +48,6 @@ var app_require = require.config({
     NavBarView                                            : 'display/public/navbar/NavBarView',
     NavSubView                                           : 'display/public/navbar/NavSubView',
     ModalView                                             : 'display/public/modal/ModalView',
-
-    /* Admin */
-    LoginView                                              : 'display/forms/LoginView',
-    RegisterView                                          : 'display/forms/RegisterView',
-    ProfileView                                             : 'display/forms/ProfileView',
 
     /* Site models */
     UserModel                                              : 'models/UserModel',

@@ -1,12 +1,11 @@
 
 define([
-  'App',
-  'SiteifyModel'
-], function (App, SiteifyModel) {
+  'App'
+], function (App) {
 
   "use strict";
 
-  var SiteSetupPage = Backbone.Page.extend({
+  var NewPage = Backbone.Page.extend({
 
     initialize : function (options) {
       this.options = options;
@@ -16,9 +15,9 @@ define([
     render : function () {
       this.$el.html(this.options.template);
       var self = this;
-      this.form.init(SiteifyModel, {
-        name : 'Setup',
-        action : 'setup',
+      this.form.init(App.Sitemap, {
+        name : 'NewPage',
+        action : 'newPage',
         el : this.$el.find('form')
       }, self.done);
       return this;
@@ -26,14 +25,14 @@ define([
 
     done : function (result, data, status) {
       if(result) {
-        App.Router.navigate('/siteify/pages/new', {trigger:true});
+        console.log('DATA : ', data);
       } else {
-        alert('Something went wrong setting up Siteify');
+        alert('Something went wrong making a new page');
       }
     }
 
   });
 
-  return SiteSetupPage;
+  return NewPage;
 
 });

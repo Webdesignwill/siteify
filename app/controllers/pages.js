@@ -1,20 +1,22 @@
 
 var Pages = require('./../models').Pages;
 
-module.exports.create = function (req, res, next) {
-  var page = new Pages();
+module.exports.new = function (req, res, next) {
+  console.log('Create a nice page : ', req.body);
+  res.json(req.body);
+  // var page = new Pages();
 
-  for(var key in req.body) {
-    page[key] = req.body[key];
-  }
+  // for(var key in req.body) {
+  //   page[key] = req.body[key];
+  // }
 
-  page.save(function(err) {
-    if (err) res.send(err);
-    res.json({
-      success: 'New page created',
-      data: page
-    });
-  });
+  // page.save(function(err) {
+  //   if (err) res.send(err);
+  //   res.json({
+  //     success: 'New page created',
+  //     data: page
+  //   });
+  // });
 };
 
 module.exports.all = function (req, res, next) {

@@ -12,7 +12,6 @@ function (App) {
       owner: false,
       setup: false,
       sitename: null,
-      status: "setup",
       page : null /* Not meant to be here */
     },
 
