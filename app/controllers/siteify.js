@@ -1,7 +1,6 @@
 
 var Siteify = require('./../models').Siteify,
-      User = require('./../models').User,
-      relations = require('relations');
+      User = require('./../models').User;
 
 function parseResponse (siteify) {
   return {
@@ -30,12 +29,10 @@ module.exports.owner = function (req, res, next) {
       }, function (err, user) {
       if (err) return next(err);
 
-      relations.siteify('%s is the owner of %s', user._id.toString(), 'siteify');
-
-      Siteify.findOneAndUpdate({_id:req.session.siteid}, {
-        owner : true
-      }, null, function (err, siteify) {
-        if(err) return next(err);
+      Siteify.registerOwner({
+        siteid : req.session.siteid,
+        userid : user._id.toString()
+      }, function (err, siteify) {
         res.json(parseResponse(siteify));
       });
     });

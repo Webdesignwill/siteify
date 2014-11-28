@@ -1,5 +1,6 @@
 
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+      relations = require('relations');
 
 var SiteifySchema = new mongoose.Schema({
   owner : {
@@ -23,6 +24,17 @@ var SiteifySchema = new mongoose.Schema({
 SiteifySchema.statics.hello = function (siteid, callback) {
   SiteifyModel.findOne({_id:siteid}, function (err, siteify) {
     if(err) callback(err);
+    callback(err, siteify);
+  });
+};
+
+SiteifySchema.statics.registerOwner = function (options, callback) {
+
+  SiteifyModel.findOneAndUpdate({_id:options.siteid}, {
+    owner : true
+  }, null, function (err, siteify) {
+    if(err) return callback(err);
+    relations.siteify('%s is the owner of %s', options.userid, siteify._id.toString());
     callback(err, siteify);
   });
 };

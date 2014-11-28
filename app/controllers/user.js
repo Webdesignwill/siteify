@@ -1,8 +1,6 @@
 
 var User = require('./../models').User,
-      Oauth = require('./../models/oauth'),
-      Siteify = require('./../models').Siteify,
-      relations = require('relations');
+      Oauth = require('./../models/oauth');
 
 function parseUserObject (user) {
   return {
@@ -46,7 +44,6 @@ module.exports.register = function (req, res, next) {
       password : req.body.password
     }, function (err, user) {
     if (err) return next(err);
-    var userId = user._id.toString();
     res.json(parseUserObject(user));
   });
 };

@@ -8,21 +8,45 @@ function (App) {
   var SiteifyModel = Backbone.Model.extend({
 
     defaults : {
-      setup : null,
-      sitename : null,
-      status : null,
+      id: null,
+      owner: false,
+      setup: false,
+      sitename: null,
+      status: "setup",
       page : null /* Not meant to be here */
     },
 
     urls : {
       hello : '/api/siteify/hello',
-      setup : '/api/siteify/setup'
+      setup : '/api/siteify/setup',
+      owner : '/api/siteify/owner'
     },
 
     initialize : function () {
-      this.listenTo(this, 'change:status', function (model, status) {
-        console.log('%c App status is ' + status + ' ', 'background: #444f64; color: #FFFFFF');
+      var to;
+      this.listenTo(this, 'change', function (siteify) {
+        for(var key in siteify.changed) {
+          to = typeof siteify.changed[key] !== 'object' ? ' to : ' + siteify.changed[key] : ' ';
+          console.log('%c Siteify changed ' + key + to, 'background: #00feff; color: #222222;');
+        }
       }, this);
+    },
+
+    registerOwner : function (user, done) {
+      $.ajax({
+        type : 'POST',
+        context : this,
+        url : this.urls.owner,
+        contentType : 'application/x-www-form-urlencoded',
+        data : user,
+        success : function (data, status) {
+          this.set(data);
+          done(true, data, status);
+        },
+        error : function (data, status) {
+          done(false, data, status);
+        }
+      });
     },
 
     hello : function (done) {

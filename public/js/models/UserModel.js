@@ -17,8 +17,7 @@ function (App, Oauth2Model) {
       login : '/api/user/login',
       logout : '/api/user/logout',
       me : '/api/user/me',
-      session : '/api/user/session',
-      owner : '/api/siteify/owner'
+      session : '/api/user/session'
     },
 
     initialize : function () {
@@ -38,22 +37,6 @@ function (App, Oauth2Model) {
         type : 'POST',
         context : this,
         url : this.urls.register,
-        contentType : 'application/x-www-form-urlencoded',
-        data : user,
-        success : function (data, status) {
-          done(true, data, status);
-        },
-        error : function (data, status) {
-          done(false, data, status);
-        }
-      });
-    },
-
-    registerOwner : function (user, done) {
-      $.ajax({
-        type : 'POST',
-        context : this,
-        url : this.urls.owner,
         contentType : 'application/x-www-form-urlencoded',
         data : user,
         success : function (data, status) {

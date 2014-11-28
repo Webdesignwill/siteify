@@ -10,14 +10,14 @@ module.exports = function (app, config) {
     owner : ['all']
   });
 
-  relations.define('pages', {
-    admin : ['create', 'remove', 'update', 'delete'],
-    owner : ['create', 'remove', 'update', 'delete']
+  relations.define('users', {
+    owner : ['create', 'remove', 'update', 'delete'],
+    friend : ['email', 'message']
   });
 
-  relations.define('users', {
-    admin : ['create', 'remove', 'update', 'delete'],
-    owner : ['create', 'remove', 'update', 'delete']
+  relations.define('pages', {
+    owner : ['create', 'remove', 'update', 'delete'],
+    admin : ['create', 'remove', 'update', 'delete']
   });
 
   /* Will being the userID */

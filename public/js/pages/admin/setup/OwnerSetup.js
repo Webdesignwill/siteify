@@ -1,8 +1,8 @@
 
 define([
   'App',
-  'UserModel'
-], function (App, UserModel) {
+  'SiteifyModel'
+], function (App, SiteifyModel) {
 
   "use strict";
 
@@ -16,7 +16,7 @@ define([
     render : function () {
       this.$el.html(this.options.template);
       var self = this;
-      this.form.init(App.User, {
+      this.form.init(SiteifyModel, {
         name : 'Register',
         action : 'registerOwner',
         el : this.$el.find('form')
