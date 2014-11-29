@@ -7,28 +7,20 @@ function (App) {
 
   var PageModel = Backbone.Model.extend({
 
-    initialize : function (model, options) {
-      this.listenTo(options.collection, 'sync', function (collection, ary, response) {
-        this.setModelProperties(collection);
+    initialize : function () {
+      var to;
+      this.listenTo(this, 'change', function (page) {
+        for(var key in page.changed) {
+          to = typeof page.changed[key] !== 'object' ? ' to : ' + sitemap.changed[key] : ' ';
+          console.log('%c Page ' + page.get('title') + ' changed ' + key + to, 'background: #222222; color: #00feff;');
+        }
       }, this);
     },
 
     parse : function (model) {
+      model.id = model._id;
+      model.route = model.route + '(/)';
       return model;
-    },
-
-    setModelProperties : function (collection) {
-      var subpages = this.get('subpages'),
-            self = this;
-
-      if(subpages) {
-        for(var i = 0; i<subpages.length;i++) {}
-      }
-
-    },
-
-    getPage : function (prop, direction) {
-      return prop ? App.Sitemap.get(this.get(direction + 'Page') + '-page').get(prop) : App.Sitemap.get(this.get(direction + 'Page') + '-page');
     }
 
   });

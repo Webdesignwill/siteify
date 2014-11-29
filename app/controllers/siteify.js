@@ -7,7 +7,9 @@ function parseResponse (siteify) {
     id : siteify._id,
     sitename : siteify.sitename,
     setup : siteify.setup,
-    owner : siteify.owner
+    owner : siteify.owner,
+    homepageid : siteify.homepageid,
+    homepage : siteify.homepage
   };
 }
 

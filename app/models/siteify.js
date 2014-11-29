@@ -11,9 +11,17 @@ var SiteifySchema = new mongoose.Schema({
     type : Boolean,
     default : false
   },
+  homepage : {
+    type : Boolean,
+    default : false
+  },
   sitename : {
     type : String,
-    default : null
+    default : ""
+  },
+  homepageid : {
+    type : String,
+    default : ""
   }
 });
 
@@ -22,6 +30,13 @@ SiteifySchema.statics.hello = function (siteid, callback) {
     if(err) callback(err);
     callback(err, siteify);
   });
+};
+
+SiteifySchema.statics.setHomePageId = function (options, callback) {
+  SiteifyModel.findOneAndUpdate({_id:options.siteid}, {
+    homepageid : options.homepageid,
+    homepage : true
+  }, null, callback);
 };
 
 SiteifySchema.statics.registerOwner = function (options, callback) {

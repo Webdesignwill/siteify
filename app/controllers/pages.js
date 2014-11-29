@@ -1,22 +1,38 @@
 
-var Pages = require('./../models').Pages;
+var Pages = require('./../models').Pages,
+      User = require('./../models').User,
+      Siteify = require('./../models').Siteify;
 
 module.exports.new = function (req, res, next) {
-  console.log('Create a nice page : ', req.body);
-  res.json(req.body);
-  // var page = new Pages();
 
-  // for(var key in req.body) {
-  //   page[key] = req.body[key];
-  // }
+  function setHomepage (page) {
+    Siteify.setHomePageId({
+      siteid : req.session.siteid,
+      homepageid : page._id
+    }, function (err, siteify) {
+      if(err) return next(err);
+      res.json(page);
+    });
+  }
 
-  // page.save(function(err) {
-  //   if (err) res.send(err);
-  //   res.json({
-  //     success: 'New page created',
-  //     data: page
-  //   });
-  // });
+  User.findOne({ email : req.user.id }, function (err, user) {
+    if(err) return next(err);
+    if(!user) res.send(404, "For some reason, that user isn't found");
+
+    Pages.count({}, function (err, count) {
+      if(err) return next(err);
+      Pages.new(user, {
+        title : req.body.title,
+        count : count
+      }, function (err, page) {
+        if(page.homepage) {
+          return setHomepage(page);
+        }
+        res.json(page);
+      });
+    });
+
+  });
 };
 
 module.exports.all = function (req, res, next) {

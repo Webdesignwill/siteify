@@ -3,10 +3,10 @@ define(['SiteifyModel'], function (SiteifyModel) {
 
     "use strict";
 
-    var PageFactory = function (module) {
+    var PageFactory = function () {
 
       function closeCurrentPage (done) {
-        var page = module.Page.get('page');
+        var page = SiteifyModel.get('page');
         if(page && typeof page.close === 'function') {
           return page.close(function () {
             done();
@@ -24,15 +24,12 @@ define(['SiteifyModel'], function (SiteifyModel) {
         done();
       }
 
-      this.make = function (templatePath, $container, pageModel, Page, identifier) {
+      this.make = function ($container, pageModel, Page, identifier) {
 
-        /* Create the page instance. Could be DefaultPage, BlogPage etc
-        ======================================== */
-        function produce (template) {
+        function produce () {
           var pageIdClass = pageModel.get('name') + '-page';
           var page = new Page({
             model : pageModel,
-            template : template,
             id : pageIdClass,
             className : pageIdClass,
             identifier : identifier || null
@@ -46,16 +43,10 @@ define(['SiteifyModel'], function (SiteifyModel) {
               view : page,
               model : pageModel
             });
-            module.Page.set({
-              page : page,
-              model : pageModel
-            });
           });
         }
 
-        closeCurrentPage(function () {
-          $.get(templatePath + '/' + pageModel.get('name') + '.tpl', produce);
-        });
+        closeCurrentPage(produce);
 
       };
 

@@ -27,15 +27,14 @@ var app_require = require.config({
     Sitemap                                                : 'Sitemap',
 
     /* Owner/Site Setup */
-    OwnerSetup                                           : 'pages/admin/setup/OwnerSetup',
-    SiteSetup                                               : 'pages/admin/setup/SiteSetup',
+    SetupOwnerPage                                   : 'pages/admin/setup/SetupOwnerPage',
+    SetupSitePage                                        : 'pages/admin/setup/SetupSitePage',
+    SetupHomePage                                    : 'pages/admin/setup/SetupHomePage',
 
     /* Admin */
     LoginView                                              : 'display/forms/LoginView',
     RegisterView                                          : 'display/forms/RegisterView',
     ProfileView                                             : 'display/forms/ProfileView',
-
-    NewPage                                                : 'pages/admin/pages/NewPage',
 
     /* Extensions */
     pageExt                                                 : 'pages/pageExt',
@@ -45,8 +44,9 @@ var app_require = require.config({
 
     /* Public */
     BodyView                                               : 'display/public/body/BodyView',
-    NavBarView                                            : 'display/public/navbar/NavBarView',
-    NavSubView                                           : 'display/public/navbar/NavSubView',
+    HeaderView                                            : 'display/public/header/HeaderView',
+    NavSubView                                           : 'display/public/header/NavSubView',
+    UserHeaderView                                     : 'display/public/header/UserHeaderView',
     ModalView                                             : 'display/public/modal/ModalView',
 
     /* Site models */

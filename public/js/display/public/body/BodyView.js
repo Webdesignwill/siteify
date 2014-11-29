@@ -1,10 +1,10 @@
 
 define([
   'App',
-  'NavBarView',
+  'HeaderView',
   'ModalView',
   'text!display/public/body/templates/body.tpl'
-], function (App, NavBarView, ModalView, template) {
+], function (App, HeaderView, ModalView, template) {
 
   "use strict";
 
@@ -39,7 +39,7 @@ define([
         el : this.$modal
       });
 
-      new NavBarView({
+      new HeaderView({
         el : this.$navBar
       });
 

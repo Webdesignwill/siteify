@@ -1,20 +1,20 @@
 
 define([
   'App',
-  'SiteifyModel'
-], function (App, SiteifyModel) {
+  'SiteifyModel',
+  'text!pages/admin/setup/templates/setupowner.tpl'
+], function (App, SiteifyModel, template) {
 
   "use strict";
 
-  var OwnerSetupPage = Backbone.Page.extend({
+  var SetupOwnerPage = Backbone.Page.extend({
 
-    initialize : function (options) {
-      this.options = options;
+    initialize : function () {
       this.form = new App.Forms();
     },
 
     render : function () {
-      this.$el.html(this.options.template);
+      this.$el.html(template);
       var self = this;
       this.form.init(SiteifyModel, {
         name : 'Register',
@@ -34,6 +34,6 @@ define([
 
   });
 
-  return OwnerSetupPage;
+  return SetupOwnerPage;
 
 });

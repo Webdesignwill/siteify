@@ -44,15 +44,17 @@ define([
       function getRouter () {
         app_require(['Router'], function (Router) {
           self.Router = new Router();
-          self.Router.init(self);
           start();
         });
       }
 
       function start () {
+
         if(SiteifyModel.get('owner')) {
           return self[SiteifyModel.get('setup') ? 'startSite' : 'setupSite']();
         }
+
+        Backbone.history.start();
         self.Router.navigate('/siteify/setup/owner', {trigger:true});
       }
 
@@ -64,20 +66,21 @@ define([
     },
 
     setupSite : function () {
+      Backbone.history.start();
       this.Router.navigate('/siteify/setup/site', {trigger:true});
     },
 
     startSite : function () {
-      var self = this;
+      var self = this, path;
       this.Sitemap.getSitemap(function (result, data, status) {
         if(result) {
-          if(data.length) {
-            return alert('Load first page');
-          }
-          self.Router.navigate('/siteify/pages/new', {trigger:true});
+          path = SiteifyModel.get('homepage') ? self.Sitemap.get(SiteifyModel.get('homepageid')).get('path') : '/siteify/setup/homepage';
         } else {
           alert('Something went wrong loading the sitemap');
         }
+
+        Backbone.history.start();
+        self.Router.navigate(path, {trigger : true});
       });
     },
 

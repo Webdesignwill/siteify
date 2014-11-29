@@ -16,15 +16,13 @@ function (App, SiteifyModel) {
       'click' : 'navigate'
     },
 
-    initialize : function () {
+    initialize : function (options) {
+      this.options = options;
       this.setEvents();
     },
 
     setEvents : function () {
-      this.listenTo(SiteifyModel, 'change:page', function (model, event) {
-        console.log('NAV : ', model);
-      });
-      this.listenTo(App.Page, 'change:page', function (model) {
+      this.listenTo(SiteifyModel, 'change:page', function (model) {
         this.highlightActive(model.get('page'));
       });
     },
@@ -34,12 +32,18 @@ function (App, SiteifyModel) {
     },
 
     navigate : function () {
-      App.Router.navigate(this.model.get('path'), {trigger: true});
+      App.Router.navigate(this.options.model.get('path'), {trigger: true});
     },
 
     render : function () {
-      this.$el.html('<a href="' + this.model.get('path') + '">' + this.model.get('name') + '</a>');
+      this.$el.html('<a href="' + this.options.model.get('path') + '">' + this.model.get('title') + '</a>');
       return this;
+    },
+
+    destroy : function () {
+      this.stopListening();
+      this.off();
+      this.$el.remove();
     }
 
   });

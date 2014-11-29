@@ -1,44 +1,60 @@
 
-var mongoose = require('mongoose');
-
-/* If there are no pages yet, this gets created */
-// var startPage = {
-//   name : 'siteify-start',
-//   route : 'siteify/start(/)',
-//   path : 'siteify/start/',
-//   nav : true,
-//   packages : [],
-//   page : { view : 'DefaultPage', template : 'siteify-start' }
-// };
+var mongoose = require('mongoose'),
+      relations = require('relations');
 
 var PagesSchema = new mongoose.Schema({
   title : {
     type: String,
-    set : function toLower (str) {
-      return str.toLowerCase();
-    },
-    unique : true,
     required : true
   },
-  route : String,
-  path : String,
-  order : Number,
-  page : {
-    view : String,
-    template : String
+  route : {
+    type : String,
+    set : function makeRoute (str) {
+      return str.toLowerCase().split(' ').join('-');
+    }
   },
-  nav : Boolean,
-  packages : Array,
-  override : {
-    route : String,
-    path : String
-  }
+  path : {
+    type : String,
+    set : function makePath (str) {
+      return '/' + str.toLowerCase().split(' ').join('-') + '/';
+    }
+  },
+  order : {
+    type : Number
+  },
+  view : {
+    type : String,
+    default : 'DefaultPage'
+  },
+  html : {
+    type : String,
+    default : '<h2>{{title}}</h2>'
+  },
+  homepage : {
+    type : Boolean,
+    defafult : false
+  },
+  nav : {
+    type : Boolean,
+    default : true
+  },
+  packages : Array
 });
 
-PagesSchema.statics.create = function () {
-  // PagesModel.doSoemthing(function (err, pages){
+PagesSchema.statics.new = function (user, fields, callback) {
 
-  // });
+  fields.homepage = fields.count === 0 ? true : false;
+  fields.route = fields.title;
+  fields.path = fields.title;
+
+  var page = new PagesModel(fields);
+
+  page.save(function (err, page) {
+    if(err) return callback(err);
+    relations.pages('%s is the owner of %s', user._id.toString(), page._id.toString());
+    callback(err, page);
+  });
+
 };
 
 mongoose.model('pages', PagesSchema);

@@ -31,7 +31,7 @@ module.exports = function (app) {
 
    /* Pages
   ==================================== */
-  app.post('/api/pages/new', Controllers.Pages.new);
+  app.post('/api/pages/new', middleware.requiresUser, Controllers.Pages.new);
   app.get('/api/pages/all', Controllers.Pages.all);
   // app.get('/api/pages/get/:page_id', Controllers.Pages.get);
   // app.put('/api/pages/put/:page_id', Controllers.Pages.put);

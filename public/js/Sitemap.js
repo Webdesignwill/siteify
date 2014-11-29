@@ -14,17 +14,21 @@ function (PageModel) {
 
     model : PageModel,
 
-    initialize : function () {},
+    initialize : function () {
+      this.listenTo(this, 'add', function (page) {
+        console.log('%c Page ' + page.get('title') + ' added ', 'background: #222222; color: #00FF00;');
+      }, this);
+      this.listenTo(this, 'remove', function (page) {
+        console.log('%c Page ' + page.get('title') + ' removed ', 'background: #222222; color: #FF0000;');
+      }, this);
+    },
 
-    parse : function (response, options) {
-      // TODO, create the id on set @ mongo
-      for(var i = 0; i<response.length;i++) {
-        response[i].id = response[i]._id;
-      }
-      return response;
+    parse : function (models) {
+      return models;
     },
 
     getSitemap : function (done) {
+      var self = this;
       this.fetch({
         success : function (data, status) {
           done(true, data, status);
@@ -43,6 +47,11 @@ function (PageModel) {
         contentType : 'application/x-www-form-urlencoded',
         data : page,
         success : function (data, status) {
+          this.set(data, {
+            parse:true,
+            remove:false,
+            merge:true
+          });
           done(true, data, status);
         },
         error : function (data, status) {

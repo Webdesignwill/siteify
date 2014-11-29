@@ -1,11 +1,10 @@
 
 define([
   'App',
-  'SiteifyModel',
   'PageFactory'
 ],
 
-function (App, SiteifyModel, PageFactory) {
+function (App, PageFactory) {
 
   "use strict";
 
@@ -16,29 +15,35 @@ function (App, SiteifyModel, PageFactory) {
     routes : {
       'siteify/setup/owner(/)' : 'setupOwner',
       'siteify/setup/site(/)' : 'setupSite',
-      'siteify/pages/new(/)' : 'newPage'
+      'siteify/setup/homepage(/)' : 'setupHomePage'
     },
 
-    init : function (module) {
+    initialize : function () {
 
+      this.$sfContent = $('#sf-content');
+
+      this.listenTo(App.Sitemap, 'add', function (model) {
+        this.addRoute(model);
+      }, this);
+      this.listenTo(App.Sitemap, 'remove', function (model) {
+        this.removeRoute(model);
+      }, this);
+
+      this.pageFactory = new PageFactory();
+
+    },
+
+    addRoute : function (model) {
       var self = this;
-      this.pageFactory = new PageFactory(module);
-
-      function setRoutes (pageModel) {
-        self.route(pageModel.get('route'), pageModel.get('name'), function (option) {
-          app_require([pageModel.get('page').view], function (Page) {
-            self.pageFactory.make(self.templatePath, $('#sf-content'), pageModel, Page, option);
-          });
+      self.route(model.get('route'), model.get('name'), function (option) {
+        app_require([model.get('view')], function (Page) {
+          self.pageFactory.make(self.$sfContent, model, Page, option);
         });
-      }
-
-      App.Sitemap.each(function (model, index, list) {
-        setRoutes(model);
       });
+    },
 
-      Backbone.history.start();
+    removeRoute : function (model) {
 
-      return this;
     },
 
     execute: function(callback, args) {
@@ -52,8 +57,8 @@ function (App, SiteifyModel, PageFactory) {
       var pageModel = new Backbone.Model({id : 'setupSite', name : 'setupSite'}),
             self = this;
 
-      app_require(['SiteSetup'], function (Page) {
-        self.pageFactory.make(self.templatePath, $('#sf-content'), pageModel, Page, option);
+      app_require(['SetupSitePage'], function (Page) {
+        self.pageFactory.make(self.$sfContent, pageModel, Page, option);
       });
     },
 
@@ -61,17 +66,17 @@ function (App, SiteifyModel, PageFactory) {
       var pageModel = new Backbone.Model({id : 'setupOwner', name : 'setupOwner'}),
             self = this;
 
-      app_require(['OwnerSetup'], function (Page) {
-        self.pageFactory.make(self.templatePath, $('#sf-content'), pageModel, Page, option);
+      app_require(['SetupOwnerPage'], function (Page) {
+        self.pageFactory.make(self.$sfContent, pageModel, Page, option);
       });
     },
 
-    newPage : function (option) {
-      var pageModel = new Backbone.Model({id : 'newPage', name : 'newPage'}),
+    setupHomePage : function (option) {
+      var pageModel = new Backbone.Model({id : 'setupHomePage', name : 'setupHomePage'}),
             self = this;
 
-      app_require(['NewPage'], function (Page) {
-        self.pageFactory.make(self.templatePath, $('#sf-content'), pageModel, Page, option);
+      app_require(['SetupHomePage'], function (Page) {
+        self.pageFactory.make(self.$sfContent, pageModel, Page, option);
       });
     }
 

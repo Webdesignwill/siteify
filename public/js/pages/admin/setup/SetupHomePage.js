@@ -1,19 +1,19 @@
 
 define([
-  'App'
-], function (App) {
+  'App',
+  'text!pages/admin/setup/templates/setuphomepage.tpl'
+], function (App, template) {
 
   "use strict";
 
-  var NewPage = Backbone.Page.extend({
+  var SetupHomePage = Backbone.Page.extend({
 
-    initialize : function (options) {
-      this.options = options;
+    initialize : function () {
       this.form = new App.Forms();
     },
 
     render : function () {
-      this.$el.html(this.options.template);
+      this.$el.html(template);
       var self = this;
       this.form.init(App.Sitemap, {
         name : 'NewPage',
@@ -25,7 +25,7 @@ define([
 
     done : function (result, data, status) {
       if(result) {
-        console.log('DATA : ', data);
+        // App.Router.navigate('go-somewhere', {trigger:true});
       } else {
         alert('Something went wrong making a new page');
       }
@@ -33,6 +33,6 @@ define([
 
   });
 
-  return NewPage;
+  return SetupHomePage;
 
 });
