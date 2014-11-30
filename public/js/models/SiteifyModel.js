@@ -26,7 +26,7 @@ function (App) {
       var to;
       this.listenTo(this, 'change', function (siteify) {
         for(var key in siteify.changed) {
-          to = typeof siteify.changed[key] !== 'object' ? ' to : ' + siteify.changed[key] : ' ';
+          to = typeof siteify.changed[key] !== 'object' ? ' to : ' + siteify.changed[key] + ' ' : ' ';
           console.log('%c Siteify changed ' + key + to, 'background: #222222; color: #00feff;');
         }
       }, this);

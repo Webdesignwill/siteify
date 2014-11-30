@@ -4,11 +4,6 @@ var Controllers = require('./../app/controllers'),
 
 module.exports = function (app) {
 
-  app.post('/getPermissions', Controllers.User.getPermissions);
-  app.get('/private', function (req, res, next) {
-    // for the hell of it
-  });
-
   /* Siteify
   ==================================== */
   app.get('/api/siteify/hello', middleware.sessionSiteId, Controllers.Siteify.hello);
@@ -32,6 +27,7 @@ module.exports = function (app) {
    /* Pages
   ==================================== */
   app.post('/api/pages/new', middleware.requiresUser, Controllers.Pages.new);
+  app.post('/api/pages/delete', middleware.requiresUser, Controllers.Pages.delete);
   app.get('/api/pages/all', Controllers.Pages.all);
   // app.get('/api/pages/get/:page_id', Controllers.Pages.get);
   // app.put('/api/pages/put/:page_id', Controllers.Pages.put);

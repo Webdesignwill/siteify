@@ -12,7 +12,8 @@ function (PageModel, SiteifyModel) {
 
     url : '/api/pages/all',
     urls : {
-      new : '/api/pages/new'
+      new : '/api/pages/new',
+      delete : '/api/pages/delete'
     },
 
     model : PageModel,
@@ -59,6 +60,23 @@ function (PageModel, SiteifyModel) {
             remove:false,
             merge:true
           });
+          done(true, data, status);
+        },
+        error : function (data, status) {
+          done(false, data, status);
+        }
+      });
+    },
+
+    delete : function (page, done) {
+      $.ajax({
+        type : 'POST',
+        context : this,
+        url : this.urls.delete,
+        contentType : 'application/x-www-form-urlencoded',
+        data : {pageid : page.id},
+        success : function (data, status) {
+          this.remove(data._id);
           done(true, data, status);
         },
         error : function (data, status) {

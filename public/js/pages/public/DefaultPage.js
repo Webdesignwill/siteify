@@ -5,7 +5,7 @@ define(['handlebars'], function (handlebars) {
 
   var DefaultPage = Backbone.Page.extend({
 
-    className : 'well container',
+    className : 'container',
 
     initialize : function (options) {
       this.model = options.model;

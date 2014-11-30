@@ -36,7 +36,11 @@ var app_require = require.config({
     RegisterView                                          : 'display/forms/RegisterView',
     ProfileView                                             : 'display/forms/ProfileView',
 
+    NewPageView                                         : 'display/forms/NewPageView',
+    ConfirmView                                          : 'display/forms/ConfirmView',
+
     OwnerBarView                                        : 'display/admin/ownerBar/OwnerBarView',
+    OwnerBarControlsView                          : 'display/admin/ownerBar/OwnerBarControlsView',
 
     /* Extensions */
     pageExt                                                 : 'pages/pageExt',

@@ -13,10 +13,13 @@ body {
   display:table;
   clear:both;
 }
+.navbar {
+  border:none;
+}
 .navbar-inverse .navbar-brand {
   color:rgb(0,254,255);
 }
-.navbar-inverse .navbar-nav li a span {
+.navbar-inverse .navbar-nav li a .glyphicon {
   color:rgb(0,254,255);
 }
 .navbar-inverse .navbar-nav li a {

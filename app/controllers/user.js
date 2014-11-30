@@ -10,7 +10,7 @@ function parseUserObject (user) {
     firstname : user.firstname,
     lastname : user.lastname,
     company : user.company,
-    roles : user.roles,
+    owner : user.owner,
     loggedin : true
   };
 }
@@ -18,9 +18,8 @@ function parseUserObject (user) {
 function logMeOut (req, res, next) {
   Oauth.deleteAccessToken(req, function () {
     Oauth.deleteRefreshToken(req, function () {
-      User.logout(req, function () {
-        res.send(200, {message : 'Logged out'});
-      });
+      req.session.userId = null;
+      res.send(200, {message : 'Logged out'});
     });
   });
 }
@@ -99,18 +98,4 @@ module.exports.putMe = function (req, res, next) {
 ============================= */
 module.exports.logout = function (req, res, next) {
   logMeOut(req, res, next);
-};
-
-module.exports.getPermissions = function (req, res, next) {
-  User.findOne({ _id : req.body.id }, function (err, user) {
-    if(err) return next(err);
-
-    if(!user) {
-      return res.send(404, 'No user');
-    }
-
-    /* DO ACL testing here */
-    // console.log('******* : ', relations.pages());
-
-  });
 };

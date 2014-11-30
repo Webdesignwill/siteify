@@ -8,6 +8,10 @@ var OAuthUsersSchema = new mongoose.Schema({
     unique: true,
     required: true
   },
+  owner : {
+    type : Boolean,
+    default : false
+  },
   displayname : {
     type : String,
     default : 'Display name'
@@ -58,12 +62,6 @@ OAuthUsersSchema.statics.getUser = function (email, password, callback) {
   OAuthUsersModel.authenticate(email, password, function (err, user) {
     if (err || !user) return callback(err, user);
     callback(null, user.email);
-  });
-};
-
-OAuthUsersSchema.statics.logout = function (req, callback) {
-  req.session.destroy(function () {
-    callback();
   });
 };
 

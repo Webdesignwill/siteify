@@ -54,7 +54,6 @@ PagesSchema.statics.new = function (user, fields, callback) {
     relations.pages('%s is the owner of %s', user._id.toString(), page._id.toString());
     callback(err, page);
   });
-
 };
 
 mongoose.model('pages', PagesSchema);

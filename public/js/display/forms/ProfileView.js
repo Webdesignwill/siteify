@@ -26,7 +26,11 @@ define([
     },
 
     done : function (result, data, status) {
-      App.$broker.trigger('modal:close');
+      if(result) {
+        App.$broker.trigger('modal:close');
+      } else {
+        alert('The was a problem updating your profile');
+      }
     },
 
     close : function () {

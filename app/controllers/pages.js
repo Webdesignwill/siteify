@@ -1,7 +1,8 @@
 
 var Pages = require('./../models').Pages,
       User = require('./../models').User,
-      Siteify = require('./../models').Siteify;
+      Siteify = require('./../models').Siteify,
+      relations = require('relations');
 
 module.exports.new = function (req, res, next) {
 
@@ -19,19 +20,26 @@ module.exports.new = function (req, res, next) {
     if(err) return next(err);
     if(!user) res.send(404, "For some reason, that user isn't found");
 
-    Pages.count({}, function (err, count) {
-      if(err) return next(err);
-      Pages.new(user, {
-        title : req.body.title,
-        count : count
-      }, function (err, page) {
-        if(page.homepage) {
-          return setHomepage(page);
-        }
-        res.json(page);
-      });
-    });
 
+    relations.siteify('Is %s the owner of %s', user._id.toString(), req.session.siteid, function (err, result) {
+      if(err) return next(err);
+      if(result) {
+        Pages.count({}, function (err, count) {
+          if(err) return next(err);
+          Pages.new(user, {
+            title : req.body.title,
+            count : count
+          }, function (err, page) {
+            if(page.homepage) {
+              return setHomepage(page);
+            }
+            res.json(page);
+          });
+        });
+      } else {
+        res.send(401, 'Only the owner can modify pages');
+      }
+    });
   });
 };
 
@@ -66,8 +74,19 @@ module.exports.put = function (req, res, next) {
 };
 
 module.exports.delete = function (req, res, next) {
-  Pages.findByIdAndRemove(req.params.page_id, function (err) {
-    if (err) res.send(err);
-    res.send(200);
+  User.findOne({ email : req.user.id }, function (err, user) {
+    if(err) return next(err);
+    if(!user) res.send(404, "For some reason, that user isn't found");
+
+    relations.siteify('Is %s the owner of %s', user._id.toString(), req.session.siteid, function (err, result) {
+      if(result) {
+        Pages.findByIdAndRemove(req.body.pageid, function (err, page) {
+          if (err) res.send(err);
+          res.json(page);
+        });
+      } else {
+        res.send(401, 'Only the owner can modify pages');
+      }
+    });
   });
 };

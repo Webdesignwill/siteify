@@ -26,7 +26,11 @@ define([
     },
 
     done : function (result, data, status) {
-      App.$broker.trigger('modal:close');
+      if(result) {
+        App.$broker.trigger('modal:close');
+      } else {
+        alert('There was a problem logging you in');
+      }
     },
 
     close : function () {

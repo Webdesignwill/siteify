@@ -44,7 +44,8 @@ function (App, PageFactory) {
     },
 
     removeRoute : function (model) {
-
+      // remove browser history for this
+      // remove route
     },
 
     execute: function(callback, args) {

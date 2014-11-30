@@ -6,7 +6,7 @@ define([
 
   "use strict";
 
-  var Register = Backbone.View.extend({
+  var NewPage = Backbone.View.extend({
 
     initialize : function (options) {
       this.options = options;
@@ -17,9 +17,9 @@ define([
     render : function () {
       this.$el.html(template);
       var self = this;
-      this.form.init(App.User, {
-        name : 'Register',
-        action : 'register',
+      this.form.init(App.Sitemap, {
+        name : 'NewPage',
+        action : 'newPage',
         el : this.$el.find('form')
       }, self.done);
       return this;
@@ -27,9 +27,10 @@ define([
 
     done : function (result, data, status) {
       if(result) {
+        App.Router.navigate(data.path, {trigger:true});
         App.$broker.trigger('modal:close');
       } else {
-        alert('There was a problem registering you as a user');
+        alert('There was a problem creating a new page');
       }
     },
 
@@ -39,6 +40,6 @@ define([
 
   });
 
-  return Register;
+  return NewPage;
 
 });

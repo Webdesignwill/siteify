@@ -26,7 +26,8 @@ module.exports.owner = function (req, res, next) {
     User.register({
         displayname : req.body.displayname,
         email : req.body.email,
-        password : req.body.password
+        password : req.body.password,
+        owner : true
       }, function (err, user) {
       if (err) return next(err);
 
