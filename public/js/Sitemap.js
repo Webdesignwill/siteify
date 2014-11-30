@@ -55,6 +55,9 @@ function (PageModel, SiteifyModel) {
         contentType : 'application/x-www-form-urlencoded',
         data : page,
         success : function (data, status) {
+          if(data.homepage) {
+            SiteifyModel.set('homepageid', data._id);
+          }
           this.set(data, {
             parse:true,
             remove:false,

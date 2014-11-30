@@ -5,51 +5,58 @@ define([
 
   "use strict";
 
-  var Forms = Backbone.Model.extend({
+  var Forms = function () {
 
-    init : function (model, options, done) {
-      this.model = model;
-      this.action = options.action;
-      this.done = done;
+    var formView = {},
+          model,
+          action,
+          done;
 
-      this.loadForm(options);
-    },
-
-    loadForm : function (options) {
-      var self = this;
-
+    function loadForm (options) {
       require(['FormView'], function (FormView) {
-        self.formView = new FormView({
+        formView = new FormView({
           name : options.name,
           el : options.el,
-          serverModel : self.model,
-          displayModel : self.model.attributes
+          serverModel : model,
+          displayModel : model.attributes
         });
 
-        self.listenTo(self.formView, 'valid', function (opts) {
-          self.formValid(opts.validationModel);
-        }, self);
+        formView.on('valid', function (opts) {
+          formValid(opts.validationModel);
+        });
 
       });
-    },
-
-    formValid : function (validationModel) {
-      var self = this;
-      this.model[this.action](validationModel.attributes, function (result, data, status) {
-        if(result) { return self.done(result, data, status); }
-        alert('TODO : Server Errors');
-      });
-    },
-
-    destroy : function () {
-      this.formView.destroy();
-    },
-
-    clear : function () {
-      this.formView.clear();
     }
 
-  });
+    function formValid (validationModel) {
+      model[action](validationModel.attributes, function (result, data, status) {
+        if(result) { return done(result, data, status); }
+        alert('TODO : Server Errors');
+      });
+    }
+
+    function clear () {
+      formView.clear();
+    }
+
+    function destroy () {
+      formView.destroy();
+    }
+
+    function init (m, options, d) {
+      model = m;
+      action = options.action;
+      done = d;
+
+      loadForm(options);
+    }
+
+    return {
+      init : init,
+      destroy : destroy
+    };
+
+  };
 
   return Forms;
 
