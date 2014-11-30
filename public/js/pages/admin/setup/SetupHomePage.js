@@ -25,7 +25,7 @@ define([
 
     done : function (result, data, status) {
       if(result) {
-        // App.Router.navigate('go-somewhere', {trigger:true});
+        App.Router.navigate(data.path, {trigger:true});
       } else {
         alert('Something went wrong making a new page');
       }

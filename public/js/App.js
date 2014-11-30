@@ -74,7 +74,7 @@ define([
       var self = this, path;
       this.Sitemap.getSitemap(function (result, data, status) {
         if(result) {
-          path = SiteifyModel.get('homepage') ? self.Sitemap.get(SiteifyModel.get('homepageid')).get('path') : '/siteify/setup/homepage';
+          path = SiteifyModel.get('homepage') ? self.Sitemap.getHomepage().get('path') : '/siteify/setup/homepage';
         } else {
           alert('Something went wrong loading the sitemap');
         }

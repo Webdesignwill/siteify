@@ -31,10 +31,12 @@ var app_require = require.config({
     SetupSitePage                                        : 'pages/admin/setup/SetupSitePage',
     SetupHomePage                                    : 'pages/admin/setup/SetupHomePage',
 
-    /* Admin */
+    /* Forms */
     LoginView                                              : 'display/forms/LoginView',
     RegisterView                                          : 'display/forms/RegisterView',
     ProfileView                                             : 'display/forms/ProfileView',
+
+    OwnerBarView                                        : 'display/admin/ownerBar/OwnerBarView',
 
     /* Extensions */
     pageExt                                                 : 'pages/pageExt',

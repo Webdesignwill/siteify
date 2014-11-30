@@ -1,7 +1,10 @@
 
-define(['PageModel'],
+define([
+  'PageModel',
+  'SiteifyModel'
+],
 
-function (PageModel) {
+function (PageModel, SiteifyModel) {
 
   "use strict";
 
@@ -25,6 +28,10 @@ function (PageModel) {
 
     parse : function (models) {
       return models;
+    },
+
+    getHomepage : function () {
+      return this.get(SiteifyModel.get('homepageid'));
     },
 
     getSitemap : function (done) {

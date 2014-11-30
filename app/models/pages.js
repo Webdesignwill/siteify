@@ -7,9 +7,9 @@ var PagesSchema = new mongoose.Schema({
     type: String,
     required : true
   },
-  route : {
+  name : {
     type : String,
-    set : function makeRoute (str) {
+    set : function makeName (str) {
       return str.toLowerCase().split(' ').join('-');
     }
   },
@@ -44,7 +44,7 @@ var PagesSchema = new mongoose.Schema({
 PagesSchema.statics.new = function (user, fields, callback) {
 
   fields.homepage = fields.count === 0 ? true : false;
-  fields.route = fields.title;
+  fields.name = fields.title;
   fields.path = fields.title;
 
   var page = new PagesModel(fields);

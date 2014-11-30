@@ -19,7 +19,7 @@ function (App) {
 
     parse : function (model) {
       model.id = model._id;
-      model.route = model.route + '(/)';
+      model.route = model.name + '(/)';
       return model;
     }
 

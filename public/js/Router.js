@@ -13,6 +13,7 @@ function (App, PageFactory) {
     templatePath : '/js/templates',
 
     routes : {
+      '(/)' : 'home',
       'siteify/setup/owner(/)' : 'setupOwner',
       'siteify/setup/site(/)' : 'setupSite',
       'siteify/setup/homepage(/)' : 'setupHomePage'
@@ -48,6 +49,15 @@ function (App, PageFactory) {
 
     execute: function(callback, args) {
       if (callback) callback.apply(this, args);
+    },
+
+    home : function (option) {
+      var model = App.Sitemap.getHomepage(),
+            self = this;
+
+      app_require([model.get('view')], function (Page) {
+        self.pageFactory.make(self.$sfContent, model, Page, option);
+      });
     },
 
     /* Owner routes

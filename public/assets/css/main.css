@@ -13,10 +13,32 @@ body {
   display:table;
   clear:both;
 }
-.navbar-inverse .navbar-brand,
-.navbar-nav .glyphicon-user {
+.navbar-inverse .navbar-brand {
   color:rgb(0,254,255);
 }
-body.loggedin .admin-view {
-  display:block;
+.navbar-inverse .navbar-nav li a span {
+  color:rgb(0,254,255);
+}
+.navbar-inverse .navbar-nav li a {
+  color:rgb(225, 225, 225);
+}
+.navbar {
+  margin-bottom:0;
+}
+.navbar li.active a {
+  color: #fff;
+  background-color: #337ab7;
+}
+.sf-ownerBar {
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  min-height: 0;
+  height:0;
+  overflow:hidden;
+}
+body.loggedin .sf-ownerBar {
+  height:50px;
 }

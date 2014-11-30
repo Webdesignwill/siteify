@@ -27,11 +27,9 @@ define(['SiteifyModel'], function (SiteifyModel) {
       this.make = function ($container, pageModel, Page, identifier) {
 
         function produce () {
-          var pageIdClass = pageModel.get('name') + '-page';
           var page = new Page({
             model : pageModel,
-            id : pageIdClass,
-            className : pageIdClass,
+            id : pageModel.get('name') + '-page',
             identifier : identifier || null
           });
 
