@@ -55,9 +55,11 @@ function (App, PageFactory) {
       var model = App.Sitemap.getHomepage(),
             self = this;
 
-      app_require([model.get('view')], function (Page) {
-        self.pageFactory.make(self.$sfContent, model, Page, option);
-      });
+      if(model) {
+        app_require([model.get('view')], function (Page) {
+          self.pageFactory.make(self.$sfContent, model, Page, option);
+        });
+      }
     },
 
     /* Owner routes
