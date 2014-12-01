@@ -44,7 +44,8 @@ body.loggedin {
 }
 .navbar-inverse .navbar-nav li .disabled .glyphicon,
 .navbar-inverse .navbar-nav li .disabled,
-.navbar-inverse .navbar-nav li a.disabled:hover {
+.navbar-inverse .navbar-nav li a.disabled:hover,
+.navbar-inverse .navbar-nav li a.disabled:focus {
   color:rgb(100, 100, 100);
   cursor:not-allowed;
 }
