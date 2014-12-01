@@ -80,6 +80,7 @@ module.exports.delete = function (req, res, next) {
           }
           Pages.findByIdAndRemove(req.body.pageid, null, function (err, page) {
             if (err) res.send(err);
+
             res.json(page);
           });
         } else {

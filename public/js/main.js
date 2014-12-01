@@ -42,6 +42,7 @@ var app_require = require.config({
 
     OwnerBarView                                        : 'display/admin/ownerBar/OwnerBarView',
     OwnerBarControlsView                          : 'display/admin/ownerBar/OwnerBarControlsView',
+    ConfirmDeleteView                                : 'display/admin/confirmDelete/ConfirmDeleteView',
 
     /* Extensions */
     pageExt                                                 : 'pages/pageExt',
@@ -60,7 +61,7 @@ var app_require = require.config({
     UserModel                                              : 'models/UserModel',
     Oauth2Model                                          : 'models/Oauth2Model',
     PageModel                                              : 'models/PageModel',
-    SiteifyModel                                           : 'models/SiteifyModel'
+    SiteifyModel                                           : 'models/SiteifyModel',
 
   },
   shim : {

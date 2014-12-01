@@ -11,7 +11,7 @@ define([
   var OwnerBarControlsView = Backbone.View.extend({
 
     events : {
-      'click .delete-page' : 'delete'
+      'click .delete-page' : 'preventDefault'
     },
 
     initialize : function () {
@@ -19,6 +19,10 @@ define([
         this.render();
       }, this);
       this.render();
+    },
+
+    setElements : function () {
+      this.$deletePage = this.$el.find('.delete-page');
     },
 
     render : function () {
@@ -29,26 +33,20 @@ define([
       var compiled = tpl(model.attributes);
       this.$el.html(compiled);
 
+      this.setElements();
+
       if(model.get('homepage')) {
-        this.$el.find('.delete-page').addClass('disabled');
+        this.$deletePage.addClass('disabled');
       }
 
       return this;
     },
 
-    delete : function (e) {
-      e.preventDefault();
-
+    preventDefault : function (e) {
       if(SiteifyModel.get('page').model.get('homepage')) {
-        return this;
+        e.preventDefault();
+        e.stopPropagation();
       }
-
-      App.Sitemap.delete(SiteifyModel.get('page'), function (result, data, status) {
-        if(result) {
-          return App.Router.navigate(App.Sitemap.getHomepage().get('path'), {trigger:true});
-        }
-        alert('There was a problem deleting the page');
-      });
     },
 
     destroy : function () {
