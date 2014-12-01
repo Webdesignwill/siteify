@@ -43,7 +43,6 @@ var PagesSchema = new mongoose.Schema({
 
 PagesSchema.statics.new = function (user, fields, callback) {
 
-  fields.homepage = fields.count === 0 ? true : false;
   fields.name = fields.title;
   fields.path = fields.title;
 

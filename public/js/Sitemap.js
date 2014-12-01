@@ -1,10 +1,11 @@
 
 define([
   'PageModel',
-  'SiteifyModel'
+  'SiteifyModel',
+  'Oauth2Model'
 ],
 
-function (PageModel, SiteifyModel) {
+function (PageModel, SiteifyModel, Oauth2Model) {
 
   "use strict";
 
@@ -53,6 +54,9 @@ function (PageModel, SiteifyModel) {
         context : this,
         url : this.urls.new,
         contentType : 'application/x-www-form-urlencoded',
+        headers : {
+          Authorization : 'Bearer ' + Oauth2Model.get('access_token')
+        },
         data : page,
         success : function (data, status) {
           if(data.homepage) {
@@ -77,6 +81,9 @@ function (PageModel, SiteifyModel) {
         context : this,
         url : this.urls.delete,
         contentType : 'application/x-www-form-urlencoded',
+        headers : {
+          Authorization : 'Bearer ' + Oauth2Model.get('access_token')
+        },
         data : {pageid : page.id},
         success : function (data, status) {
           this.remove(data._id);

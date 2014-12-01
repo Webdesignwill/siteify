@@ -6,39 +6,32 @@ var Pages = require('./../models').Pages,
 
 module.exports.new = function (req, res, next) {
 
-  function setHomepage (page) {
-    Siteify.setHomePageId({
-      siteid : req.session.siteid,
-      homepageid : page._id
-    }, function (err, siteify) {
-      if(err) return next(err);
-      res.json(page);
-    });
-  }
-
-  User.findOne({ email : req.user.id }, function (err, user) {
+  Siteify.findOne({}, function (err, siteify) {
     if(err) return next(err);
-    if(!user) res.send(404, "For some reason, that user isn't found");
 
-
-    relations.siteify('Is %s the owner of %s', user._id.toString(), req.session.siteid, function (err, result) {
+    User.findOne({ email : req.user.id}, function (err, user) {
       if(err) return next(err);
-      if(result) {
-        Pages.count({}, function (err, count) {
-          if(err) return next(err);
+
+      relations.siteify('Is %s the owner of %s', user._id.toString(), siteify._id.toString(), function (err, result) {
+        if(err) return next(err);
+        if(result) {
           Pages.new(user, {
-            title : req.body.title,
-            count : count
+            title : req.body.title
           }, function (err, page) {
-            if(page.homepage) {
-              return setHomepage(page);
+            if(err) return next(err);
+
+            if(!siteify.homepage) {
+              return Siteify.setHomePageId({
+                homepageid : page._id
+              }, function (err, siteify) {
+                if(err) return next(err);
+                res.json(page);
+              });
             }
             res.json(page);
           });
-        });
-      } else {
-        res.send(401, 'Only the owner can modify pages');
-      }
+        }
+      });
     });
   });
 };
@@ -74,19 +67,22 @@ module.exports.put = function (req, res, next) {
 };
 
 module.exports.delete = function (req, res, next) {
-  User.findOne({ email : req.user.id }, function (err, user) {
+  Siteify.findOne({}, function (err, siteify) {
     if(err) return next(err);
-    if(!user) res.send(404, "For some reason, that user isn't found");
 
-    relations.siteify('Is %s the owner of %s', user._id.toString(), req.session.siteid, function (err, result) {
-      if(result) {
-        Pages.findByIdAndRemove(req.body.pageid, function (err, page) {
-          if (err) res.send(err);
-          res.json(page);
-        });
-      } else {
-        res.send(401, 'Only the owner can modify pages');
-      }
+    User.findOne({ email : req.user.id }, function (err, user) {
+      if(err) return next(err);
+
+      relations.siteify('Is %s the owner of %s', user._id.toString(), siteify._id.toString(), function (err, result) {
+        if(result) {
+          Pages.findByIdAndRemove(req.body.pageid, function (err, page) {
+            if (err) res.send(err);
+            res.json(page);
+          });
+        } else {
+          res.send(401, 'Only the owner can modify pages');
+        }
+      });
     });
   });
 };

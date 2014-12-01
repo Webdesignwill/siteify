@@ -19,7 +19,7 @@ function (App, Oauth2Model) {
       login : '/api/user/login',
       logout : '/api/user/logout',
       me : '/api/user/me',
-      session : '/api/user/session'
+      authenticate : '/api/user/authenticate'
     },
 
     initialize : function () {
@@ -53,16 +53,16 @@ function (App, Oauth2Model) {
     login : function (user, done) {
       var self = this;
       Oauth2Model.requestAccessToken(user, function (result, data, status) {
-        if (result) { return self.startSession(user, done); }
+        if (result) { return self.authenticate(user, done); }
         done(false, data, status);
       });
     },
 
-    startSession : function (user, done) {
+    authenticate : function (user, done) {
       $.ajax({
         type : 'POST',
         context : this,
-        url : this.urls.session,
+        url : this.urls.authenticate,
         contentType : 'application/x-www-form-urlencoded',
         data : user,
         success : function (data, status) {

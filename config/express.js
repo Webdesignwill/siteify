@@ -18,12 +18,6 @@ module.exports = function (app, config) {
   app.use(cookieParser())
         .use(bodyParser());
 
-  app.use(session({
-    secret: 'siteifyistheonlyawesomecontentmanagementsystemthatweloveforever',
-      store: new MongoStore({ url: config.db, collection: 'sessions'})
-    })
-  );
-
   app.oauth = oauth2server({
     model: oauth,
     grants: ['password', 'refresh_token'],

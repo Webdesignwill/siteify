@@ -40,7 +40,7 @@ module.exports.getRefreshToken = function(refreshToken, callback) {
 };
 
 module.exports.deleteRefreshToken = function(req, callback) {
-  OAuthRefreshTokensModel.findOneAndRemove({ userId: req.session.userId }, callback);
+  OAuthRefreshTokensModel.findOneAndRemove({ userId: req.user.id }, callback);
 };
 
 mongoose.model('oauth_refreshtokens', OAuthRefreshTokensSchema);

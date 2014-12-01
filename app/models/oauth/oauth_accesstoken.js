@@ -33,7 +33,7 @@ module.exports.saveAccessToken = function(token, clientId, expires, userId, call
 };
 
 module.exports.deleteAccessToken = function(req, callback) {
-  OAuthAccessTokensModel.findOneAndRemove({ userId: req.session.userId }, callback);
+  OAuthAccessTokensModel.findOneAndRemove({ userId: req.user.id }, callback);
 };
 
 mongoose.model('oauth_accesstokens', OAuthAccessTokensSchema);

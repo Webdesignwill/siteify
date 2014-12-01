@@ -18,18 +18,16 @@ function parseUserObject (user) {
 function logMeOut (req, res, next) {
   Oauth.deleteAccessToken(req, function () {
     Oauth.deleteRefreshToken(req, function () {
-      req.session.userId = null;
       res.send(200, {message : 'Logged out'});
     });
   });
 }
 
-/* Start session, login
+/* Authenticate, login
 ============================= */
-module.exports.session = function (req, res, next) {
+module.exports.authenticate = function (req, res, next) {
   User.authenticate(req.body.email, req.body.password, function (err, user) {
     if (err) return next(err);
-    req.session.userId = user.email;
     res.send(200, parseUserObject(user));
   });
 };

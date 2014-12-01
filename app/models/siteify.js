@@ -25,22 +25,22 @@ var SiteifySchema = new mongoose.Schema({
   }
 });
 
-SiteifySchema.statics.hello = function (siteid, callback) {
-  SiteifyModel.findOne({_id:siteid}, function (err, siteify) {
+SiteifySchema.statics.hello = function (callback) {
+  SiteifyModel.findOne({}, function (err, siteify) {
     if(err) callback(err);
     callback(err, siteify);
   });
 };
 
 SiteifySchema.statics.setHomePageId = function (options, callback) {
-  SiteifyModel.findOneAndUpdate({_id:options.siteid}, {
+  SiteifyModel.findOneAndUpdate({}, {
     homepageid : options.homepageid,
     homepage : true
   }, null, callback);
 };
 
 SiteifySchema.statics.registerOwner = function (options, callback) {
-  SiteifyModel.findOneAndUpdate({_id:options.siteid}, {
+  SiteifyModel.findOneAndUpdate({}, {
     owner : true
   }, null, function (err, siteify) {
     if(err) return callback(err);
@@ -50,7 +50,7 @@ SiteifySchema.statics.registerOwner = function (options, callback) {
 };
 
 SiteifySchema.statics.setup = function (options, callback) {
-  SiteifyModel.findOneAndUpdate({_id:options.siteid}, {
+  SiteifyModel.findOneAndUpdate({}, {
     setup : true,
     sitename : options.sitename
   }, null, callback);
