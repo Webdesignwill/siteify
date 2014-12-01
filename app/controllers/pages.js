@@ -15,19 +15,21 @@ module.exports.new = function (req, res, next) {
         if(err) return next(err);
         if(result) {
           Pages.new(user, {
-            title : req.body.title
+            title : req.body.title,
+            isThereAHomepage : siteify.homepage
           }, function (err, page) {
             if(err) return next(err);
 
-            if(!siteify.homepage) {
-              return Siteify.setHomePageId({
+            if(page.homepage) {
+              Siteify.setHomePageId({
                 homepageid : page._id
               }, function (err, siteify) {
                 if(err) return next(err);
                 res.json(page);
               });
+            } else {
+              res.json(page);
             }
-            res.json(page);
           });
         }
       });

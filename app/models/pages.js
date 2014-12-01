@@ -42,7 +42,7 @@ var PagesSchema = new mongoose.Schema({
 });
 
 PagesSchema.statics.new = function (user, fields, callback) {
-
+  fields.homepage = fields.isThereAHomepage ? false : true;
   fields.name = fields.title;
   fields.path = fields.title;
 

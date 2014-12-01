@@ -22,14 +22,27 @@ define([
     },
 
     render : function () {
+
+      var model = SiteifyModel.get('page').model;
+
       var tpl = handlebars.compile(template);
-      var compiled = tpl(SiteifyModel.get('page').model.attributes);
+      var compiled = tpl(model.attributes);
       this.$el.html(compiled);
+
+      if(model.get('homepage')) {
+        this.$el.find('.delete-page').addClass('disabled');
+      }
+
       return this;
     },
 
     delete : function (e) {
       e.preventDefault();
+
+      if(SiteifyModel.get('page').model.get('homepage')) {
+        return this;
+      }
+
       App.Sitemap.delete(SiteifyModel.get('page'), function (result, data, status) {
         if(result) {
           return App.Router.navigate(App.Sitemap.getHomepage().get('path'), {trigger:true});

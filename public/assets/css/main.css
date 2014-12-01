@@ -25,6 +25,14 @@ body.loggedin {
 .navbar {
   border:none;
 }
+.navbar {
+  margin-bottom:0;
+}
+.navbar li.active a {
+  color: #fff;
+  background-color: #337ab7;
+}
+
 .navbar-inverse .navbar-brand {
   color:rgb(0,254,255);
 }
@@ -34,12 +42,11 @@ body.loggedin {
 .navbar-inverse .navbar-nav li a {
   color:rgb(225, 225, 225);
 }
-.navbar {
-  margin-bottom:0;
-}
-.navbar li.active a {
-  color: #fff;
-  background-color: #337ab7;
+.navbar-inverse .navbar-nav li .disabled .glyphicon,
+.navbar-inverse .navbar-nav li .disabled,
+.navbar-inverse .navbar-nav li a.disabled:hover {
+  color:rgb(100, 100, 100);
+  cursor:not-allowed;
 }
 .sf-ownerBar {
   -webkit-transition: all 0.2s linear;
