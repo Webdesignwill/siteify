@@ -6,14 +6,10 @@
   "dependencies": {
     "relations" : "https://github.com/Webdesignwill/node-relations/tarball/master",
     "express" : "~4.1.1",
-    "express-session" : "~1.2.1",
     "ejs" : "~1.0.0",
-    "cookie-parser" : "~1.1.0",
     "debug" : "~0.7.4",
     "body-parser" : "~1.2.0",
     "mongoose"  : "~3.8.9",
-    "connect-flash" : "~0.1.1",
-    "connect-mongo" : "~0.4.1",
     "node-oauth2-server" : "latest",
     "bcrypt-nodejs" : "latest"
   },
