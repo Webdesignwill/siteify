@@ -73,7 +73,10 @@ module.exports.delete = function (req, res, next) {
 
       relations.siteify('Is %s the owner of %s', user._id.toString(), siteify._id.toString(), function (err, result) {
         if(result) {
-          Pages.findByIdAndRemove(req.body.pageid, function (err, page) {
+          if(req.body.pageid === siteify.homepageid) {
+            res.send(401, "You cant delete the homepage");
+          }
+          Pages.findByIdAndRemove(req.body.pageid, null, function (err, page) {
             if (err) res.send(err);
             res.json(page);
           });
