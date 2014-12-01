@@ -1,9 +1,10 @@
 
 define([
   'App',
+  'handlebars',
   'SiteifyModel',
   'text!display/admin/ownerBar/templates/ownerbarcontrols.tpl'
-], function (App, SiteifyModel, template) {
+], function (App, handlebars, SiteifyModel, template) {
 
   "use strict";
 
@@ -14,16 +15,16 @@ define([
     },
 
     initialize : function () {
+      this.listenTo(SiteifyModel, 'change:page', function (siteifyModel, page) {
+        this.render();
+      }, this);
       this.render();
     },
 
-    setElements : function () {
-      this.$sfOwnerControls = this.$el.find('.sf-owner-controls');
-    },
-
     render : function () {
-      this.$el.html(template);
-      this.setElements();
+      var tpl = handlebars.compile(template);
+      var compiled = tpl(SiteifyModel.get('page').model.attributes);
+      this.$el.html(compiled);
       return this;
     },
 

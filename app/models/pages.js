@@ -28,7 +28,7 @@ var PagesSchema = new mongoose.Schema({
   },
   html : {
     type : String,
-    default : '<h2>{{title}}</h2>'
+    default : '<div class="page-header"><h1>{{title}}</h1></div>'
   },
   homepage : {
     type : Boolean,

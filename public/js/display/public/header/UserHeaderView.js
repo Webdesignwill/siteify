@@ -1,11 +1,12 @@
 
 define([
   'App',
+  'SiteifyModel',
   'handlebars',
   'text!display/public/header/templates/userheader.tpl'
 ],
 
-function (App, handlebars, template) {
+function (App, SiteifyModel, handlebars, template) {
 
   "use strict";
 
@@ -15,7 +16,15 @@ function (App, handlebars, template) {
       this.listenTo(App.User, 'change', function () {
         this.render();
       }, this);
-      this.render();
+      this.listenToOnce(SiteifyModel, 'change:owner', function () {
+        this.render();
+      }, this);
+
+      if(SiteifyModel.get('owner')) {
+        this.stopListening(SiteifyModel);
+        this.render();
+      }
+
     },
 
     render : function () {

@@ -30,8 +30,7 @@ define([
 
     function formValid (validationModel) {
       model[action](validationModel.attributes, function (result, data, status) {
-        if(result) { return done(result, data, status); }
-        alert('TODO : Server Errors');
+        done(result, data, status);
       });
     }
 

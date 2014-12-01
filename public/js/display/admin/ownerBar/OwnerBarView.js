@@ -11,11 +11,6 @@ define([
   var OwnerBarView = Backbone.View.extend({
 
     initialize : function () {
-      var action;
-      this.listenTo(SiteifyModel, 'change:page', function (siteifyModel, page) {
-        this.changeTitle(page.model);
-      }, this);
-
       this.listenTo(App.User, 'change:loggedin', function (user, loggedin) {
         if(loggedin) {
           this[user.get('owner') ? 'renderOwnerControls' : 'removeOwnerControls']();
@@ -23,10 +18,6 @@ define([
       }, this);
 
       this.render();
-    },
-
-    setElements : function () {
-      this.$pageTitle = this.$el.find('.page-title');
     },
 
     removeOwnerControls : function () {
@@ -43,12 +34,7 @@ define([
 
     render : function () {
       this.$el.html(template);
-      this.setElements();
       return this;
-    },
-
-    changeTitle : function (model) {
-      this.$pageTitle.html(model.get('title'));
     }
 
   });

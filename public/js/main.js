@@ -21,6 +21,7 @@ var app_require = require.config({
     bootstrap                                              : 'libs/bootstrap/bootstrap.min',
 
     Router                                                  : 'Router',
+    Errors                                                   : 'Errors',
 
     App                                                      : 'App',
     PageFactory                                          : 'pages/PageFactory',

@@ -1,5 +1,7 @@
 
-define(['handlebars'], function (handlebars) {
+define([
+  'handlebars'
+], function (handlebars) {
 
   "use strict";
 
@@ -17,6 +19,7 @@ define(['handlebars'], function (handlebars) {
       var compiled = tpl(this.model.attributes);
 
       this.$el.html(compiled);
+
       return this;
     }
 

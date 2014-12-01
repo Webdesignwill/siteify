@@ -13,8 +13,8 @@ define([
 
     initialize : function () {
       var self = this;
-      App.$broker.on('modal:open', function (event, options) {
-        self.load(options);
+      App.$broker.on('modal:open', function (event, view) {
+        self.load(view);
       });
       App.$broker.on('modal:close', function (event) {
         self.$el.modal('hide');

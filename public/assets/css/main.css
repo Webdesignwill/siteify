@@ -2,11 +2,20 @@ html, body {
   height: 100%;
   min-height: 100%;
 }
-
 body {
+  -webkit-transition: top 0.2s linear;
+  -moz-transition: top 0.2s linear;
+  -o-transition: top 0.2s linear;
+  -ms-transition: top 0.2s linear;
+  transition: top 0.2s linear;
+  position:relative;
+  top:0;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
   color : #555555;
+}
+body.loggedin {
+  top:50px;
 }
 .clear:after {
   content:"";
@@ -44,4 +53,7 @@ body {
 }
 body.loggedin .sf-ownerBar {
   height:50px;
+}
+.sf-control-add-content {
+  width:100%;
 }

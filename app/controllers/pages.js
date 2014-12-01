@@ -5,7 +5,6 @@ var Pages = require('./../models').Pages,
       relations = require('relations');
 
 module.exports.new = function (req, res, next) {
-
   Siteify.findOne({}, function (err, siteify) {
     if(err) return next(err);
 
@@ -51,8 +50,7 @@ module.exports.get = function (req, res, next) {
 };
 
 module.exports.put = function (req, res, next) {
-  // findByIdAndUpdate
-  Pages.findById(req.params.page_id, function (err, page) {
+  Pages.findByIdAndUpdate(req.params.page_id, function (err, page) {
     if (err) res.send(err);
 
     for(var key in req.body) {

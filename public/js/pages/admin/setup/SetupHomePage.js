@@ -1,8 +1,9 @@
 
 define([
   'App',
+  'Errors',
   'text!pages/admin/setup/templates/setuphomepage.tpl'
-], function (App, template) {
+], function (App, Errors, template) {
 
   "use strict";
 
@@ -27,7 +28,7 @@ define([
       if(result) {
         App.Router.navigate(data.path, {trigger:true});
       } else {
-        alert('Something went wrong making a new page');
+        new Errors('server', data.responseText);
       }
     }
 
