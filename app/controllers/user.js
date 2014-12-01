@@ -18,7 +18,7 @@ function parseUserObject (user) {
 function logMeOut (req, res, next) {
   Oauth.deleteAccessToken(req, function () {
     Oauth.deleteRefreshToken(req, function () {
-      res.send(200, {message : 'Logged out'});
+      res.send(200);
     });
   });
 }

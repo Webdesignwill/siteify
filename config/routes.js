@@ -21,7 +21,7 @@ module.exports = function (app) {
   app.get('/api/user/me', app.oauth.authorise(), Controllers.User.getMe);
   app.delete('/api/user/me', app.oauth.authorise(), Controllers.User.deleteMe);
   app.put('/api/user/me', app.oauth.authorise(), Controllers.User.putMe);
-  app.post('/api/user/logout', Controllers.User.logout);
+  app.post('/api/user/logout', app.oauth.authorise(), Controllers.User.logout);
 
    /* Pages
   ==================================== */

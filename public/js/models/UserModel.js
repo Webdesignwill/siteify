@@ -29,11 +29,6 @@ function (App, Oauth2Model) {
       });
     },
 
-    clearUser : function () {
-      this.clear({silent : true});
-      this.set(this.defaults);
-    },
-
     register : function (user, done) {
       $.ajax({
         type : 'POST',
@@ -75,7 +70,7 @@ function (App, Oauth2Model) {
       });
     },
 
-    getProfile : function (done) {
+    getMyProfile : function (done) {
       $.ajax({
         type : 'GET',
         context : this,
@@ -134,11 +129,24 @@ function (App, Oauth2Model) {
     },
 
     logout : function () {
-      var self = this;
-      $.post(this.urls.logout, function (data) {
-        self.clearUser();
+      $.ajax({
+        type : 'POST',
+        context : this,
+        url : this.urls.logout,
+        contentType : 'application/x-www-form-urlencoded',
+        headers : {
+          Authorization : 'Bearer ' + Oauth2Model.get('access_token')
+        },
+        success : function (data, status) {
+          this.clearUser();
+        }
       });
-    }
+    },
+
+    clearUser : function () {
+      this.clear({silent : true});
+      this.set(this.defaults);
+    },
 
   });
 
