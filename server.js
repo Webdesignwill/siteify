@@ -16,6 +16,8 @@ var app = express(),
       server = http.createServer(app),
       io = socketio(server);
 
+require('./sockets')(app, io);
+
 // access control settings
 require('./config/relations')(app, config);
 require('./config/express')(app, config);
@@ -27,5 +29,5 @@ server.listen(port, function () {
   debug('Express server listening on port ' + server.address().port);
 });
 
-//expose app
+// expose app
 exports = module.exports = app;

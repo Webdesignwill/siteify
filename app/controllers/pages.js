@@ -5,6 +5,7 @@ var Pages = require('./../models').Pages,
       relations = require('relations');
 
 module.exports.new = function (req, res, next) {
+
   Siteify.findOne({}, function (err, siteify) {
     if(err) return next(err);
 
@@ -80,7 +81,6 @@ module.exports.delete = function (req, res, next) {
           }
           Pages.findByIdAndRemove(req.body.pageid, null, function (err, page) {
             if (err) res.send(err);
-
             res.json(page);
           });
         } else {

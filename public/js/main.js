@@ -19,6 +19,7 @@ var app_require = require.config({
     text                                                      : 'libs/require/text.min',
     domReady                                             : 'libs/require/domReady',
     bootstrap                                              : 'libs/bootstrap/bootstrap.min',
+    io                                                          : 'libs/sockets/sockets.io',
 
     Router                                                  : 'Router',
     Errors                                                   : 'Errors',

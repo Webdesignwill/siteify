@@ -2,10 +2,11 @@
 define([
   'PageModel',
   'SiteifyModel',
-  'Oauth2Model'
+  'Oauth2Model',
+  'io'
 ],
 
-function (PageModel, SiteifyModel, Oauth2Model) {
+function (PageModel, SiteifyModel, Oauth2Model, io) {
 
   "use strict";
 
@@ -20,12 +21,23 @@ function (PageModel, SiteifyModel, Oauth2Model) {
     model : PageModel,
 
     initialize : function () {
+
+      this.pages = io.connect('/pages');
+
       this.listenTo(this, 'add', function (page) {
         console.log('%c Page ' + page.get('title') + ' added ', 'background: #222222; color: #00FF00;');
       }, this);
       this.listenTo(this, 'remove', function (page) {
         console.log('%c Page ' + page.get('title') + ' removed ', 'background: #222222; color: #FF0000;');
       }, this);
+
+      var self = this;
+      this.pages.on('page:added', function (page) {
+        self.addNewPage(page, false);
+      });
+      this.pages.on('page:deleted', function (page) {
+        self.deletePage(page, false);
+      });
     },
 
     parse : function (models) {
@@ -59,20 +71,28 @@ function (PageModel, SiteifyModel, Oauth2Model) {
         },
         data : page,
         success : function (data, status) {
-          if(data.homepage) {
-            SiteifyModel.set('homepageid', data._id);
-          }
-          this.set(data, {
-            parse:true,
-            remove:false,
-            merge:true
-          });
+          this.addNewPage(data, 'emit');
           done(true, data, status);
         },
         error : function (data, status) {
           done(false, data, status);
         }
       });
+    },
+
+    addNewPage : function (page, emit) {
+      if(page.homepage) {
+        SiteifyModel.set('homepageid', page._id);
+      }
+      this.set(page, {
+        parse:true,
+        remove:false,
+        merge:true
+      });
+
+      if(emit) {
+        this.pages.emit('new:page', page);
+      }
     },
 
     delete : function (page, done) {
@@ -86,13 +106,21 @@ function (PageModel, SiteifyModel, Oauth2Model) {
         },
         data : {pageid : page.id},
         success : function (data, status) {
-          this.remove(data._id);
+          this.deletePage(data, 'emit');
           done(true, data, status);
         },
         error : function (data, status) {
           done(false, data, status);
         }
       });
+    },
+
+    deletePage : function (page, emit) {
+      this.remove(page._id);
+
+      if(emit) {
+        this.pages.emit('delete:page', page);
+      }
     }
 
   });
