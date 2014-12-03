@@ -1,7 +1,7 @@
 
 var express = require('express'),
       bodyParser = require('body-parser'),
-      oauth = require('./../app/models/oauth'),
+      oauthModel = require('./../app/models/oauth'),
       oauth2server = require('node-oauth2-server');
 
 module.exports = function (app, config) {
@@ -13,7 +13,7 @@ module.exports = function (app, config) {
   app.use(bodyParser());
 
   app.oauth = oauth2server({
-    model: oauth,
+    model: oauthModel,
     grants: ['password', 'refresh_token'],
     debug: true
   });

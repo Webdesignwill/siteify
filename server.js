@@ -4,25 +4,26 @@ var express = require('express'),
 
 var env = process.env.NODE_ENV || 'development',
       config = require('./config/config')[env],
-      mongoose = require('mongoose');
+      mongoose = require('mongoose'),
+      socketio = require('socket.io'),
+      http = require('http');
 
 // Database
 var db = mongoose.connect(config.db);
 
-var app = express();
+// Sockets
+var app = express(),
+      server = http.createServer(app),
+      io = socketio(server);
 
 // access control settings
 require('./config/relations')(app, config);
-
-// express settings
 require('./config/express')(app, config);
-
-// route settings
 require('./config/routes')(app);
 
 // Start
 var port = process.env.PORT || 5000;
-var server = app.listen(port, function() {
+server.listen(port, function () {
   debug('Express server listening on port ' + server.address().port);
 });
 
