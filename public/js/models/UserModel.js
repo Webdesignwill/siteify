@@ -59,6 +59,9 @@ function (App, Oauth2Model) {
         context : this,
         url : this.urls.authenticate,
         contentType : 'application/x-www-form-urlencoded',
+        headers : {
+          Authorization : 'Bearer ' + Oauth2Model.get('access_token')
+        },
         data : user,
         success : function (data, status) {
           this.set(data);
