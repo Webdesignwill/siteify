@@ -72,7 +72,7 @@ define([
 
     startSite : function () {
       var self = this, path;
-      this.Sitemap.getSitemap(function (result, data, status) {
+      this.Sitemap.getAllPages(function (result, data, status) {
         if(result) {
           path = SiteifyModel.get('homepage') ? self.Sitemap.getHomepage().get('path') : '/siteify/setup/homepage';
         } else {

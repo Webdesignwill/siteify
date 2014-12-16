@@ -41,10 +41,10 @@ function (App) {
         data : user,
         success : function (data, status) {
           this.set(data);
-          done(true, data, status);
+          if(done) return done(true, data, status);
         },
         error : function (data, status) {
-          done(false, data, status);
+          if(done) return done(false, data, status);
         }
       });
     },
@@ -57,7 +57,7 @@ function (App) {
         contentType : 'application/x-www-form-urlencoded',
         success : function (data, status) {
           this.set(data);
-          done(true, data, status);
+          if(done) return done(true, data, status);
         },
         error : function (data, status) {
           alert("Siteify isn't available");
@@ -74,10 +74,10 @@ function (App) {
         data : data,
         success : function (data, status) {
           this.set(data);
-          done(true, data, status);
+          if(done) return done(true, data, status);
         },
         error : function (data, status) {
-          done(false, data, status);
+          if(done) return done(false, data, status);
         }
       });
     }

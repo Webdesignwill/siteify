@@ -14,29 +14,39 @@ define([
 
     var channels = {};
 
-    App.$broker.on('siteify:toggleLive', function (event, options) {
-      toggleLive(options);
+    App.$broker.on('siteify:toggleLive', function (event) {
+      toggleLive();
     });
 
-    function toggleLive (options) {
+    function toggleLive () {
       if(App.User.get('loggedin')) {
-        self[self.live ? 'offlive' : 'onlive'](options);
+        self[self.live ? 'offlive' : 'onlive']();
         App.$broker.trigger('siteify:live:change', self.live);
       }
     }
 
-    this.registerChannel = function (channel) {
-      channels[channel] = {
-        socket : null
+    this.register = function (channel) {
+      channels[channel.room] = {
+        socket : null,
+        events : channel.events
       };
     };
 
-    this.onlive = function (options) {
+    this.emit = function (channel) {
+      if(channels[channel.room].socket) {
+        channels[channel.room].socket.emit(channel.event, channel.data);
+      }
+    };
+
+    this.onlive = function () {
       var channel;
       for(var key in channels) {
         channel = channels[key];
         if(!channel.socket) {
-          channel.socket = io.connect([channel]);
+          channel.socket = io.connect(key);
+          for(key in channel.events) {
+            channel.socket.on(key, channel.events[key]);
+          }
         } else {
           channel.socket.connect([channel]);
         }
@@ -44,7 +54,7 @@ define([
       this.live = true;
     };
 
-    this.offlive = function (options) {
+    this.offlive = function () {
       for(var key in channels) {
         channels[key].socket.disconnect([channels[key]]);
       }

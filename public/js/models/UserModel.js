@@ -37,10 +37,10 @@ function (App, Oauth2Model) {
         contentType : 'application/x-www-form-urlencoded',
         data : user,
         success : function (data, status) {
-          done(true, data, status);
+          if(done) return done(true, data, status);
         },
         error : function (data, status) {
-          done(false, data, status);
+          if(done) return done(false, data, status);
         }
       });
     },
@@ -65,10 +65,10 @@ function (App, Oauth2Model) {
         data : user,
         success : function (data, status) {
           this.set(data);
-          done(true, data, status);
+          if(done) return done(true, data, status);
         },
         error : function (data, status) {
-          done(false, data, status);
+          if(done) return done(false, data, status);
         }
       });
     },
@@ -84,10 +84,10 @@ function (App, Oauth2Model) {
         },
         success : function (data, status) {
           this.set(data);
-          done(true, data, status);
+          if(done) return done(true, data, status);
         },
         error : function (data, status) {
-          done(false, data, status);
+          if(done) return done(false, data, status);
         }
       });
     },
@@ -104,10 +104,10 @@ function (App, Oauth2Model) {
         data : user,
         success : function (data, status) {
           this.set(data);
-          done(true, data, status);
+          if(done) return done(true, data, status);
         },
         error : function (data, status) {
-          done(false, data, status);
+          if(done) return done(false, data, status);
         }
       });
     },
@@ -123,10 +123,10 @@ function (App, Oauth2Model) {
         },
         success : function (data, status) {
           this.clearUser();
-          done(true, data, status);
+          if(done) return done(true, data, status);
         },
         error : function (data, status) {
-          done(false, data, status);
+          if(done) return done(false, data, status);
         }
       });
     },

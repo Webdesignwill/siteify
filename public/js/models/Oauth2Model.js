@@ -15,7 +15,7 @@ define([
       token : '/api/oauth/token'
     },
 
-    requestAccessToken : function (user, callback) {
+    requestAccessToken : function (user, done) {
       $.ajax({
         type : 'POST',
         context : this,
@@ -34,10 +34,10 @@ define([
             refresh_token : data.refresh_token,
             access_token : data.access_token
           });
-          callback(true, data, status);
+          if(done) return done(true, data, status);
         },
         error : function (data, status) {
-          callback(false, data, status);
+          if(done) return done(false, data, status);
         }
       });
     }

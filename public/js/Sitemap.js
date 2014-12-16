@@ -29,8 +29,23 @@ function (App, PageModel, SiteifyModel, Oauth2Model, SiteifyLive) {
         console.log('%c Page ' + page.get('title') + ' removed ', 'background: #222222; color: #FF0000;');
       }, this);
 
-      SiteifyLive.registerChannel('/pages');
+      this.setSiteifyLive();
 
+    },
+
+    setSiteifyLive : function () {
+      var self = this;
+      SiteifyLive.register({
+        room : '/pages',
+        events : {
+          'page:added' : function pageAdded (page) {
+            self.addNewPage(page);
+          },
+          'page:removed' : function pageRemoved (page) {
+            self.removePage(page);
+          }
+        }
+      });
     },
 
     parse : function (models) {
@@ -41,14 +56,18 @@ function (App, PageModel, SiteifyModel, Oauth2Model, SiteifyLive) {
       return this.get(SiteifyModel.get('homepageid'));
     },
 
-    getSitemap : function (done) {
-      var self = this;
-      this.fetch({
+    getAllPages : function (done) {
+      $.ajax({
+        type : 'GET',
+        context : this,
+        url : this.url,
+        contentType : 'application/x-www-form-urlencoded',
         success : function (data, status) {
-          done(true, data, status);
+          this.set(data, {parse:true});
+          if(done) return done(true, data, status);
         },
         error : function (data, status) {
-          done(false, data, status);
+          if(done) return done(false, data, status);
         }
       });
     },
@@ -64,28 +83,32 @@ function (App, PageModel, SiteifyModel, Oauth2Model, SiteifyLive) {
         },
         data : page,
         success : function (data, status) {
-          this.addNewPage(data, 'emit');
-          done(true, data, status);
+          this.addNewPage(data);
+
+          SiteifyLive.emit({
+            room : '/pages',
+            event : 'page:added',
+            data : data
+          });
+
+          if(done) return done(true, data, status);
         },
         error : function (data, status) {
-          done(false, data, status);
+          if(done) return done(false, data, status);
         }
       });
     },
 
-    addNewPage : function (page, emit) {
+    addNewPage : function (page) {
       if(page.homepage) {
         SiteifyModel.set('homepageid', page._id);
       }
+
       this.set(page, {
         parse:true,
         remove:false,
         merge:true
       });
-
-      // if(this.pages && emit) {
-      //   this.pages.emit('pages:count:change', page);
-      // }
     },
 
     delete : function (page, done) {
@@ -99,21 +122,24 @@ function (App, PageModel, SiteifyModel, Oauth2Model, SiteifyLive) {
         },
         data : {pageid : page.id},
         success : function (data, status) {
-          this.deletePage(data, 'emit');
-          done(true, data, status);
+          this.removePage(data);
+
+          SiteifyLive.emit({
+            room : '/pages',
+            event : 'page:removed',
+            data : data
+          });
+
+          if(done) return done(true, data, status);
         },
         error : function (data, status) {
-          done(false, data, status);
+          if(done) return done(false, data, status);
         }
       });
     },
 
-    deletePage : function (page, emit) {
+    removePage : function (page) {
       this.remove(page._id);
-
-      // if(this.pages && emit) {
-      //   this.pages.emit('pages:count:change', page);
-      // }
     }
 
   });
