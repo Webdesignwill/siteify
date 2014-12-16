@@ -1,8 +1,7 @@
 {
-  "name": "Siteify",
+  "name": "siteify",
   "description": "Node based content management system",
   "version": "0.0.1",
-  "private": true,
   "dependencies": {
     "bcrypt-nodejs": "latest",
     "body-parser": "~1.2.0",

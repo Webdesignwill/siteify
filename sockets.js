@@ -1,11 +1,9 @@
 
 module.exports = function (app, io) {
   io.of('/pages').on('connection', function (sockets) {
-    sockets.on('new:page', function (page) {
-      sockets.broadcast.emit('page:added', page);
+    sockets.on('pages:count:change', function (page) {
+      sockets.broadcast.emit('pages:count:change', page);
     });
-    sockets.on('delete:page', function (page) {
-      sockets.broadcast.emit('page:deleted', page);
-    });
+    sockets.on('disconnect', function () {});
   });
 };

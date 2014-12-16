@@ -14,6 +14,7 @@ define([
     navItems : {},
 
     initialize : function () {
+
       this.listenTo(App.Sitemap, 'add', function (model) {
         if(model.get('nav')) {
           this.addNavItem(model);
@@ -57,7 +58,9 @@ define([
     },
 
     removeNavItem : function (model) {
-      this.navItems[model.get('_id')].destroy();
+      var _id = model.get('_id');
+      this.navItems[_id].destroy();
+      delete this.navItems[_id];
     }
 
   });

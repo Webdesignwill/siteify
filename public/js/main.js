@@ -23,6 +23,7 @@ var app_require = require.config({
 
     Router                                                  : 'Router',
     Errors                                                   : 'Errors',
+    SiteifyLive                                            : 'SiteifyLive',
 
     App                                                      : 'App',
     PageFactory                                          : 'pages/PageFactory',
@@ -78,7 +79,7 @@ var app_require = require.config({
       exports : 'bootstrap'
     }
   },
-  deps : ['jquery', 'underscore', 'App', 'domReady', 'SiteifyModel', 'bootstrap', 'pageExt', 'Validation'],
+  deps : ['jquery', 'underscore', 'App', 'domReady', 'SiteifyModel', 'bootstrap', 'pageExt', 'Validation', 'SiteifyLive'],
   callback : function ($, _, App, domReady) {
 
     // Mix in the validation for all models. Do something with this

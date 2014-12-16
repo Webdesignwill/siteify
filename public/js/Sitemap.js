@@ -1,12 +1,13 @@
 
 define([
+  'App',
   'PageModel',
   'SiteifyModel',
   'Oauth2Model',
-  'io'
+  'SiteifyLive'
 ],
 
-function (PageModel, SiteifyModel, Oauth2Model, io) {
+function (App, PageModel, SiteifyModel, Oauth2Model, SiteifyLive) {
 
   "use strict";
 
@@ -21,9 +22,6 @@ function (PageModel, SiteifyModel, Oauth2Model, io) {
     model : PageModel,
 
     initialize : function () {
-
-      this.pages = io.connect('/pages');
-
       this.listenTo(this, 'add', function (page) {
         console.log('%c Page ' + page.get('title') + ' added ', 'background: #222222; color: #00FF00;');
       }, this);
@@ -31,13 +29,8 @@ function (PageModel, SiteifyModel, Oauth2Model, io) {
         console.log('%c Page ' + page.get('title') + ' removed ', 'background: #222222; color: #FF0000;');
       }, this);
 
-      var self = this;
-      this.pages.on('page:added', function (page) {
-        self.addNewPage(page, false);
-      });
-      this.pages.on('page:deleted', function (page) {
-        self.deletePage(page, false);
-      });
+      SiteifyLive.registerChannel('/pages');
+
     },
 
     parse : function (models) {
@@ -90,9 +83,9 @@ function (PageModel, SiteifyModel, Oauth2Model, io) {
         merge:true
       });
 
-      if(emit) {
-        this.pages.emit('new:page', page);
-      }
+      // if(this.pages && emit) {
+      //   this.pages.emit('pages:count:change', page);
+      // }
     },
 
     delete : function (page, done) {
@@ -118,9 +111,9 @@ function (PageModel, SiteifyModel, Oauth2Model, io) {
     deletePage : function (page, emit) {
       this.remove(page._id);
 
-      if(emit) {
-        this.pages.emit('delete:page', page);
-      }
+      // if(this.pages && emit) {
+      //   this.pages.emit('pages:count:change', page);
+      // }
     }
 
   });
