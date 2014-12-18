@@ -1,9 +1,9 @@
 
 define([
-  'App',
+  'Siteify',
   'FretView',
   'FretModel'
-], function (App, FretView, FretModel) {
+], function (Siteify, FretView, FretModel) {
 
   "use strict";
 

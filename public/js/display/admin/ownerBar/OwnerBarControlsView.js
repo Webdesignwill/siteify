@@ -1,10 +1,9 @@
 
 define([
-  'App',
+  'Siteify',
   'handlebars',
-  'SiteifyModel',
   'text!display/admin/ownerBar/templates/ownerbarcontrols.tpl'
-], function (App, handlebars, SiteifyModel, template) {
+], function (Siteify, handlebars, template) {
 
   "use strict";
 
@@ -15,10 +14,14 @@ define([
     },
 
     initialize : function () {
-      this.listenTo(SiteifyModel, 'change:page', function (siteifyModel, page) {
+      this.listenTo(Siteify, 'change:page', function (siteifyModel, page) {
         this.render();
       }, this);
-      this.render();
+
+      if(Siteify.get('page')) {
+        this.render();
+      }
+
     },
 
     setElements : function () {
@@ -27,7 +30,7 @@ define([
 
     render : function () {
 
-      var model = SiteifyModel.get('page').model;
+      var model = Siteify.get('page').model;
 
       var tpl = handlebars.compile(template);
       var compiled = tpl(model.attributes);
@@ -43,7 +46,7 @@ define([
     },
 
     preventDefault : function (e) {
-      if(SiteifyModel.get('page').model.get('homepage')) {
+      if(Siteify.get('page').model.get('homepage')) {
         e.preventDefault();
         e.stopPropagation();
       }
@@ -51,6 +54,7 @@ define([
 
     destroy : function () {
       this.$el.off();
+      this.stopListening();
       this.$el.empty();
     }
 

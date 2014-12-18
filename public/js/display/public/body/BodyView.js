@@ -1,11 +1,11 @@
 
 define([
-  'App',
+  'Siteify',
   'HeaderView',
   'ModalView',
   'OwnerBarView',
   'text!display/public/body/templates/body.tpl'
-], function (App, HeaderView, ModalView, OwnerBarView, template) {
+], function (Siteify, HeaderView, ModalView, OwnerBarView, template) {
 
   "use strict";
 
@@ -15,7 +15,7 @@ define([
 
     initialize : function () {
 
-      this.listenTo(App.User, 'change:loggedin', function (model, loggedin) {
+      this.listenTo(Siteify.User, 'change:loggedin', function (model, loggedin) {
         this.toggleClass(loggedin, 'loggedin');
       }, this);
 
@@ -23,6 +23,8 @@ define([
       this.setElements();
       this.renderPageComponents();
       this.delegateAnchorClickEvent();
+
+      this.toggleClass(Siteify.User.get('loggedin'), 'loggedin');
     },
 
     toggleClass : function (att, cls) {
@@ -72,7 +74,7 @@ define([
             argument = argsArray[2] || null;
 
       if(module && event) {
-        App.$broker.trigger(module + ':' + event, argument);
+        Siteify.$broker.trigger(module + ':' + event, argument);
       }
     },
 

@@ -1,10 +1,9 @@
 
 define([
-  'App',
-  'SiteifyModel'
+  'Siteify'
 ],
 
-function (App, SiteifyModel) {
+function (Siteify) {
 
   "use strict";
 
@@ -22,7 +21,7 @@ function (App, SiteifyModel) {
     },
 
     setEvents : function () {
-      this.listenTo(SiteifyModel, 'change:page', function (model) {
+      this.listenTo(Siteify, 'change:page', function (model) {
         this.highlightActive(model.get('page'));
       });
     },
@@ -32,7 +31,7 @@ function (App, SiteifyModel) {
     },
 
     navigate : function () {
-      App.Router.navigate(this.options.model.get('path'), {trigger: true});
+      Siteify.Router.navigate(this.options.model.get('path'), {trigger: true});
     },
 
     render : function () {

@@ -4,7 +4,7 @@ define(function (require, exports, module) {
       baseUrl                                        : '/js/packages/' + name,
       context                                        : name + '_require',
       paths : {
-        App                                                       : 'app',
+        App                                                       : 'Siteify',
 
         /* Public */
         BodyView                                               : 'display/public/body/BodyView',
@@ -45,7 +45,7 @@ define(function (require, exports, module) {
           exports: 'Handlebars'
         }
       },
-      deps : ['app', 'router']
+      deps : ['Siteify', 'router']
     };
   };
 });
@@ -88,7 +88,7 @@ var base_require = require.config({
       exports : 'bootstrap'
     }
   },
-  deps : ['jquery', 'underscore', 'App', 'domReady', 'bootstrap', 'Validation'],
+  deps : ['jquery', 'underscore', 'Siteify', 'domReady', 'bootstrap', 'Validation'],
   callback : function ($, _, App, domReady) {
 
     // Mix in the validation for all models. Do something with this

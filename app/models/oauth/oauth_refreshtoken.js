@@ -29,9 +29,7 @@ module.exports.saveRefreshToken = function(token, clientId, expires, userId, cal
 };
 
 module.exports.getRefreshToken = function(refreshToken, callback) {
-  OAuthRefreshTokensModel.findOne({ refreshToken: refreshToken }, function(err, token) {
-    // node-oauth2-server defaults to .user or { id: userId }, but { id: userId} doesn't work
-    // This is in node-oauth2-server/lib/grant.js on line 256
+  OAuthRefreshTokensModel.findOne({ refreshToken: refreshToken }, function (err, token) {
     if (token) {
       token.user = token.userId;
     }

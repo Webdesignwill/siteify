@@ -1,9 +1,9 @@
 
 define([
-  'App',
+  'Siteify',
   'io',
   'UserModel'
-], function (App, io, UserModel) {
+], function (Siteify, io, UserModel) {
 
   "use strict";
 
@@ -14,14 +14,14 @@ define([
 
     var channels = {};
 
-    App.$broker.on('siteify:toggleLive', function (event) {
+    Siteify.$broker.on('siteify:toggleLive', function (event) {
       toggleLive();
     });
 
     function toggleLive () {
-      if(App.User.get('loggedin')) {
+      if(Siteify.User.get('loggedin')) {
         self[self.live ? 'offlive' : 'onlive']();
-        App.$broker.trigger('siteify:live:change', self.live);
+        Siteify.$broker.trigger('siteify:live:change', self.live);
       }
     }
 

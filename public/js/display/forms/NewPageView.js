@@ -1,8 +1,8 @@
 
 define([
-  'App',
+  'Siteify',
   'text!display/forms/templates/form.tpl'
-], function (App, template) {
+], function (Siteify, template) {
 
   "use strict";
 
@@ -10,14 +10,14 @@ define([
 
     initialize : function (options) {
       this.options = options;
-      this.form = new App.Forms();
+      this.form = new Siteify.Forms();
       this.render();
     },
 
     render : function () {
       this.$el.html(template);
       var self = this;
-      this.form.init(App.Sitemap, {
+      this.form.init(Siteify.Sitemap, {
         name : 'NewPage',
         action : 'newPage',
         el : this.$el.find('form')
@@ -27,8 +27,8 @@ define([
 
     done : function (result, data, status) {
       if(result) {
-        App.Router.navigate(data.path, {trigger:true});
-        App.$broker.trigger('modal:close');
+        Siteify.Router.navigate(data.path, {trigger:true});
+        Siteify.$broker.trigger('modal:close');
       } else {
         alert('There was a problem creating a new page');
       }

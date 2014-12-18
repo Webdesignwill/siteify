@@ -1,10 +1,10 @@
 
 define([
-  'App',
+  'Siteify',
   'IntervalsCollection',
   'handlebars',
   'text!display/public/description/templates/description.tpl'
-], function (App, IntervalsCollection, handlebars, template) {
+], function (Siteify, IntervalsCollection, handlebars, template) {
 
   "use strict";
 
@@ -16,7 +16,7 @@ define([
         this.render(model);
       }, this);
 
-      App.$broker.on('clear:selection', function () {
+      Siteify.$broker.on('clear:selection', function () {
         self.close();
       });
     },

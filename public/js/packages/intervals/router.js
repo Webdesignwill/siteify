@@ -1,7 +1,7 @@
 
 define([
   'require',
-  'app'
+  'Siteify'
 ],
 
 function (require, app) {

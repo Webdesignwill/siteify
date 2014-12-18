@@ -1,10 +1,9 @@
 
 define([
-  'App',
-  'Oauth2Model'
+  'Siteify'
 ],
 
-function (App, Oauth2Model) {
+function (Siteify) {
 
   "use strict";
 
@@ -18,15 +17,20 @@ function (App, Oauth2Model) {
       register : '/api/user/register',
       login : '/api/user/login',
       logout : '/api/user/logout',
-      me : '/api/user/me',
-      authenticate : '/api/user/authenticate'
+      me : '/api/user/me'
     },
 
     initialize : function () {
       var self = this;
-      App.$broker.on('user:logout', function () {
+      Siteify.$broker.on('user:logout', function () {
         self.logout();
       });
+
+      if(Siteify.Oauth2.get('refresh_token')) {
+        Siteify.Oauth2.refreshToken(function (result, data, status) {
+          if (result) { return self.getMe(null); }
+        });
+      }
     },
 
     register : function (user, done) {
@@ -47,40 +51,20 @@ function (App, Oauth2Model) {
 
     login : function (user, done) {
       var self = this;
-      Oauth2Model.requestAccessToken(user, function (result, data, status) {
-        if (result) { return self.authenticate(user, done); }
+      Siteify.Oauth2.requestAccessToken(user, function (result, data, status) {
+        if (result) { return self.getMe(done); }
         done(false, data, status);
       });
     },
 
-    authenticate : function (user, done) {
-      $.ajax({
-        type : 'POST',
-        context : this,
-        url : this.urls.authenticate,
-        contentType : 'application/x-www-form-urlencoded',
-        headers : {
-          Authorization : 'Bearer ' + Oauth2Model.get('access_token')
-        },
-        data : user,
-        success : function (data, status) {
-          this.set(data);
-          if(done) return done(true, data, status);
-        },
-        error : function (data, status) {
-          if(done) return done(false, data, status);
-        }
-      });
-    },
-
-    getMyProfile : function (done) {
+    getMe : function (done) {
       $.ajax({
         type : 'GET',
         context : this,
         url : this.urls.me,
         contentType : 'application/x-www-form-urlencoded',
         headers : {
-          Authorization : 'Bearer ' + Oauth2Model.get('access_token')
+          Authorization : 'Bearer ' + Siteify.Oauth2.get('access_token')
         },
         success : function (data, status) {
           this.set(data);
@@ -99,7 +83,7 @@ function (App, Oauth2Model) {
         url : this.urls.me,
         contentType : 'application/x-www-form-urlencoded',
         headers : {
-          Authorization : 'Bearer ' + Oauth2Model.get('access_token')
+          Authorization : 'Bearer ' + Siteify.Oauth2.get('access_token')
         },
         data : user,
         success : function (data, status) {
@@ -119,7 +103,7 @@ function (App, Oauth2Model) {
         url : this.urls.me,
         contentType : 'application/x-www-form-urlencoded',
         headers : {
-          Authorization : 'Bearer ' + Oauth2Model.get('access_token')
+          Authorization : 'Bearer ' + Siteify.Oauth2.get('access_token')
         },
         success : function (data, status) {
           this.clearUser();
@@ -138,7 +122,7 @@ function (App, Oauth2Model) {
         url : this.urls.logout,
         contentType : 'application/x-www-form-urlencoded',
         headers : {
-          Authorization : 'Bearer ' + Oauth2Model.get('access_token')
+          Authorization : 'Bearer ' + Siteify.Oauth2.get('access_token')
         },
         success : function (data, status) {
           this.clearUser();
@@ -148,6 +132,7 @@ function (App, Oauth2Model) {
 
     clearUser : function () {
       this.clear({silent : true});
+      Siteify.Oauth2.clear();
       this.set(this.defaults);
     },
 

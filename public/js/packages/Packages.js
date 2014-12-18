@@ -8,11 +8,9 @@
   ========================================================== */
 
 define([
-  'App',
-  'SiteifyModel',
-  'PageFactory',
+  'Siteify',
   'launchControl'
-], function (App, SiteifyModel, PageFactory, launchControl) {
+], function (Siteify, PageFactory, launchControl) {
 
   "use strict";
 
@@ -31,7 +29,7 @@ define([
         /* Either grab the element where the package should be loaded in to
             or pass the whole page container
         ========================================== */
-        var $page = App.Page.get('page'),
+        var $page = Siteify.get('page'),
               $packageElement = $page.$el.find("[data-package='" + packageName + "']");
 
         return $packageElement.length > 0 ? $packageElement : $page.$el;
@@ -43,7 +41,7 @@ define([
             for future use. Invoke the mediator after by calling each init method in turn
             with the launchControl.
         ======================================== */
-        packages[packageName].req(['app'], function (app) {
+        packages[packageName].req(['App'], function (app) {
           app.pageFactory = new PageFactory(app);
           app.$el = attachPackageElement();
           app.page = new Backbone.Model();
@@ -111,7 +109,7 @@ define([
         pageModel.get('packages') returns an array. Could be empty but always an array. If it's more
         than 0 then start loading them.
     ========================================================== */
-    App.Page.on('change:page', function (model) {
+    Siteify.on('change:page', function (model) {
       var pageModel = model.get('page').model,
             pgsArray = pageModel.get('packages');
 

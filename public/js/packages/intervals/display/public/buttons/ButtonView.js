@@ -1,8 +1,8 @@
 
 define([
-  'App',
+  'Siteify',
   'IntervalsCollection'
-], function (App, IntervalsCollection) {
+], function (Siteify, IntervalsCollection) {
 
   "use strict";
 
@@ -27,7 +27,7 @@ define([
 
     handler : function (e) {
       e.preventDefault();
-      if(this.options.event) App.$broker.trigger(this.options.event);
+      if(this.options.event) Siteify.$broker.trigger(this.options.event);
       if(this.options.callback) this.options.callback();
     }
 

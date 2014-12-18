@@ -1,6 +1,6 @@
 
 define([
-  'App',
+  'Siteify',
   'IntervalManagementView',
   'NavBarView',
   'FretboardView',
@@ -10,7 +10,7 @@ define([
   'DescriptionView',
   'ModalView',
   'text!display/public/body/templates/body.tpl'
-], function (App, IntervalManagementView, NavBarView, FretboardView, MatchCountView, ControlBoardView, ListParentView, DescriptionView, ModalView, template) {
+], function (Siteify, IntervalManagementView, NavBarView, FretboardView, MatchCountView, ControlBoardView, ListParentView, DescriptionView, ModalView, template) {
 
   "use strict";
 
@@ -102,7 +102,7 @@ define([
             argument = argsArray[2] || null;
 
       if(module && event) {
-        App.$broker.trigger(module + ':' + event, argument);
+        Siteify.$broker.trigger(module + ':' + event, argument);
       }
     },
 

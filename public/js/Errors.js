@@ -1,5 +1,5 @@
 
-define(['App'], function (App) {
+define(['Siteify'], function (Siteify) {
 
   "use strict";
 
@@ -7,7 +7,7 @@ define(['App'], function (App) {
 
     var map = {
       OAuth2Error : function OAuth2Error () {
-        App.$broker.trigger('modal:open', 'Login');
+        Siteify.$broker.trigger('modal:open', 'Login');
       }
     };
 

@@ -25,7 +25,7 @@ var app_require = require.config({
     Errors                                                   : 'Errors',
     SiteifyLive                                            : 'SiteifyLive',
 
-    App                                                      : 'App',
+    Siteify                                                   : 'Siteify',
     PageFactory                                          : 'pages/PageFactory',
     Sitemap                                                : 'Sitemap',
 
@@ -63,7 +63,7 @@ var app_require = require.config({
     UserModel                                              : 'models/UserModel',
     Oauth2Model                                          : 'models/Oauth2Model',
     PageModel                                              : 'models/PageModel',
-    SiteifyModel                                           : 'models/SiteifyModel',
+    SiteifyModel                                           : 'models/SiteifyModel'
 
   },
   shim : {
@@ -79,8 +79,8 @@ var app_require = require.config({
       exports : 'bootstrap'
     }
   },
-  deps : ['jquery', 'underscore', 'App', 'domReady', 'SiteifyModel', 'bootstrap', 'pageExt', 'Validation', 'SiteifyLive'],
-  callback : function ($, _, App, domReady) {
+  deps : ['jquery', 'underscore', 'Siteify', 'domReady', 'bootstrap', 'pageExt', 'Validation', 'SiteifyLive'],
+  callback : function ($, _, Siteify, domReady) {
 
     // Mix in the validation for all models. Do something with this
     // cause it can't very well go here
@@ -106,7 +106,7 @@ var app_require = require.config({
     });
 
     domReady(function() {
-      App.init();
+      Siteify.init();
     });
   }
 });

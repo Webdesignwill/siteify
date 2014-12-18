@@ -1,8 +1,8 @@
 
 define([
-  'App',
+  'Siteify',
   'text!display/forms/templates/form.tpl'
-], function (App, template) {
+], function (Siteify, template) {
 
   "use strict";
 
@@ -10,14 +10,14 @@ define([
 
     initialize : function (options) {
       this.options = options;
-      this.form = new App.Forms();
+      this.form = new Siteify.Forms();
       this.render();
     },
 
     render : function () {
       this.$el.html(template);
       var self = this;
-      this.form.init(App.User, {
+      this.form.init(Siteify.User, {
         name : 'Profile',
         action : 'put',
         el : this.$el.find('form')
@@ -27,7 +27,7 @@ define([
 
     done : function (result, data, status) {
       if(result) {
-        App.$broker.trigger('modal:close');
+        Siteify.$broker.trigger('modal:close');
       } else {
         alert('The was a problem updating your profile');
       }

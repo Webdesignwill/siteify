@@ -1,10 +1,9 @@
 
 define([
-  'App',
-  'SiteifyModel',
+  'Siteify',
   'OwnerBarControlsView',
   'text!display/admin/ownerBar/templates/ownerbar.tpl'
-], function (App, SiteifyModel, OwnerBarControlsView, template) {
+], function (Siteify, OwnerBarControlsView, template) {
 
   "use strict";
 
@@ -18,13 +17,13 @@ define([
 
       var self = this;
 
-      this.listenTo(App.User, 'change:loggedin', function (user, loggedin) {
+      this.listenTo(Siteify.User, 'change:loggedin', function (user, loggedin) {
         if(loggedin) {
           this[user.get('owner') ? 'renderOwnerControls' : 'removeOwnerControls']();
         }
       }, this);
 
-      App.$broker.on('siteify:live:change', function (event, live) {
+      Siteify.$broker.on('siteify:live:change', function (event, live) {
         self.live(live);
       });
 
@@ -36,7 +35,7 @@ define([
     },
 
     toggleLive : function () {
-      App.$broker.trigger('siteify:toggleLive');
+      Siteify.$broker.trigger('siteify:toggleLive');
     },
 
     setElements : function () {
@@ -58,6 +57,11 @@ define([
     render : function () {
       this.$el.html(template);
       this.setElements();
+
+      if(Siteify.User.get('loggedin') && Siteify.User.get('owner')) {
+        this.renderOwnerControls();
+      }
+
       return this;
     }
 

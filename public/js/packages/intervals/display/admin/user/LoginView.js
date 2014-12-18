@@ -1,8 +1,8 @@
 
 define([
-  'App',
+  'Siteify',
   'text!display/admin/user/templates/form.tpl'
-], function (App, template) {
+], function (Siteify, template) {
 
   "use strict";
 
@@ -26,7 +26,7 @@ define([
     },
 
     done : function () {
-      App.$broker.trigger('modal:close');
+      Siteify.$broker.trigger('modal:close');
     },
 
     close : function () {

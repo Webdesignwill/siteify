@@ -1,9 +1,9 @@
 
 define([
-  'App',
+  'Siteify',
   'IntervalsCollection',
   'text!display/admin/intervals/templates/intervalManagement.tpl'
-], function (App, IntervalsCollection, template) {
+], function (Siteify, IntervalsCollection, template) {
 
   "use strict";
 

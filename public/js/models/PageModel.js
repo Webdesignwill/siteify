@@ -1,7 +1,7 @@
 
-define(['App'],
+define(['Siteify'],
 
-function (App) {
+function (Siteify) {
 
   "use strict";
 

@@ -1,10 +1,9 @@
 
 define([
-  'App',
+  'Siteify',
   'handlebars',
-  'SiteifyModel',
   'text!display/admin/confirmDelete/templates/confirm.tpl'
-], function (App, handlebars, SiteifyModel, template) {
+], function (Siteify, handlebars, template) {
 
   "use strict";
 
@@ -21,29 +20,29 @@ define([
 
     render : function () {
       var tpl = handlebars.compile(template);
-      var compiled = tpl(SiteifyModel.get('page').model.attributes);
+      var compiled = tpl(Siteify.get('page').model.attributes);
       this.$el.html(compiled);
 
       return this;
     },
 
     goBack : function () {
-      App.$broker.trigger('modal:close');
+      Siteify.$broker.trigger('modal:close');
     },
 
     delete : function (e) {
       e.preventDefault();
 
-      var model = SiteifyModel.get('page').model;
+      var model = Siteify.get('page').model;
 
       if(model.get('homepage')) {
         return this;
       }
 
-      App.Sitemap.delete(SiteifyModel.get('page'), function (result, data, status) {
+      Siteify.Sitemap.delete(Siteify.get('page'), function (result, data, status) {
         if(result) {
-          App.$broker.trigger('modal:close');
-          return App.Router.navigate(App.Sitemap.getHomepage().get('path'), {trigger:true});
+          Siteify.$broker.trigger('modal:close');
+          return Siteify.Router.navigate(Siteify.Sitemap.getHomepage().get('path'), {trigger:true});
         }
         alert('There was a problem deleting the page');
       });

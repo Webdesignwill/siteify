@@ -1,10 +1,10 @@
 
 define([
-  'App',
+  'Siteify',
   'Oauth2Model'
 ],
 
-function (App, Oauth2Model) {
+function (Siteify, Oauth2Model) {
 
   "use strict";
 
@@ -22,7 +22,7 @@ function (App, Oauth2Model) {
 
     initialize : function () {
       var self = this;
-      App.$broker.on('user:logout', function () {
+      Siteify.$broker.on('user:logout', function () {
         self.logout();
       });
     },

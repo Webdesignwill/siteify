@@ -51,17 +51,10 @@ OAuthUsersSchema.statics.register = function (fields, callback) {
   user.save(callback);
 };
 
-OAuthUsersSchema.statics.authenticate = function (email, password, callback) {
-  OAuthUsersModel.findOne({ email : email }, function (err, user) {
+OAuthUsersSchema.statics.getUser = function (email, password, callback) {
+   OAuthUsersModel.findOne({ email : email }, function (err, user) {
     if (err || !user) return callback(err, user);
     callback(null, bcrypt.compareSync(password, user.hashed_password) ? user : null);
-  });
-};
-
-OAuthUsersSchema.statics.getUser = function (email, password, callback) {
-  OAuthUsersModel.authenticate(email, password, function (err, user) {
-    if (err || !user) return callback(err, user);
-    callback(null, user.email);
   });
 };
 

@@ -1,11 +1,10 @@
 
 define([
-  'App',
-  'SiteifyModel',
+  'Siteify',
   'NavSubView',
   'UserHeaderView',
   'text!display/public/header/templates/header.tpl'
-], function (App, SiteifyModel, NavSubView, UserHeaderView, template) {
+], function (Siteify, NavSubView, UserHeaderView, template) {
 
   "use strict";
 
@@ -15,17 +14,17 @@ define([
 
     initialize : function () {
 
-      this.listenTo(App.Sitemap, 'add', function (model) {
+      this.listenTo(Siteify.Sitemap, 'add', function (model) {
         if(model.get('nav')) {
           this.addNavItem(model);
         }
       }, this);
-      this.listenTo(App.Sitemap, 'remove', function (model) {
+      this.listenTo(Siteify.Sitemap, 'remove', function (model) {
         if(model.get('nav')) {
           this.removeNavItem(model);
         }
       }, this);
-      this.listenTo(SiteifyModel, 'change:sitename', function (model) {
+      this.listenTo(Siteify, 'change:sitename', function (model) {
         this.renderTitle();
       }, this);
 
@@ -48,7 +47,7 @@ define([
     },
 
     renderTitle : function () {
-      this.$sfSitename.html(SiteifyModel.get('sitename'));
+      this.$sfSitename.html(Siteify.get('sitename'));
     },
 
     addNavItem : function (model) {

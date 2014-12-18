@@ -1,13 +1,11 @@
 
 define([
-  'App',
+  'Siteify',
   'PageModel',
-  'SiteifyModel',
-  'Oauth2Model',
   'SiteifyLive'
 ],
 
-function (App, PageModel, SiteifyModel, Oauth2Model, SiteifyLive) {
+function (Siteify, PageModel, SiteifyLive) {
 
   "use strict";
 
@@ -53,7 +51,7 @@ function (App, PageModel, SiteifyModel, Oauth2Model, SiteifyLive) {
     },
 
     getHomepage : function () {
-      return this.get(SiteifyModel.get('homepageid'));
+      return this.get(Siteify.get('homepageid'));
     },
 
     getAllPages : function (done) {
@@ -79,7 +77,7 @@ function (App, PageModel, SiteifyModel, Oauth2Model, SiteifyLive) {
         url : this.urls.new,
         contentType : 'application/x-www-form-urlencoded',
         headers : {
-          Authorization : 'Bearer ' + Oauth2Model.get('access_token')
+          Authorization : 'Bearer ' + Siteify.Oauth2.get('access_token')
         },
         data : page,
         success : function (data, status) {
@@ -101,7 +99,7 @@ function (App, PageModel, SiteifyModel, Oauth2Model, SiteifyLive) {
 
     addNewPage : function (page) {
       if(page.homepage) {
-        SiteifyModel.set('homepageid', page._id);
+        Siteify.set('homepageid', page._id);
       }
 
       this.set(page, {
@@ -118,7 +116,7 @@ function (App, PageModel, SiteifyModel, Oauth2Model, SiteifyLive) {
         url : this.urls.delete,
         contentType : 'application/x-www-form-urlencoded',
         headers : {
-          Authorization : 'Bearer ' + Oauth2Model.get('access_token')
+          Authorization : 'Bearer ' + Siteify.Oauth2.get('access_token')
         },
         data : {pageid : page.id},
         success : function (data, status) {

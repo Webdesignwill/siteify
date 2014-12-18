@@ -1,9 +1,9 @@
 
 define([
-  'App',
+  'Siteify',
   'handlebars',
   'text!display/public/navbar/templates/navbar.tpl'
-], function (App, handlebars, template) {
+], function (Siteify, handlebars, template) {
 
   "use strict";
 

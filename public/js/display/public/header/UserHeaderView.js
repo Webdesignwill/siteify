@@ -1,27 +1,26 @@
 
 define([
-  'App',
-  'SiteifyModel',
+  'Siteify',
   'handlebars',
   'text!display/public/header/templates/userheader.tpl'
 ],
 
-function (App, SiteifyModel, handlebars, template) {
+function (Siteify, handlebars, template) {
 
   "use strict";
 
   var UserHeaderView = Backbone.View.extend({
 
     initialize : function () {
-      this.listenTo(App.User, 'change', function () {
+      this.listenTo(Siteify.User, 'change', function () {
         this.render();
       }, this);
-      this.listenToOnce(SiteifyModel, 'change:owner', function () {
+      this.listenToOnce(Siteify, 'change:owner', function () {
         this.render();
       }, this);
 
-      if(SiteifyModel.get('owner')) {
-        this.stopListening(SiteifyModel);
+      if(Siteify.get('owner')) {
+        this.stopListening(Siteify);
         this.render();
       }
 
@@ -29,7 +28,7 @@ function (App, SiteifyModel, handlebars, template) {
 
     render : function () {
       var tpl = handlebars.compile(template);
-      var compiled = tpl(App.User.attributes);
+      var compiled = tpl(Siteify.User.attributes);
 
       this.$el.html(compiled);
       return this;

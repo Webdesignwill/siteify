@@ -1,12 +1,12 @@
 
-define(['SiteifyModel'], function (SiteifyModel) {
+define(['Siteify'], function (Siteify) {
 
     "use strict";
 
     var PageFactory = function () {
 
       function closeCurrentPage (done) {
-        var page = SiteifyModel.get('page');
+        var page = Siteify.get('page');
         if(page && typeof page.close === 'function') {
           return page.close(function () {
             done();
@@ -36,7 +36,7 @@ define(['SiteifyModel'], function (SiteifyModel) {
           $container.html(page.render().el);
 
           openNextPage($container, page, function () {
-            SiteifyModel.set('page', {
+            Siteify.set('page', {
               id : pageModel.get('id'),
               view : page,
               model : pageModel

@@ -1,8 +1,8 @@
 
 define([
-  'App',
+  'Siteify',
   'IntervalsCollection'
-], function (App, IntervalsCollection) {
+], function (Siteify, IntervalsCollection) {
 
   "use strict";
 
@@ -18,7 +18,7 @@ define([
       }, this);
 
       var self = this;
-      App.$broker.on('clear:selection', function (e) {
+      Siteify.$broker.on('clear:selection', function (e) {
         self.set({selected : false, highlight : false});
       });
     },

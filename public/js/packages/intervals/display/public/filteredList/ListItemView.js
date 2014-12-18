@@ -1,10 +1,10 @@
 
 define([
-  'App',
+  'Siteify',
   'IntervalsCollection',
   'handlebars',
   'text!display/public/filteredList/templates/listItem.tpl'
-], function (App, IntervalsCollection, handlebars, template) {
+], function (Siteify, IntervalsCollection, handlebars, template) {
 
   "use strict";
 
@@ -33,7 +33,7 @@ define([
         if(isTheSame(model)) return this.readyForTrash();
       }, this);
 
-      App.$broker.on('clear:selection', function () {
+      Siteify.$broker.on('clear:selection', function () {
         self.clearSelection();
       });
     },

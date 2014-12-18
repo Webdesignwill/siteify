@@ -1,16 +1,14 @@
 
 define([
-  'App',
+  'Siteify',
   'PageFactory'
 ],
 
-function (App, PageFactory) {
+function (Siteify, PageFactory) {
 
   "use strict";
 
   var Router = Backbone.Router.extend({
-
-    templatePath : '/js/templates',
 
     routes : {
       '(/)' : 'home',
@@ -23,10 +21,10 @@ function (App, PageFactory) {
 
       this.$sfContent = $('#sf-content');
 
-      this.listenTo(App.Sitemap, 'add', function (model) {
+      this.listenTo(Siteify.Sitemap, 'add', function (model) {
         this.addRoute(model);
       }, this);
-      this.listenTo(App.Sitemap, 'remove', function (model) {
+      this.listenTo(Siteify.Sitemap, 'remove', function (model) {
         this.removeRoute(model);
       }, this);
 
@@ -53,7 +51,7 @@ function (App, PageFactory) {
     },
 
     home : function (option) {
-      var model = App.Sitemap.getHomepage(),
+      var model = Siteify.Sitemap.getHomepage(),
             self = this;
 
       if(model) {

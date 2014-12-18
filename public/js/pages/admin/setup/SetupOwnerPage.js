@@ -1,22 +1,21 @@
 
 define([
-  'App',
-  'SiteifyModel',
+  'Siteify',
   'text!pages/admin/setup/templates/setupowner.tpl'
-], function (App, SiteifyModel, template) {
+], function (Siteify, template) {
 
   "use strict";
 
   var SetupOwnerPage = Backbone.Page.extend({
 
     initialize : function () {
-      this.form = new App.Forms();
+      this.form = new Siteify.Forms();
     },
 
     render : function () {
       this.$el.html(template);
       var self = this;
-      this.form.init(SiteifyModel, {
+      this.form.init(Siteify, {
         name : 'Register',
         action : 'registerOwner',
         el : this.$el.find('form')
@@ -26,7 +25,7 @@ define([
 
     done : function (result, data, status) {
       if(result) {
-        App.Router.navigate('/siteify/setup/site', {trigger:true});
+        Siteify.Router.navigate('/siteify/setup/site', {trigger:true});
       } else {
         alert('Something went wrong registering the owner');
       }

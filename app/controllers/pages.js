@@ -9,7 +9,7 @@ module.exports.new = function (req, res, next) {
   Siteify.findOne({}, function (err, siteify) {
     if(err) return next(err);
 
-    User.findOne({ email : req.user.id}, function (err, user) {
+    User.findById(req.user.id, function (err, user) {
       if(err) return next(err);
 
       relations.siteify('Is %s the owner of %s', user._id.toString(), siteify._id.toString(), function (err, result) {
@@ -71,7 +71,7 @@ module.exports.delete = function (req, res, next) {
   Siteify.findOne({}, function (err, siteify) {
     if(err) return next(err);
 
-    User.findOne({ email : req.user.id }, function (err, user) {
+    User.findById(req.user.id, function (err, user) {
       if(err) return next(err);
 
       relations.siteify('Is %s the owner of %s', user._id.toString(), siteify._id.toString(), function (err, result) {

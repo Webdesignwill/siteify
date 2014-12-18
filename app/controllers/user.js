@@ -23,15 +23,6 @@ function logMeOut (req, res, next) {
   });
 }
 
-/* Authenticate, login
-============================= */
-module.exports.authenticate = function (req, res, next) {
-  User.authenticate(req.body.email, req.body.password, function (err, user) {
-    if (err) return next(err);
-    res.send(200, parseUserObject(user));
-  });
-};
-
 /* Register user
 ============================= */
 module.exports.register = function (req, res, next) {
@@ -57,17 +48,17 @@ module.exports.unique = function (req, res, next) {
 
 /* Get me as the user
 ============================= */
-module.exports.getMe = function (req, res, next) {
-  User.findOne({ email : req.user.id }, function (err, user) {
-    if (err) res.send(err);
-    res.send(200, parseUserObject(user));
+module.exports.me = function (req, res, next) {
+  User.findById(req.user.id, function (err, user) {
+    if (err) next(err);
+    res.json(parseUserObject(user));
   });
 };
 
 /* Delete me as a user
 ============================= */
 module.exports.deleteMe = function (req, res, next) {
-  User.findOne({ email : req.user.id }, function (err, user) {
+  User.findById(req.user.id, function (err, user) {
     User.findByIdAndRemove(user.id, function (err) {
       if (err) res.send(err);
       logMeOut(req, res, next);
@@ -79,7 +70,7 @@ module.exports.deleteMe = function (req, res, next) {
 ============================= */
 module.exports.putMe = function (req, res, next) {
   // findByIdAndUpdate
-  User.findOne({ email : req.user.id }, function (err, user) {
+  User.findById(req.user.id, function (err, user) {
     if (err) res.send(err);
 
     for(var key in req.body) {
