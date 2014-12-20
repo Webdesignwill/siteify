@@ -53,7 +53,6 @@ module.exports.me = function (req, res, next) {
     if (err) next(err);
     res.json(parseUserObject(user));
   });
-  res.send(200);
 };
 
 /* Delete me as a user

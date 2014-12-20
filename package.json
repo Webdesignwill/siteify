@@ -9,7 +9,7 @@
     "ejs": "~1.0.0",
     "express": "~4.1.1",
     "mongoose": "~3.8.9",
-    "oauth2-server": "https://github.com/Webdesignwill/node-oauth2-server/tarball/master",
+    "oauth2-server": "~2.3.0",
     "relations": "https://github.com/Webdesignwill/node-relations/tarball/master",
     "socket.io": "^1.2.1"
   },
