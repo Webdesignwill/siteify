@@ -33,7 +33,11 @@ define([
       for(var key in this.defaults) {
         localStorageProp = window.localStorage.getItem(this.namespace + key);
         if(localStorageProp) {
-          this.set(key, localStorageProp, {silent:true});
+          if(Siteify.get('setup')) {
+            this.set(key, localStorageProp, {silent:true});
+          } else {
+            window.localStorage.removeItem(this.namespace + key);
+          }
         }
       }
     },
@@ -45,9 +49,13 @@ define([
           window.localStorage.setItem(this.namespace + key, this.get(key));
         }
       } else {
-        for(var prop in this.defaults) {
-          window.localStorage.removeItem(this.namespace + prop);
-        }
+        this.clearTokens();
+      }
+    },
+
+    clearTokens : function () {
+      for(var prop in this.defaults) {
+        window.localStorage.removeItem(this.namespace + prop);
       }
     },
 
