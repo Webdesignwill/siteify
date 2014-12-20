@@ -49,7 +49,7 @@ define([
           window.localStorage.setItem(this.namespace + key, this.get(key));
         }
       } else {
-        clearTokens();
+        this.clearTokens();
       }
     },
 
