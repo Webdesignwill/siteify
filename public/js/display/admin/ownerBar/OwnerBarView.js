@@ -18,9 +18,7 @@ define([
       var self = this;
 
       this.listenTo(Siteify.User, 'change:loggedin', function (user, loggedin) {
-        if(loggedin) {
-          this[user.get('owner') ? 'renderOwnerControls' : 'removeOwnerControls']();
-        }
+        this[user.get('owner') ? 'renderOwnerControls' : 'removeOwnerControls']();
       }, this);
 
       Siteify.$broker.on('siteify:live:change', function (event, live) {
@@ -49,18 +47,18 @@ define([
     },
 
     renderOwnerControls : function () {
-      this.ownerBarControlsView = new OwnerBarControlsView({
-        el : this.$el.find('.sf-owner-controls')
-      });
+      if(Siteify.User.get('loggedin') && Siteify.User.get('owner')) {
+        this.ownerBarControlsView = new OwnerBarControlsView({
+          el : this.$el.find('.sf-owner-controls')
+        });
+      }
     },
 
     render : function () {
       this.$el.html(template);
       this.setElements();
 
-      if(Siteify.User.get('loggedin') && Siteify.User.get('owner')) {
-        this.renderOwnerControls();
-      }
+      this.renderOwnerControls();
 
       return this;
     }
