@@ -3,7 +3,15 @@
   "description": "Node based content management system",
   "version": "0.0.1",
   "dependencies": {
-
+    "bcrypt-nodejs": "latest",
+    "body-parser": "~1.2.0",
+    "debug": "~0.7.4",
+    "ejs": "~1.0.0",
+    "express": "~4.1.1",
+    "mongoose": "~3.8.9",
+    "oauth2-server": "https://github.com/Webdesignwill/node-oauth2-server/tarball/master",
+    "relations": "https://github.com/Webdesignwill/node-relations/tarball/master",
+    "socket.io": "^1.2.1"
   },
   "engines": {
     "node": "0.10.x"
