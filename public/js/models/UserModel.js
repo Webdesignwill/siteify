@@ -29,6 +29,7 @@ function (Siteify) {
       if(Siteify.Oauth2.get('refresh_token')) {
         Siteify.Oauth2.refreshToken(function (result, data, status) {
           if (result) { return self.getMe(null); }
+          Siteify.Oauth2.clearTokens();
         });
       }
     },
