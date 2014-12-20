@@ -54,7 +54,6 @@ OAuthUsersSchema.statics.register = function (fields, callback) {
 OAuthUsersSchema.statics.getUser = function (email, password, callback) {
    OAuthUsersModel.findOne({ email : email }, function (err, user) {
     if (err || !user) return callback(err, user);
-    console.log('USER : ', user);
     callback(null, bcrypt.compareSync(password, user.hashed_password) ? user : null);
   });
 };
