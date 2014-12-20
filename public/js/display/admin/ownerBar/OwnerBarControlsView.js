@@ -21,7 +21,6 @@ define([
       if(Siteify.get('page')) {
         this.render();
       }
-
     },
 
     setElements : function () {

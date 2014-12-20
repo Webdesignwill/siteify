@@ -17,7 +17,7 @@ define([
 
       var self = this;
 
-      this.listenTo(Siteify.User, 'change:loggedin', function (user, loggedin) {
+      this.listenTo(Siteify.User, 'change:loggedin', function (user, value) {
         this[user.get('owner') ? 'renderOwnerControls' : 'removeOwnerControls']();
       }, this);
 

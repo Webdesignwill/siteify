@@ -11,6 +11,9 @@ define(['Siteify'], function (Siteify) {
       }
     };
 
+    // OAuth2Error: User credentials are invalid
+    // OAuth2Error: Malformed auth header
+
     function normaliseError () {
       if(err.indexOf('OAuth2Error') === -1) {
         return 'OAuth2Error';
