@@ -49,10 +49,13 @@ module.exports.unique = function (req, res, next) {
 /* Get me as the user
 ============================= */
 module.exports.me = function (req, res, next) {
-  User.findById(req.user.id, function (err, user) {
-    if (err) next(err);
-    res.json(parseUserObject(user));
-  });
+  function find () {
+    User.findById(req.user.id, function (err, user) {
+      if (err) next(err);
+      res.json(parseUserObject(user));
+    });
+  }
+  process.nextTick(find);
 };
 
 /* Delete me as a user
