@@ -78,11 +78,19 @@ module.exports.delete = function (req, res, next) {
         if(result) {
           if(req.body.pageid === siteify.homepageid) {
             res.send(401, "You cant delete the homepage");
+          } else {
+            relations.pages('%s is not the owner of %s', user._id.toString(), req.body.pageid.toString(), function (err, result){
+              if (result){
+                Pages.findByIdAndRemove(req.body.pageid, null, function (err, page) {
+                  if (err) res.send(err);
+                  res.json(page);
+                });
+              } else {
+                //TODO: PM - not sure what errors to expect here.  Needs proper error handling.
+                res.send(500, 'Something bad happened.\n' + JSON.stringify(err))
+              }
+            });
           }
-          Pages.findByIdAndRemove(req.body.pageid, null, function (err, page) {
-            if (err) res.send(err);
-            res.json(page);
-          });
         } else {
           res.send(401, 'Only the owner can modify pages');
         }
