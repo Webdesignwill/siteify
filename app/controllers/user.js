@@ -49,8 +49,8 @@ module.exports.unique = function (req, res, next) {
 /* Get me as the user
 ============================= */
 module.exports.me = function (req, res, next) {
-  // console.log('OAUTH ************************** : ', req.oauth);
-  // console.log('USER ************************** : ', req.user);
+  console.log('OAUTH ************************** : ', req.oauth);
+  console.log('USER ************************** : ', req.user);
   // User.findById(req.user.id, function (err, user) {
   //   console.log('USER ************************** : ', user);
   //   if (err) next(err);
