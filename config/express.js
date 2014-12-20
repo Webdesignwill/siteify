@@ -2,7 +2,7 @@
 var express = require('express'),
       bodyParser = require('body-parser'),
       oauthModel = require('./../app/models/oauth'),
-      oauth2server = require('node-oauth2-server');
+      oauth2server = require('oauth2-server');
 
 module.exports = function (app, config) {
   app.set('showStackError', true);
