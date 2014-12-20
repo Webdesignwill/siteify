@@ -82,7 +82,7 @@ define([
 
       // Get the commonjs module
       function requireConfig () {
-        app_require([packageName], function (config) {
+        siteify_require([packageName], function (config) {
           loadPackage(config(packageName));
         });
       }

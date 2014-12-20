@@ -57,7 +57,6 @@ define([
               } else {
                 self.Router.navigate(self.Sitemap.getHomepage().get('path'), {trigger:true});
               }
-
             });
           }
         } else {
@@ -112,7 +111,6 @@ define([
     },
 
     init : function () {
-      var self = this;
       this.hello();
     },
 

@@ -1,8 +1,8 @@
 
-var app_require = require.config({
+var siteify_require = require.config({
 
   baseUrl : './js/',
-  context : 'app_require',
+  context : 'siteify_require',
 
   packages: [{
     name : 'forms',

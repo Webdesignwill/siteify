@@ -35,7 +35,7 @@ function (Siteify, PageFactory) {
     addRoute : function (model) {
       var self = this;
       self.route(model.get('route'), model.get('name'), function (option) {
-        app_require([model.get('view')], function (Page) {
+        siteify_require([model.get('view')], function (Page) {
           self.pageFactory.make(self.$sfContent, model, Page, option);
         });
       });
@@ -55,7 +55,7 @@ function (Siteify, PageFactory) {
             self = this;
 
       if(model) {
-        app_require([model.get('view')], function (Page) {
+        siteify_require([model.get('view')], function (Page) {
           self.pageFactory.make(self.$sfContent, model, Page, option);
         });
       }
@@ -68,7 +68,7 @@ function (Siteify, PageFactory) {
       var pageModel = new Backbone.Model({id : 'setupSite', name : 'setupSite'}),
             self = this;
 
-      app_require(['SetupSitePage'], function (Page) {
+      siteify_require(['SetupSitePage'], function (Page) {
         self.pageFactory.make(self.$sfContent, pageModel, Page, option);
       });
     },
@@ -77,7 +77,7 @@ function (Siteify, PageFactory) {
       var pageModel = new Backbone.Model({id : 'setupOwner', name : 'setupOwner'}),
             self = this;
 
-      app_require(['SetupOwnerPage'], function (Page) {
+      siteify_require(['SetupOwnerPage'], function (Page) {
         self.pageFactory.make(self.$sfContent, pageModel, Page, option);
       });
     },
@@ -86,7 +86,7 @@ function (Siteify, PageFactory) {
       var pageModel = new Backbone.Model({id : 'setupHomePage', name : 'setupHomePage'}),
             self = this;
 
-      app_require(['SetupHomePage'], function (Page) {
+      siteify_require(['SetupHomePage'], function (Page) {
         self.pageFactory.make(self.$sfContent, pageModel, Page, option);
       });
     }
