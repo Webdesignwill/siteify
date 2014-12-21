@@ -67,13 +67,13 @@ define([
       function getOauth2 () {
         siteify_require(['Oauth2Model'], function (Oauth2Model) {
           self.Oauth2 = new Oauth2Model();
-          getUser();
+          getMe();
         });
       }
 
-      function getUser () {
-        siteify_require(['UserModel'], function (UserModel) {
-          self.User = new UserModel();
+      function getMe () {
+        siteify_require(['MeModel'], function (MeModel) {
+          self.Me = new MeModel();
           getUsersCollection();
         });
       }

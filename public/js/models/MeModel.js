@@ -7,17 +7,17 @@ function (Siteify) {
 
   "use strict";
 
-  var UserModel = Backbone.Model.extend({
+  var MeModel = Backbone.Model.extend({
 
     defaults : {
       loggedin : false
     },
 
     urls : {
-      register : '/api/user/register',
-      login : '/api/user/login',
-      logout : '/api/user/logout',
-      me : '/api/user/me'
+      register : '/api/me/register',
+      login : '/api/me/login',
+      logout : '/api/me/logout',
+      me : '/api/me'
     },
 
     initialize : function () {
@@ -139,6 +139,6 @@ function (Siteify) {
 
   });
 
-  return UserModel;
+  return MeModel;
 
 });

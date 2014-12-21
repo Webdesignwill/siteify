@@ -10,7 +10,7 @@ define([
     url : '/api/users/all',
 
     initialize : function () {
-      this.listenTo(Siteify.User, 'change:loggedin', function (user, prop) {
+      this.listenTo(Siteify.Me, 'change:loggedin', function (user, prop) {
         if(prop && user.get('owner')) {
           this.fetch({
             success : function (collection, response, options) {

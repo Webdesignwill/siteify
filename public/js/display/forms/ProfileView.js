@@ -17,7 +17,7 @@ define([
     render : function () {
       this.$el.html(template);
       var self = this;
-      this.form.init(Siteify.User, {
+      this.form.init(Siteify.Me, {
         name : 'Profile',
         action : 'put',
         el : this.$el.find('form')

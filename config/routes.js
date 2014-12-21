@@ -13,14 +13,14 @@ module.exports = function (app) {
   app.post('/api/siteify/setup', Controllers.Siteify.setup);
   app.post('/api/siteify/owner', Controllers.Siteify.owner);
 
-  /* User
+  /* Me
   ==================================== */
-  app.post('/api/user/unique', Controllers.User.unique);
-  app.post('/api/user/register', Controllers.User.register);
-  app.get('/api/user/me', app.oauth.authorise(), Controllers.User.me);
-  app.delete('/api/user/me', app.oauth.authorise(), Controllers.User.deleteMe);
-  app.put('/api/user/me', app.oauth.authorise(), Controllers.User.putMe);
-  app.post('/api/user/logout', app.oauth.authorise(), Controllers.User.logout);
+  app.post('/api/me/unique', Controllers.Me.unique);
+  app.post('/api/me/register', Controllers.Me.register);
+  app.get('/api/me', app.oauth.authorise(), Controllers.Me.me);
+  app.delete('/api/me', app.oauth.authorise(), Controllers.Me.deleteMe);
+  app.put('/api/me', app.oauth.authorise(), Controllers.Me.putMe);
+  app.post('/api/me/logout', app.oauth.authorise(), Controllers.Me.logout);
 
   /* All Users
   ==================================== */

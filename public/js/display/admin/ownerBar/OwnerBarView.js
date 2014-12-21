@@ -17,7 +17,7 @@ define([
 
       var self = this;
 
-      this.listenTo(Siteify.User, 'change:loggedin', function (user, value) {
+      this.listenTo(Siteify.Me, 'change:loggedin', function (user, value) {
         this[user.get('owner') ? 'renderOwnerControls' : 'removeOwnerControls']();
       }, this);
 
@@ -47,7 +47,7 @@ define([
     },
 
     renderOwnerControls : function () {
-      if(Siteify.User.get('loggedin') && Siteify.User.get('owner')) {
+      if(Siteify.Me.get('loggedin') && Siteify.Me.get('owner')) {
         this.ownerBarControlsView = new OwnerBarControlsView({
           el : this.$el.find('.sf-owner-controls')
         });

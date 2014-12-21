@@ -1,9 +1,8 @@
 
 define([
   'Siteify',
-  'io',
-  'UserModel'
-], function (Siteify, io, UserModel) {
+  'io'
+], function (Siteify, io) {
 
   "use strict";
 
@@ -19,7 +18,7 @@ define([
     });
 
     function toggleLive () {
-      if(Siteify.User.get('loggedin')) {
+      if(Siteify.Me.get('loggedin')) {
         self[self.live ? 'offlive' : 'onlive']();
         Siteify.$broker.trigger('siteify:live:change', self.live);
       }

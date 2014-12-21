@@ -7,7 +7,7 @@ function () {
 
   var RegisterModel = Backbone.Model.extend({
 
-    urls : { email : '/api/user/unique', },
+    urls : { email : '/api/me/unique', },
 
     validation : {
       email : [{

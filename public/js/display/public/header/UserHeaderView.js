@@ -16,7 +16,7 @@ function (Siteify, handlebars, template) {
     },
 
     initialize : function () {
-      this.listenTo(Siteify.User, 'change', function () {
+      this.listenTo(Siteify.Me, 'change', function () {
         this.render();
       }, this);
       this.render();
@@ -24,7 +24,7 @@ function (Siteify, handlebars, template) {
 
     render : function () {
       var tpl = handlebars.compile(template);
-      var compiled = tpl(Siteify.User.attributes);
+      var compiled = tpl(Siteify.Me.attributes);
 
       this.$el.html(compiled);
       return this;

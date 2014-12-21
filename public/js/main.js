@@ -63,7 +63,7 @@ var siteify_require = require.config({
     ModalView                                             : 'display/public/modal/ModalView',
 
     /* Site models */
-    UserModel                                              : 'models/UserModel',
+    MeModel                                                 : 'models/MeModel',
     Oauth2Model                                          : 'models/Oauth2Model',
     PageModel                                              : 'models/PageModel',
 

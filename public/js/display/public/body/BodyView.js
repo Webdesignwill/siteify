@@ -15,7 +15,7 @@ define([
 
     initialize : function () {
 
-      this.listenTo(Siteify.User, 'change:loggedin', function (model, loggedin) {
+      this.listenTo(Siteify.Me, 'change:loggedin', function (model, loggedin) {
         this.toggleClass(loggedin, 'loggedin');
       }, this);
 
@@ -24,7 +24,7 @@ define([
       this.renderPageComponents();
       this.delegateAnchorClickEvent();
 
-      this.toggleClass(Siteify.User.get('loggedin'), 'loggedin');
+      this.toggleClass(Siteify.Me.get('loggedin'), 'loggedin');
     },
 
     toggleClass : function (att, cls) {
