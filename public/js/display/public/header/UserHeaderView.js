@@ -11,19 +11,15 @@ function (Siteify, handlebars, template) {
 
   var UserHeaderView = Backbone.View.extend({
 
+    events : {
+      'click' : 'handler'
+    },
+
     initialize : function () {
       this.listenTo(Siteify.User, 'change', function () {
         this.render();
       }, this);
-      this.listenToOnce(Siteify, 'change:owner', function () {
-        this.render();
-      }, this);
-
-      if(Siteify.get('owner')) {
-        this.stopListening(Siteify);
-        this.render();
-      }
-
+      this.render();
     },
 
     render : function () {
@@ -32,6 +28,17 @@ function (Siteify, handlebars, template) {
 
       this.$el.html(compiled);
       return this;
+    },
+
+    handler : function (e) {
+      e.preventDefault();
+      var modalAtt = $(e.target).attr('modal');
+      if(modalAtt) {
+        Siteify.$broker.trigger('modal:open', {
+          view : modalAtt,
+          size : 'small'
+        });
+      }
     }
 
   });

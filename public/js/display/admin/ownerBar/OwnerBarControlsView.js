@@ -10,7 +10,7 @@ define([
   var OwnerBarControlsView = Backbone.View.extend({
 
     events : {
-      'click .delete-page' : 'preventDefault'
+      'click' : 'handler'
     },
 
     initialize : function () {
@@ -44,10 +44,17 @@ define([
       return this;
     },
 
-    preventDefault : function (e) {
-      if(Siteify.get('page').model.get('homepage')) {
-        e.preventDefault();
-        e.stopPropagation();
+    handler : function (e) {
+      e.preventDefault();
+      var modalAtt = $(e.target).attr('modal');
+
+      if(modalAtt) {
+        if(Siteify.get('page').model.get('homepage') && modalAtt === "ConfirmDelete") {
+          return;
+        }
+        Siteify.$broker.trigger('modal:open', {
+          view : modalAtt
+        });
       }
     },
 

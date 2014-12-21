@@ -74,6 +74,12 @@ define([
       function getUser () {
         siteify_require(['UserModel'], function (UserModel) {
           self.User = new UserModel();
+          getUsersCollection();
+        });
+      }
+
+      function getUsersCollection () {
+        siteify_require(['UsersCollection'], function () {
           getBodyView();
         });
       }

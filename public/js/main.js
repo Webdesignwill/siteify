@@ -42,6 +42,9 @@ var siteify_require = require.config({
     NewPageView                                         : 'display/forms/NewPageView',
     ConfirmView                                          : 'display/forms/ConfirmView',
 
+    UserListItemView                                    : 'display/admin/usersList/UserListItemView',
+    UsersListView                                          : 'display/admin/usersList/UsersListView',
+
     OwnerBarView                                        : 'display/admin/ownerBar/OwnerBarView',
     OwnerBarControlsView                          : 'display/admin/ownerBar/OwnerBarControlsView',
     ConfirmDeleteView                                : 'display/admin/confirmDelete/ConfirmDeleteView',
@@ -63,7 +66,9 @@ var siteify_require = require.config({
     UserModel                                              : 'models/UserModel',
     Oauth2Model                                          : 'models/Oauth2Model',
     PageModel                                              : 'models/PageModel',
-    SiteifyModel                                           : 'models/SiteifyModel'
+
+    /* Siteify Collections */
+    UsersCollection                                      : 'collections/UsersCollection'
 
   },
   shim : {

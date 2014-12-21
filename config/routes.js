@@ -22,6 +22,12 @@ module.exports = function (app) {
   app.put('/api/user/me', app.oauth.authorise(), Controllers.User.putMe);
   app.post('/api/user/logout', app.oauth.authorise(), Controllers.User.logout);
 
+  /* All Users
+  ==================================== */
+  app.get('/api/users/all', app.oauth.authorise(), function (err, req, res, next) {
+    res.json([{user : 'Willy'}]);
+  });
+
    /* Pages
   ==================================== */
   app.post('/api/pages/new', app.oauth.authorise(), Controllers.Pages.new);
