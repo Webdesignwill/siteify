@@ -22,9 +22,19 @@ define([
       loggedin = loggedin ? loggedin : Siteify.Me.get('loggedin');
       me = me ? me : Siteify.Me;
       if(loggedin && me.get('owner')) {
-        this.fetch({
-          success : function (collection, response, options) {
-
+        $.ajax({
+          type : 'GET',
+          context : this,
+          url : this.url,
+          contentType : 'application/x-www-form-urlencoded',
+          headers : {
+            Authorization : 'Bearer ' + Siteify.Oauth2.get('access_token')
+          },
+          success : function (data, status) {
+            this.set(data);
+          },
+          error : function (data, status) {
+            alert('Theres a problem getting the users');
           }
         });
       } else {
