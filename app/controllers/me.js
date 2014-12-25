@@ -78,7 +78,7 @@ module.exports.putMe = function (req, res, next) {
     }
     user.save(function (err, user) {
       if (err) res.send(err);
-      res.send(200, parseUserObject(user));
+      res.json(parseUserObject(user));
     });
   });
 };

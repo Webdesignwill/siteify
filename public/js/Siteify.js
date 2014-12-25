@@ -14,7 +14,8 @@ define([
       setup: false,
       sitename: null,
       page : null,
-      homepage : null
+      homepage : null,
+      ready : false
     },
 
     urls : {

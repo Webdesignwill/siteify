@@ -66,6 +66,7 @@ var siteify_require = require.config({
     MeModel                                                 : 'models/MeModel',
     Oauth2Model                                          : 'models/Oauth2Model',
     PageModel                                              : 'models/PageModel',
+    UserModel                                              : 'models/UserModel',
 
     /* Siteify Collections */
     UsersCollection                                      : 'collections/UsersCollection'

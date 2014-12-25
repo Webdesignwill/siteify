@@ -53,7 +53,8 @@ define([
           return;
         }
         Siteify.$broker.trigger('modal:open', {
-          view : modalAtt
+          view : modalAtt,
+          size : 'large'
         });
       }
     },

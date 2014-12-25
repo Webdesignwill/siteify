@@ -24,9 +24,7 @@ module.exports = function (app) {
 
   /* All Users
   ==================================== */
-  app.get('/api/users/all', app.oauth.authorise(), function (err, req, res, next) {
-    res.json([{user : 'Willy'}]);
-  });
+  app.get('/api/users/all', app.oauth.authorise(), Controllers.Users.all);
 
    /* Pages
   ==================================== */

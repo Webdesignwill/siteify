@@ -40,6 +40,7 @@ define([
       return null;
     },
 
+    /* Utility */
     clearSubViews : function () {
       for(var i = 0;i<this.subViews.length;i++) {
         this.subViews[i].close();
@@ -50,7 +51,7 @@ define([
 
     renderList : function () {
 
-      var df = document.createDocumentFragment(),
+      var frag = document.createDocumentFragment(),
             self = this;
 
       IntervalsCollection.each(function (model, index, collection) {
@@ -59,11 +60,12 @@ define([
             model : model
           });
           self.subViews.push(liv);
-          df.appendChild(liv.render().el);
+          /* Maybe dont call render here Do it instead in the item */
+          frag.appendChild(liv.render().el);
         }
       });
 
-      this.$el.html(df);
+      this.$el.html(frag);
 
     },
 
