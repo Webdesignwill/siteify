@@ -4,7 +4,7 @@ define([
   'handlebars',
   'UserListItemView',
   'UsersCollection',
-  'text!display/admin/usersList/templates/usersList.tpl'
+  'text!display/siteify/usersList/templates/usersList.tpl'
 ], function (Siteify, handlebars, UserListItemView, UsersCollection, template) {
 
   'use strict';

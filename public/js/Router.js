@@ -14,7 +14,9 @@ function (Siteify, PageFactory) {
       '(/)' : 'home',
       'siteify/setup/owner(/)' : 'setupOwner',
       'siteify/setup/site(/)' : 'setupSite',
-      'siteify/setup/homepage(/)' : 'setupHomePage'
+      'siteify/setup/homepage(/)' : 'setupHomePage',
+
+      'siteify/pages(/)' : 'pageManagement'
     },
 
     initialize : function () {
@@ -89,6 +91,10 @@ function (Siteify, PageFactory) {
       siteify_require(['SetupHomePage'], function (Page) {
         self.pageFactory.make(self.$sfContent, pageModel, Page, option);
       });
+    },
+
+    pageManagement : function (options) {
+      alert();
     }
 
   });

@@ -3,9 +3,9 @@ define([
   'Siteify',
   'HeaderView',
   'ModalView',
-  'OwnerBarView',
-  'text!display/public/body/templates/body.tpl'
-], function (Siteify, HeaderView, ModalView, OwnerBarView, template) {
+  'SiteifyHeaderView',
+  'text!display/body/templates/body.tpl'
+], function (Siteify, HeaderView, ModalView, SiteifyHeaderView, template) {
 
   "use strict";
 
@@ -34,7 +34,7 @@ define([
     setElements : function () {
       this.$navBar = this.$el.find('#navbar');
       this.$modal = this.$el.find('#modal');
-      this.$ownerBar = this.$el.find('#sf-ownerBar');
+      this.$sfHeader = this.$el.find('#sf-header');
     },
 
     renderPageComponents : function () {
@@ -43,8 +43,8 @@ define([
         el : this.$modal
       });
 
-      new OwnerBarView({
-        el : this.$ownerBar
+      new SiteifyHeaderView({
+        el : this.$sfHeader
       });
 
       new HeaderView({

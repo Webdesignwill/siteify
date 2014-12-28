@@ -15,7 +15,7 @@ module.exports = function (app, config) {
   app.oauth = oauth2server({
     model: oauthModel,
     grants: ['password', 'refresh_token'],
-    debug: true
+    refreshTokenLifetime : 3600
   });
 
   app.use(app.oauth.errorHandler());

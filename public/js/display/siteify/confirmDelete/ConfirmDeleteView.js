@@ -2,7 +2,7 @@
 define([
   'Siteify',
   'handlebars',
-  'text!display/admin/confirmDelete/templates/confirm.tpl'
+  'text!display/siteify/confirmDelete/templates/confirm.tpl'
 ], function (Siteify, handlebars, template) {
 
   "use strict";

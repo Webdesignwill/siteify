@@ -60,11 +60,11 @@ body.loggedin {
 .navbar-inverse .navbar-nav li .marked {
   color:rgb(0, 0, 255);
 }
-.navbar-inverse .navbar-nav li .owner-bar-live.live,
-.navbar-inverse .navbar-nav li .owner-bar-live.live:focus {
+.navbar-inverse .navbar-nav li .sf-toggle-live.live,
+.navbar-inverse .navbar-nav li .sf-toggle-live.live:focus {
   color:rgb(0,254,255);
 }
-.sf-ownerBar {
+.sf-header {
   -webkit-transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
@@ -74,7 +74,7 @@ body.loggedin {
   height:0;
   overflow:hidden;
 }
-body.loggedin .sf-ownerBar {
+body.loggedin .sf-header {
   height:50px;
 }
 .sf-control-add-content {

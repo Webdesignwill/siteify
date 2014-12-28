@@ -30,9 +30,9 @@ var siteify_require = require.config({
     Sitemap                                                : 'Sitemap',
 
     /* Owner/Site Setup */
-    SetupOwnerPage                                   : 'pages/admin/setup/SetupOwnerPage',
-    SetupSitePage                                        : 'pages/admin/setup/SetupSitePage',
-    SetupHomePage                                    : 'pages/admin/setup/SetupHomePage',
+    SetupOwnerPage                                   : 'pages/siteify/setup/SetupOwnerPage',
+    SetupSitePage                                        : 'pages/siteify/setup/SetupSitePage',
+    SetupHomePage                                    : 'pages/siteify/setup/SetupHomePage',
 
     /* Forms */
     LoginView                                              : 'display/forms/LoginView',
@@ -42,12 +42,12 @@ var siteify_require = require.config({
     NewPageView                                         : 'display/forms/NewPageView',
     ConfirmView                                          : 'display/forms/ConfirmView',
 
-    UserListItemView                                    : 'display/admin/usersList/UserListItemView',
-    UsersListView                                          : 'display/admin/usersList/UsersListView',
+    UserListItemView                                    : 'display/siteify/usersList/UserListItemView',
+    UsersListView                                          : 'display/siteify/usersList/UsersListView',
 
-    OwnerBarView                                        : 'display/admin/ownerBar/OwnerBarView',
-    OwnerBarControlsView                          : 'display/admin/ownerBar/OwnerBarControlsView',
-    ConfirmDeleteView                                : 'display/admin/confirmDelete/ConfirmDeleteView',
+    SiteifyHeaderView                                 : 'display/siteify/siteifyHeader/SiteifyHeaderView',
+    SiteifyHeaderControlsView                    : 'display/siteify/siteifyHeader/SiteifyHeaderControlsView',
+    ConfirmDeleteView                                : 'display/siteify/confirmDelete/ConfirmDeleteView',
 
     /* Extensions */
     pageExt                                                 : 'pages/pageExt',
@@ -56,11 +56,11 @@ var siteify_require = require.config({
     DefaultPage                                          : 'pages/public/DefaultPage',
 
     /* Public */
-    BodyView                                               : 'display/public/body/BodyView',
-    HeaderView                                            : 'display/public/header/HeaderView',
-    NavSubView                                           : 'display/public/header/NavSubView',
-    UserHeaderView                                     : 'display/public/header/UserHeaderView',
-    ModalView                                             : 'display/public/modal/ModalView',
+    BodyView                                               : 'display/body/BodyView',
+    HeaderView                                            : 'display/header/HeaderView',
+    NavSubView                                           : 'display/header/NavSubView',
+    UserHeaderView                                     : 'display/header/UserHeaderView',
+    ModalView                                             : 'display/modal/ModalView',
 
     /* Site models */
     MeModel                                                 : 'models/MeModel',

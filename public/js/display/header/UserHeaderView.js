@@ -2,7 +2,7 @@
 define([
   'Siteify',
   'handlebars',
-  'text!display/public/header/templates/userheader.tpl'
+  'text!display/header/templates/userheader.tpl'
 ],
 
 function (Siteify, handlebars, template) {

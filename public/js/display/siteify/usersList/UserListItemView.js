@@ -2,7 +2,7 @@
 define([
   'Siteify',
   'handlebars',
-  'text!display/admin/usersList/templates/usersListItem.tpl'
+  'text!display/siteify/usersList/templates/usersListItem.tpl'
 ], function (Siteify, handlebars, template) {
 
   'use strict';

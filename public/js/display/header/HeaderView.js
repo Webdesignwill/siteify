@@ -3,7 +3,7 @@ define([
   'Siteify',
   'NavSubView',
   'UserHeaderView',
-  'text!display/public/header/templates/header.tpl'
+  'text!display/header/templates/header.tpl'
 ], function (Siteify, NavSubView, UserHeaderView, template) {
 
   "use strict";

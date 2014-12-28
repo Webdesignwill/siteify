@@ -2,12 +2,12 @@
 define([
   'Siteify',
   'handlebars',
-  'text!display/admin/ownerBar/templates/ownerbarcontrols.tpl'
+  'text!display/siteify/siteifyHeader/templates/siteifyheadercontrols.tpl'
 ], function (Siteify, handlebars, template) {
 
   "use strict";
 
-  var OwnerBarControlsView = Backbone.View.extend({
+  var SiteifyHeaderControlsView = Backbone.View.extend({
 
     events : {
       'click' : 'handler'
@@ -45,7 +45,7 @@ define([
     },
 
     handler : function (e) {
-      e.preventDefault();
+      // e.preventDefault();
       var modalAtt = $(e.target).attr('modal');
 
       if(modalAtt) {
@@ -67,6 +67,6 @@ define([
 
   });
 
-  return OwnerBarControlsView;
+  return SiteifyHeaderControlsView;
 
 });

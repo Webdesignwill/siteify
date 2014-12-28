@@ -2,7 +2,7 @@
 define([
   'Siteify',
   'require',
-  'text!display/public/modal/templates/modal.tpl'
+  'text!display/modal/templates/modal.tpl'
 ], function (Siteify, require, template) {
 
   "use strict";
