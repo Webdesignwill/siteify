@@ -32,12 +32,17 @@ function (Siteify, handlebars, template) {
 
     handler : function (e) {
       e.preventDefault();
-      var modalAtt = $(e.target).attr('modal');
+      var modalAtt = $(e.target).attr('modal'),
+            logout = $(e.target).attr('logout');
+
       if(modalAtt) {
         Siteify.$broker.trigger('modal:open', {
           view : modalAtt,
           size : 'small'
         });
+      }
+      if(logout) {
+        Siteify.$broker.trigger('user:logout');
       }
     }
 

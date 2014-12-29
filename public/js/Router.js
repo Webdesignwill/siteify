@@ -16,15 +16,17 @@ function (Siteify, PageFactory) {
       'siteify/setup/site(/)' : 'setupSite',
       'siteify/setup/homepage(/)' : 'setupHomePage',
 
-      'siteify/pages(/)' : 'pageManagement'
+      'siteify/manage/pages(/)' : 'pages',
+      'siteify/manage/users(/)' : 'users'
     },
 
     initialize : function () {
 
       this.$sfContent = $('#sf-content');
+      // this.$sfRestricted = $('#sf-restricted');
 
       this.listenTo(Siteify.Sitemap, 'add', function (model) {
-        this.addRoute(model);
+        this.addUserRoutes(model);
       }, this);
       this.listenTo(Siteify.Sitemap, 'remove', function (model) {
         this.removeRoute(model);
@@ -34,9 +36,10 @@ function (Siteify, PageFactory) {
 
     },
 
-    addRoute : function (model) {
+    addUserRoutes : function (model) {
       var self = this;
       self.route(model.get('route'), model.get('name'), function (option) {
+        Siteify.set('creationmode', false);
         siteify_require([model.get('view')], function (Page) {
           self.pageFactory.make(self.$sfContent, model, Page, option);
         });
@@ -44,8 +47,8 @@ function (Siteify, PageFactory) {
     },
 
     removeRoute : function (model) {
-      // remove browser history for this
-      // remove route
+      // TODO remove browser history for this
+      // TODO remove route
     },
 
     execute: function(callback, args) {
@@ -53,6 +56,9 @@ function (Siteify, PageFactory) {
     },
 
     home : function (option) {
+
+      Siteify.set('creationmode', false);
+
       var model = Siteify.Sitemap.getHomepage(),
             self = this;
 
@@ -93,8 +99,12 @@ function (Siteify, PageFactory) {
       });
     },
 
-    pageManagement : function (options) {
-      alert();
+    pages : function (option) {
+      Siteify.set('creationmode', true);
+    },
+
+    users : function (option) {
+      Siteify.set('creationmode', true);
     }
 
   });

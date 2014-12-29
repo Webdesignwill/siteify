@@ -19,14 +19,19 @@ define([
         this.toggleClass(loggedin, 'loggedin');
       }, this);
 
+      this.listenTo(Siteify, 'change:creationmode', function (model, creationmode) {
+        this.toggleClass(creationmode, 'creationmode');
+      }, this);
+
       this.render();
       this.setElements();
       this.renderPageComponents();
-      this.delegateAnchorClickEvent();
+      // this.delegateAnchorClickEvent();
 
       this.toggleClass(Siteify.Me.get('loggedin'), 'loggedin');
     },
 
+    /* Utility */
     toggleClass : function (att, cls) {
       this.$el[att ? 'addClass' : 'removeClass'](cls);
     },
@@ -61,20 +66,8 @@ define([
           var protocol = this.protocol + "//";
           if (href && href.slice(0, protocol.length) !== protocol) {
             evt.preventDefault();
-            self.hrefController(href);
           }
         });
-      }
-    },
-
-    hrefController : function (href) {
-      var argsArray = href.split(':'),
-            module = argsArray[0],
-            event = argsArray[1],
-            argument = argsArray[2] || null;
-
-      if(module && event) {
-        Siteify.$broker.trigger(module + ':' + event, argument);
       }
     },
 

@@ -15,7 +15,8 @@ define([
       sitename: null,
       page : null,
       homepage : null,
-      ready : false
+      ready : false,
+      creationmode : false
     },
 
     urls : {
@@ -53,7 +54,7 @@ define([
             self.Sitemap.getAllPages(function (result, data, status) {
               if(!result) { return alert('Something went wrong loading the sitemap');}
 
-              if('/' + Backbone.history.fragment === self.Sitemap.getHomepage().get('path')) {
+              if('#' + Backbone.history.fragment === self.Sitemap.getHomepage().get('path')) {
                 Backbone.history.loadUrl(Backbone.history.fragment);
               } else {
                 self.Router.navigate(self.Sitemap.getHomepage().get('path'), {trigger:true});

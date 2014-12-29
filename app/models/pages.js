@@ -16,7 +16,7 @@ var PagesSchema = new mongoose.Schema({
   path : {
     type : String,
     set : function makePath (str) {
-      return '/' + str.toLowerCase().split(' ').join('-') + '/';
+      return '#' + str.toLowerCase().split(' ').join('-') + '/'; // TODO this wont work for subpages.
     }
   },
   order : {

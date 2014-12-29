@@ -10,7 +10,7 @@ define([
   var SiteifyHeaderControlsView = Backbone.View.extend({
 
     events : {
-      'click' : 'handler'
+      // 'click' : 'handler'
     },
 
     initialize : function () {
@@ -45,18 +45,17 @@ define([
     },
 
     handler : function (e) {
-      // e.preventDefault();
-      var modalAtt = $(e.target).attr('modal');
+      // var modalAtt = $(e.target).attr('modal');
 
-      if(modalAtt) {
-        if(Siteify.get('page').model.get('homepage') && modalAtt === "ConfirmDelete") {
-          return;
-        }
-        Siteify.$broker.trigger('modal:open', {
-          view : modalAtt,
-          size : 'large'
-        });
-      }
+      // if(modalAtt) {
+      //   if(Siteify.get('page').model.get('homepage') && modalAtt === "ConfirmDelete") {
+      //     return;
+      //   }
+      //   Siteify.$broker.trigger('modal:open', {
+      //     view : modalAtt,
+      //     size : 'large'
+      //   });
+      // }
     },
 
     destroy : function () {

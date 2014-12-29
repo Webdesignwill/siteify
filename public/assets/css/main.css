@@ -23,6 +23,7 @@ body.loggedin {
   clear:both;
 }
 .navbar {
+  z-index: 1;
   border:none;
 }
 .navbar {
@@ -64,18 +65,28 @@ body.loggedin {
 .navbar-inverse .navbar-nav li .sf-toggle-live.live:focus {
   color:rgb(0,254,255);
 }
-.sf-header {
-  -webkit-transition: all 0.2s linear;
-  -moz-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
-  -ms-transition: all 0.2s linear;
-  transition: all 0.2s linear;
+
+.sf-restricted {
+  -webkit-transition: height 0.2s linear;
+  -moz-transition: height 0.2s linear;
+  -o-transition: height 0.2s linear;
+  -ms-transition: height 0.2s linear;
+  transition: height 0.2s linear;
+  background-color:#222;
   min-height: 0;
   height:0;
   overflow:hidden;
+  position: fixed;
+  top:0;
+  right: 0;
+  left: 0;
+  z-index :2;
 }
-body.loggedin .sf-header {
+body.loggedin .sf-restricted {
   height:50px;
+}
+body.loggedin.creationmode .sf-restricted {
+  height:100%;
 }
 .sf-control-add-content {
   width:100%;
